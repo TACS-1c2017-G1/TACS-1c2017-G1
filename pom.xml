@@ -7,6 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <name>TACS-1c2017-G1</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -14,5 +17,10 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+	<dependency>
+	  <groupId>com.squareup.okhttp3</groupId>
+	  <artifactId>okhttp</artifactId>
+	  <version>3.6.0</version>
+	</dependency>
   </dependencies>
 </project>
