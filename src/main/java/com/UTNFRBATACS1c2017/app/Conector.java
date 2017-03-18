@@ -5,7 +5,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Conector {
-  static OkHttpClient client = new OkHttpClient();
+  private static OkHttpClient client = new OkHttpClient();
   private static String apiURL = "https://api.themoviedb.org/3/";
   private static String api_key = "?&api_key=76e19488d670621ca05341b858d5aa16&query=";  
   
@@ -15,9 +15,9 @@ public class Conector {
         .get()
         .build();
 
-    try (Response response = client.newCall(request).execute()) {
-      return response.body().string();
-    }
+    	Response response = client.newCall(request).execute();
+    	return response.body().string();
+
   }
   
 }
