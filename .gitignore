@@ -15,3 +15,4 @@
 .project
 /bin/**
 hs_err_pid*
+.resources
