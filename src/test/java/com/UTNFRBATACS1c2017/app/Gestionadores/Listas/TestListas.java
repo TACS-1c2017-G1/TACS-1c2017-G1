@@ -20,9 +20,9 @@ public class TestListas {
 	@Before
 	public void setUp() throws Exception {
 	}
-	
+
 	@Test
-	public void testGestionadorListas() throws Exception{
+	public void testGestionadorListas() throws Exception {
 		Listas gestionadorListas = new Listas();
 		assertNotNull(gestionadorListas);
 	}

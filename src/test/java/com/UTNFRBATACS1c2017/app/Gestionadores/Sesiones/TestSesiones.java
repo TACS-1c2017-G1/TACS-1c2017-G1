@@ -22,7 +22,7 @@ public class TestSesiones {
 	}
 
 	@Test
-	public void testGestionadorSesiones() throws Exception{
+	public void testGestionadorSesiones() throws Exception {
 		Sesiones gestionadorSesiones = new Sesiones();
 		assertNotNull(gestionadorSesiones);
 	}

@@ -22,7 +22,7 @@ public class TestAdministrativo {
 	}
 
 	@Test
-	public void testGestionadorAdministrativo() throws Exception{
+	public void testGestionadorAdministrativo() throws Exception {
 		Administrativo gestionadorAdministrativo = new Administrativo();
 		assertNotNull(gestionadorAdministrativo);
 	}

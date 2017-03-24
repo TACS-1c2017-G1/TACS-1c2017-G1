@@ -22,7 +22,7 @@ public class TestActoresFavoritos {
 	}
 
 	@Test
-	public void testGestionadorActoresFavoritos() throws Exception{
+	public void testGestionadorActoresFavoritos() throws Exception {
 		ActoresFavoritos gestionadorActoresFavoritos = new ActoresFavoritos();
 		assertNotNull(gestionadorActoresFavoritos);
 	}
