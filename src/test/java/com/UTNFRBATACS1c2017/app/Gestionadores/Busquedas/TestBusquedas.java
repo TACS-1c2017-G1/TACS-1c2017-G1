@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.UTNFRBATACS1c2017.app;
+package com.UTNFRBATACS1c2017.app.Gestionadores.Busquedas;
 
 import static org.junit.Assert.*;
 
@@ -13,8 +13,8 @@ import org.junit.Test;
  * @author facundo91
  *
  */
-public class TestGestionadorBusquedas {
-	GestionadorBusquedas gestionadorBusquedas = new GestionadorBusquedas();
+public class TestBusquedas {
+	Busquedas gestionadorBusquedas = new Busquedas();
 
 	/**
 	 * @throws java.lang.Exception

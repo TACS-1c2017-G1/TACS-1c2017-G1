@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.UTNFRBATACS1c2017.app;
+package com.UTNFRBATACS1c2017.app.Gestionadores.Listas;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author facundo91
  *
  */
-public class TestGestionadorListas {
+public class TestListas {
 
 	/**
 	 * @throws java.lang.Exception
@@ -23,7 +23,7 @@ public class TestGestionadorListas {
 	
 	@Test
 	public void testGestionadorListas() throws Exception{
-		GestionadorListas gestionadorListas = new GestionadorListas();
+		Listas gestionadorListas = new Listas();
 		assertNotNull(gestionadorListas);
 	}
 

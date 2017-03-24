@@ -22,7 +22,7 @@ public class TestConector {
 	}
 
 	/**
-	 * Test method for {@link com.UTNFRBATACS1c2017.app.Conector#run(java.lang.String, java.lang.String)}.
+	 * Test method for {@link com.UTNFRBATACS1c2017.app.Conector#getResource(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testConector() throws Exception{

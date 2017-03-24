@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.UTNFRBATACS1c2017.app;
+package com.UTNFRBATACS1c2017.app.Gestionadores.Administrativo;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author facundo91
  *
  */
-public class TestGestionadorAdministrativo {
+public class TestAdministrativo {
 
 	/**
 	 * @throws java.lang.Exception
@@ -23,7 +23,7 @@ public class TestGestionadorAdministrativo {
 
 	@Test
 	public void testGestionadorAdministrativo() throws Exception{
-		GestionadorAdministrativo gestionadorAdministrativo = new GestionadorAdministrativo();
+		Administrativo gestionadorAdministrativo = new Administrativo();
 		assertNotNull(gestionadorAdministrativo);
 	}
 

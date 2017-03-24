@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.UTNFRBATACS1c2017.app;
+package com.UTNFRBATACS1c2017.app.Gestionadores.ActoresFavoritos;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author facundo91
  *
  */
-public class TestGestionadorActoresFavoritos {
+public class TestActoresFavoritos {
 
 	/**
 	 * @throws java.lang.Exception
@@ -23,7 +23,7 @@ public class TestGestionadorActoresFavoritos {
 
 	@Test
 	public void testGestionadorActoresFavoritos() throws Exception{
-		GestionadorActoresFavoritos gestionadorActoresFavoritos = new GestionadorActoresFavoritos();
+		ActoresFavoritos gestionadorActoresFavoritos = new ActoresFavoritos();
 		assertNotNull(gestionadorActoresFavoritos);
 	}
 

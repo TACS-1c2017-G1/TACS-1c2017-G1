@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.UTNFRBATACS1c2017.app;
+package com.UTNFRBATACS1c2017.app.Gestionadores.Sesiones;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author facundo91
  *
  */
-public class TestGestionadorSesiones {
+public class TestSesiones {
 
 	/**
 	 * @throws java.lang.Exception
@@ -23,7 +23,7 @@ public class TestGestionadorSesiones {
 
 	@Test
 	public void testGestionadorSesiones() throws Exception{
-		GestionadorSesiones gestionadorSesiones = new GestionadorSesiones();
+		Sesiones gestionadorSesiones = new Sesiones();
 		assertNotNull(gestionadorSesiones);
 	}
 
