@@ -35,12 +35,12 @@ public class Conector {
 		this.setApi_key(key.substring(0,key.length()-1));
 		HttpGet httpGet = new HttpGet(this.getApiURL()+resource+this.getApi_key()+query);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
-//		Logger logger = LoggerFactory.getLogger(Conector.class);
+		Logger logger = LoggerFactory.getLogger(Conector.class);
 
 		try {
 			HttpEntity entity1 = response1.getEntity();
 			String response2 = EntityUtils.toString(entity1);
-//			logger.info("Recurso: "+resource+" Query: "+query+" Respuesta: "+response2);
+			logger.debug("Recurso: "+resource+" Query: "+query+" Respuesta: "+response2);
 			EntityUtils.consume(entity1);
 			return response2;
 		} finally {

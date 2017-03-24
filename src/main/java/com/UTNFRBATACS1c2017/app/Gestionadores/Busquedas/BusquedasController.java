@@ -11,7 +11,7 @@ public class BusquedasController {
 	
     @RequestMapping("/searchMovie")
     public String busquedaPelicula(
-    		@RequestParam(value="name", required=false, defaultValue="World") 
+    		@RequestParam(value="name", required=false, defaultValue="") 
     		String name, Model model) throws Exception {
         model.addAttribute("name", busqueda.buscarPeliculaPorNombre(name));
         return "searchMovie";
@@ -19,7 +19,7 @@ public class BusquedasController {
     
     @RequestMapping("/searchActor")
     public String busquedaActor(
-    		@RequestParam(value="name", required=false, defaultValue="World") 
+    		@RequestParam(value="name", required=false, defaultValue="") 
     		String name, Model model) throws Exception {
         model.addAttribute("name", busqueda.buscarActorPorNombre(name));
         return "searchActor";
@@ -27,7 +27,7 @@ public class BusquedasController {
     
     @RequestMapping("/search")
     public String busqueda(
-    		@RequestParam(value="name", required=false, defaultValue="World") 
+    		@RequestParam(value="name", required=false, defaultValue="") 
     		String name, Model model) throws Exception {
         model.addAttribute("name", busqueda.buscarPorNombre(name));
         return "search";

@@ -3,9 +3,10 @@
  */
 package com.UTNFRBATACS1c2017.app.Gestionadores.Busquedas;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 

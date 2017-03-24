@@ -1,6 +1,6 @@
 package com.UTNFRBATACS1c2017.app.Gestionadores.Busquedas;
 
-import com.UTNFRBATACS1c2017.app.*;
+import com.UTNFRBATACS1c2017.app.Conector;
 
 public class Busquedas {
 	Conector conector = new Conector();
