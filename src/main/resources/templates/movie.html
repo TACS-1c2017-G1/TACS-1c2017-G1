@@ -12,6 +12,13 @@
     <p th:text="${id} " />
     <h2>Overview</h2>
     <p th:text="${overview} " />
+        <h2>Reviews</h2>
+		<table>
+		    <tr data-th-each="review : ${reviews}">
+		    	<td data-th-text="${review.author}">...</td>
+		        <td data-th-text="${review.content}">...</td>
+		    </tr>
+		</table>
     <h2>Cast</h2>
 		<table>
 		    <tr data-th-each="credit : ${cast}">

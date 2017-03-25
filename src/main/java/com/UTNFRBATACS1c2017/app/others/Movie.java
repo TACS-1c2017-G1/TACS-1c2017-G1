@@ -119,7 +119,7 @@ public class Movie {
 	/**
 	 * @return the reviews
 	 */
-	private List<Review> getReviews() {
+	public List<Review> getReviews() {
 		return reviews;
 	}
 
@@ -145,12 +145,31 @@ public class Movie {
 		Conector conector = new Conector();
 		this.setInfo(jsonMovie);
 		this.setCredits(jsonMovie.getString("id"),conector);
+		this.setReviews(jsonMovie.getString("id"),conector);
 	}
 
 	public Movie(String id) throws JSONException, IOException {
 		Conector conector = new Conector();
 		this.setInfo(conector.getResource2("movie", id));
 		this.setCredits(id, conector);
+		this.setReviews(id, conector);
+	}
+
+	/**
+	 * @param id
+	 * @param conector
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	private void setReviews(String id, Conector conector) throws JSONException, IOException {
+		JSONArray reviews = conector.getResource2("movie",id+"/reviews").getJSONArray("results");
+        for(int i=0; i<reviews.length() ; i++){
+        	this.addReview(new Review(reviews.getJSONObject(i),this));
+       }
+	}
+
+	private void addReview(Review review) {
+		this.getReviews().add(review);
 	}
 
 	/**
@@ -168,7 +187,6 @@ public class Movie {
 
 	private void addCredit(Credit credit) {
 		this.getCast().add(credit);
-		
 	}
 
 	public Movie() {
