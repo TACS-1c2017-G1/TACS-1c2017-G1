@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +21,7 @@ public class Movie {
 	private int id;
 	private String title;
 	private String overview;
-	private List<Actor> cast = new ArrayList<Actor>();
+	private List<Credit> cast = new ArrayList<Credit>();
 	private List<Image> backdrops = new ArrayList<Image>();
 	private List<Image> posters = new ArrayList<Image>();
 	private List<Review> reviews = new ArrayList<Review>();
@@ -73,7 +74,7 @@ public class Movie {
 	/**
 	 * @return the cast
 	 */
-	private List<Actor> getCast() {
+	List<Credit> getCast() {
 		return cast;
 	}
 
@@ -81,7 +82,7 @@ public class Movie {
 	 * @param cast
 	 *            the cast to set
 	 */
-	private void setCast(List<Actor> cast) {
+	private void setCast(List<Credit> cast) {
 		this.cast = cast;
 	}
 
@@ -130,10 +131,6 @@ public class Movie {
 		this.reviews = reviews;
 	}
 
-	// public Movie(String stringMovie) {
-	// this.setInfo(new JSONObject(stringMovie));
-	// }
-
 	private void setInfo(JSONObject jsonMovie) {
 		try {
 			this.setId(jsonMovie.getInt("id"));
@@ -144,13 +141,34 @@ public class Movie {
 		}
 	}
 
-	public Movie(JSONObject jsonMovie) {
+	public Movie(JSONObject jsonMovie) throws JSONException, IOException {
+		Conector conector = new Conector();
 		this.setInfo(jsonMovie);
+		this.setCredits(jsonMovie.getString("id"),conector);
 	}
 
 	public Movie(String id) throws JSONException, IOException {
 		Conector conector = new Conector();
 		this.setInfo(conector.getResource2("movie", id));
+		this.setCredits(id, conector);
+	}
+
+	/**
+	 * @param id
+	 * @param conector
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	private void setCredits(String id, Conector conector) throws JSONException, IOException {
+		JSONArray cast = conector.getResource2("movie",id+"/credits").getJSONArray("cast");
+        for(int i=0; i<cast.length() ; i++){
+        	this.addCredit(new Credit(cast.getJSONObject(i),this));
+       }
+	}
+
+	private void addCredit(Credit credit) {
+		this.getCast().add(credit);
+		
 	}
 
 	public Movie() {

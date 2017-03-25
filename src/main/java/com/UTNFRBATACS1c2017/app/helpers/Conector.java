@@ -60,11 +60,9 @@ public class Conector {
 		System.out.println(pedir);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
 		Logger logger = LoggerFactory.getLogger(Conector.class);
-
 		try {
 			HttpEntity entity1 = response1.getEntity();
 			String response2 = EntityUtils.toString(entity1);
-			System.out.println("Recurso: " + resource + " Query: " + query + " Respuesta: " + response2);
 			JSONObject respuesta = new JSONObject(response2);
 			EntityUtils.consume(entity1);
 			return respuesta;
