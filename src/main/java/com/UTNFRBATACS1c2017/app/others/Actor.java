@@ -10,8 +10,13 @@ import java.util.List;
  *
  */
 public class Actor {
-	int id;
-	String name;
-	List<Image> profiles;
-	List<Credit> credits;
+	private int id;
+	private String name;
+	private List<Image> profiles;
+	private List<Credit> credits;
+
+	public void showDetails() {
+		// TODO Auto-generated method stub
+
+	}
 }

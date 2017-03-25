@@ -51,11 +51,11 @@ public class Conector {
 			response1.close();
 		}
 	}
-	
+
 	public JSONObject getResource2(String resource, String query) throws JSONException, IOException {
 		String key = new String(Files.readAllBytes(Paths.get(".resources")));
 		this.setApi_key(key.substring(0, key.length() - 1));
-		String pedir = this.getApiURL() + resource +"/"+ query + this.getApi_key();
+		String pedir = this.getApiURL() + resource + "/" + query + this.getApi_key();
 		HttpGet httpGet = new HttpGet(pedir);
 		System.out.println(pedir);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);

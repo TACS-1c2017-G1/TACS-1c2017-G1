@@ -3,11 +3,14 @@
  */
 package com.UTNFRBATACS1c2017.app.others;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.UTNFRBATACS1c2017.app.helpers.Conector;
 
 /**
  * @author facundo91
@@ -17,11 +20,11 @@ public class Movie {
 	private int id;
 	private String title;
 	private String overview;
-	private List<Actor> cast = new ArrayList<Actor>() ;
+	private List<Actor> cast = new ArrayList<Actor>();
 	private List<Image> backdrops = new ArrayList<Image>();
 	private List<Image> posters = new ArrayList<Image>();
 	private List<Review> reviews = new ArrayList<Review>();
-	
+
 	/**
 	 * @return the id
 	 */
@@ -30,7 +33,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	private void setId(int id) {
 		this.id = id;
@@ -44,7 +48,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	private void setTitle(String title) {
 		this.title = title;
@@ -58,7 +63,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param overview the overview to set
+	 * @param overview
+	 *            the overview to set
 	 */
 	private void setOverview(String overview) {
 		this.overview = overview;
@@ -72,7 +78,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param cast the cast to set
+	 * @param cast
+	 *            the cast to set
 	 */
 	private void setCast(List<Actor> cast) {
 		this.cast = cast;
@@ -86,7 +93,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param backdrops the backdrops to set
+	 * @param backdrops
+	 *            the backdrops to set
 	 */
 	private void setBackdrops(List<Image> backdrops) {
 		this.backdrops = backdrops;
@@ -100,7 +108,8 @@ public class Movie {
 	}
 
 	/**
-	 * @param posters the posters to set
+	 * @param posters
+	 *            the posters to set
 	 */
 	private void setPosters(List<Image> posters) {
 		this.posters = posters;
@@ -114,32 +123,43 @@ public class Movie {
 	}
 
 	/**
-	 * @param reviews the reviews to set
+	 * @param reviews
+	 *            the reviews to set
 	 */
 	private void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
 
-	public Movie(String stringMovie) {
-		this.setInfo(new JSONObject(stringMovie));
-	}
-	
-	private void setInfo(JSONObject jsonMovie){
-		try{
+	// public Movie(String stringMovie) {
+	// this.setInfo(new JSONObject(stringMovie));
+	// }
+
+	private void setInfo(JSONObject jsonMovie) {
+		try {
 			this.setId(jsonMovie.getInt("id"));
 			this.setTitle(jsonMovie.getString("title"));
 			this.setOverview(jsonMovie.getString("overview"));
-			}
-		catch(JSONException e){
+		} catch (JSONException e) {
 			System.out.print(e);
 		}
 	}
-	
+
 	public Movie(JSONObject jsonMovie) {
 		this.setInfo(jsonMovie);
+	}
+
+	public Movie(String id) throws JSONException, IOException {
+		Conector conector = new Conector();
+		this.setInfo(conector.getResource2("movie", id));
 	}
 
 	public Movie() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public void showDetails() {
+		// TODO Auto-generated method stub
+
+	}
+
 }
