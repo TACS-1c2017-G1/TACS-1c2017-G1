@@ -10,23 +10,23 @@ public class BusquedasController {
 	Busquedas busqueda = new Busquedas();
 
 	@RequestMapping("/searchMovie")
-	public String busquedaPelicula(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+	public String busquedaPelicula(@RequestParam(value = "name", required = true) String query,
 			Model model) throws Exception {
-		model.addAttribute("name", busqueda.buscarPeliculaPorNombre(name));
+		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query));
 		return "searchMovie";
 	}
 
 	@RequestMapping("/searchActor")
-	public String busquedaActor(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+	public String busquedaActor(@RequestParam(value = "name", required = true) String query,
 			Model model) throws Exception {
-		model.addAttribute("name", busqueda.buscarActorPorNombre(name));
+		model.addAttribute("movies", busqueda.buscarActorPorNombre(query));
 		return "searchActor";
 	}
 
 	@RequestMapping("/search")
-	public String busqueda(@RequestParam(value = "name", required = false, defaultValue = "") String name, Model model)
+	public String busqueda(@RequestParam(value = "name", required = true) String name, Model model)
 			throws Exception {
-		model.addAttribute("name", busqueda.buscarPorNombre(name));
+		model.addAttribute("movies", busqueda.buscarPorNombre(name));
 		return "search";
 	}
 

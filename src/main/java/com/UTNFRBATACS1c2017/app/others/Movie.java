@@ -131,7 +131,7 @@ public class Movie {
 		this.reviews = reviews;
 	}
 
-	private void setInfo(JSONObject jsonMovie) {
+	public void setInfo(JSONObject jsonMovie) {
 		try {
 			this.setId(jsonMovie.getInt("id"));
 			this.setTitle(jsonMovie.getString("title"));
@@ -217,7 +217,7 @@ public class Movie {
 	}
 
 	public Movie() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public void showDetails() {
