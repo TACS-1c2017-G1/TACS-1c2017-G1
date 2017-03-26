@@ -13,6 +13,7 @@ public class Credit {
 	private int id;
 	private int actorId; // just id in the TMDb API
 	private int movieId;
+	private String movieTitle;
 	private String creditId;
 	private String character;
 	private String name;
@@ -23,6 +24,15 @@ public class Credit {
 		this.setCreditId(jsonCredit.getString("credit_id"));
 		this.setCharacter(jsonCredit.getString("character"));
 		this.setName(jsonCredit.getString("name"));
+		this.setMovieTitle(movie.getTitle());
+	}
+	public Credit(JSONObject jsonCredit, Actor actor) {
+		this.setMovieId(jsonCredit.getInt("id"));
+		this.setActorId(actor.getId());
+		this.setCreditId(jsonCredit.getString("credit_id"));
+		this.setCharacter(jsonCredit.getString("character"));
+		this.setName(actor.getName());
+		this.setMovieTitle(jsonCredit.getString("title"));
 	}
 	/**
 	 * @return the actorId
@@ -39,7 +49,7 @@ public class Credit {
 	/**
 	 * @return the movieId
 	 */
-	private int getMovieId() {
+	public int getMovieId() {
 		return movieId;
 	}
 	/**
@@ -95,5 +105,17 @@ public class Credit {
 	 */
 	private void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the movieTitle
+	 */
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	/**
+	 * @param movieTitle the movieTitle to set
+	 */
+	private void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 }

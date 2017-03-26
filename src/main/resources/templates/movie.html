@@ -24,14 +24,12 @@
 		<table>
 		<tbody>
 		  <tr>
-		    <th>Id</th>
+		    <th>Actor name</th>
 		    <th>Character</th>
-		    <th>Full Name</th>
 		  </tr>
 		    <tr data-th-each="credit : ${cast}">
-		    	<td><a style="color:black; text-decoration: none;" th:href="@{'https://www.themoviedb.org/person/'+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.actorId}" /></a></td>
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/actor?id='+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.name}" /></a></td>
 		        <td data-th-text="${credit.character}">...</td>
-		        <td data-th-text="${credit.name}">...</td>
 		    </tr>
 		</tbody>
 		</table>

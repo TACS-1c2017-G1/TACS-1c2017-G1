@@ -9,13 +9,11 @@
 		<table>
 		<tbody>
 		  <tr>
-		    <th>Id</th>
-		    <th>Character</th>
-		    <th>Full Name</th>
+		    <th>Movie</th>
+		    <th>Overview</th>
 		  </tr>
 		    <tr data-th-each="movie : ${movies}">
-		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/movie?id='+${movie.id}}"><p style="color:black; text-decoration: none;" data-th-text="${movie.id}" /></a></td>
-		        <td data-th-text="${movie.title}">...</td>
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/movie?id='+${movie.id}}"><p style="color:black; text-decoration: none;" data-th-text="${movie.title}+' ('+${movie.id}+')'"/></a></td>
 		        <td data-th-text="${movie.overview}">...</td>
 		    </tr>
 		</tbody>

@@ -13,6 +13,7 @@ import org.json.JSONObject;
 public class Image {
 	private int id;
 	private int movieId;
+	private int actorId;
 	private String baseUrl= "http://image.tmdb.org/t/p/";
 	private int size;
 	private String filePath;
@@ -81,6 +82,20 @@ public class Image {
 	}
 
 	/**
+	 * @return the actorId
+	 */
+	private int getActorId() {
+		return actorId;
+	}
+
+	/**
+	 * @param actorId the actorId to set
+	 */
+	private void setActorId(int actorId) {
+		this.actorId = actorId;
+	}
+
+	/**
 	 * @param filePath the filePath to set
 	 */
 	private void setFilePath(String filePath) {
@@ -89,6 +104,11 @@ public class Image {
 
 	public Image(JSONObject jsonImage, Movie movie) {
 		this.setMovieId(movie.getId());
+		this.setFilePath(jsonImage.getString("file_path"));
+	}
+
+	public Image(JSONObject jsonImage, Actor actor) {
+		this.setActorId(actor.getId());
 		this.setFilePath(jsonImage.getString("file_path"));
 	}
 }
