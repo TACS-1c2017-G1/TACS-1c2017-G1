@@ -34,7 +34,7 @@ public class Review {
 	/**
 	 * @return the review_id
 	 */
-	private String getReviewId() {
+	public String getReviewId() {
 		return reviewId;
 	}
 
