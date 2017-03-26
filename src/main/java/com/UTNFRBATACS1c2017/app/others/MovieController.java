@@ -17,6 +17,8 @@ public class MovieController {
 		model.addAttribute("overview", movie.getOverview());
 		model.addAttribute("cast",movie.getCast());
 		model.addAttribute("reviews",movie.getReviews());
+		model.addAttribute("backdrops",movie.getBackdrops());
+		model.addAttribute("posters",movie.getPosters());
 		return "movie";
 	}
 

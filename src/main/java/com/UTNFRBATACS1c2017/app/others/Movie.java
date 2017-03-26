@@ -89,7 +89,7 @@ public class Movie {
 	/**
 	 * @return the backdrops
 	 */
-	private List<Image> getBackdrops() {
+	public List<Image> getBackdrops() {
 		return backdrops;
 	}
 
@@ -104,7 +104,7 @@ public class Movie {
 	/**
 	 * @return the posters
 	 */
-	private List<Image> getPosters() {
+	public List<Image> getPosters() {
 		return posters;
 	}
 
@@ -153,6 +153,33 @@ public class Movie {
 		this.setInfo(conector.getResource2("movie", id));
 		this.setCredits(id, conector);
 		this.setReviews(id, conector);
+		this.setImages(id, conector);
+	}
+
+	/**
+	 * @param id
+	 * @param conector
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	private void setImages(String id, Conector conector) throws JSONException, IOException {
+		JSONObject images = conector.getResource2("movie",id+"/images");
+		JSONArray backdrops = images.getJSONArray("backdrops");
+        for(int i=0; i<backdrops.length() ; i++){
+        	this.addBackdrop(new Image(backdrops.getJSONObject(i),this));
+       }
+		JSONArray posters = images.getJSONArray("posters");
+        for(int i=0; i<posters.length() ; i++){
+        	this.addPoster(new Image(posters.getJSONObject(i),this));
+       }
+	}
+
+	private void addPoster(Image image) {
+		this.getPosters().add(image);
+	}
+
+	private void addBackdrop(Image image) {
+		this.getBackdrops().add(image);
 	}
 
 	/**
