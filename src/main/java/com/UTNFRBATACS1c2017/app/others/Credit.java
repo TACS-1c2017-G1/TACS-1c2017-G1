@@ -17,7 +17,7 @@ public class Credit {
 	private String creditId;
 	private String character;
 	private String name;
-	
+
 	public Credit(JSONObject jsonCredit, Movie movie) {
 		this.setMovieId(movie.getId());
 		this.setActorId(jsonCredit.getInt("id"));
@@ -26,6 +26,7 @@ public class Credit {
 		this.setName(jsonCredit.getString("name"));
 		this.setMovieTitle(movie.getTitle());
 	}
+
 	public Credit(JSONObject jsonCredit, Actor actor) {
 		this.setMovieId(jsonCredit.getInt("id"));
 		this.setActorId(actor.getId());
@@ -34,86 +35,107 @@ public class Credit {
 		this.setName(actor.getName());
 		this.setMovieTitle(jsonCredit.getString("title"));
 	}
+
 	/**
 	 * @return the actorId
 	 */
 	public int getActorId() {
 		return actorId;
 	}
+
 	/**
-	 * @param actorId the actorId to set
+	 * @param actorId
+	 *            the actorId to set
 	 */
 	private void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
+
 	/**
 	 * @return the movieId
 	 */
 	public int getMovieId() {
 		return movieId;
 	}
+
 	/**
-	 * @param movieId the movieId to set
+	 * @param movieId
+	 *            the movieId to set
 	 */
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
+
 	/**
 	 * @return the creditId
 	 */
 	private String getCreditId() {
 		return creditId;
 	}
+
 	/**
-	 * @param creditId the creditId to set
+	 * @param creditId
+	 *            the creditId to set
 	 */
 	public void setCreditId(String creditId) {
 		this.creditId = creditId;
 	}
+
 	/**
 	 * @return the id
 	 */
 	private int getId() {
 		return id;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	private void setId(int id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the character
 	 */
 	public String getCharacter() {
 		return character;
 	}
+
 	/**
-	 * @param character the character to set
+	 * @param character
+	 *            the character to set
 	 */
 	private void setCharacter(String character) {
 		this.character = character;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	private void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * @return the movieTitle
 	 */
 	public String getMovieTitle() {
 		return movieTitle;
 	}
+
 	/**
-	 * @param movieTitle the movieTitle to set
+	 * @param movieTitle
+	 *            the movieTitle to set
 	 */
 	private void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;

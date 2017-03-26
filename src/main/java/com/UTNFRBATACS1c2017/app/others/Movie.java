@@ -144,8 +144,8 @@ public class Movie {
 	public Movie(JSONObject jsonMovie) throws JSONException, IOException {
 		Conector conector = new Conector();
 		this.setInfo(jsonMovie);
-		this.setCredits(jsonMovie.getString("id"),conector);
-		this.setReviews(jsonMovie.getString("id"),conector);
+		this.setCredits(jsonMovie.getString("id"), conector);
+		this.setReviews(jsonMovie.getString("id"), conector);
 	}
 
 	public Movie(String id) throws JSONException, IOException {
@@ -163,15 +163,15 @@ public class Movie {
 	 * @throws IOException
 	 */
 	private void setImages(String id, Conector conector) throws JSONException, IOException {
-		JSONObject images = conector.getResource2("movie",id+"/images");
+		JSONObject images = conector.getResource2("movie", id + "/images");
 		JSONArray backdrops = images.getJSONArray("backdrops");
-        for(int i=0; i<backdrops.length() ; i++){
-        	this.addBackdrop(new Image(backdrops.getJSONObject(i),this));
-       }
+		for (int i = 0; i < backdrops.length(); i++) {
+			this.addBackdrop(new Image(backdrops.getJSONObject(i), this));
+		}
 		JSONArray posters = images.getJSONArray("posters");
-        for(int i=0; i<posters.length() ; i++){
-        	this.addPoster(new Image(posters.getJSONObject(i),this));
-       }
+		for (int i = 0; i < posters.length(); i++) {
+			this.addPoster(new Image(posters.getJSONObject(i), this));
+		}
 	}
 
 	private void addPoster(Image image) {
@@ -189,10 +189,10 @@ public class Movie {
 	 * @throws IOException
 	 */
 	private void setReviews(String id, Conector conector) throws JSONException, IOException {
-		JSONArray reviews = conector.getResource2("movie",id+"/reviews").getJSONArray("results");
-        for(int i=0; i<reviews.length() ; i++){
-        	this.addReview(new Review(reviews.getJSONObject(i),this));
-       }
+		JSONArray reviews = conector.getResource2("movie", id + "/reviews").getJSONArray("results");
+		for (int i = 0; i < reviews.length(); i++) {
+			this.addReview(new Review(reviews.getJSONObject(i), this));
+		}
 	}
 
 	private void addReview(Review review) {
@@ -206,10 +206,10 @@ public class Movie {
 	 * @throws IOException
 	 */
 	private void setCredits(String id, Conector conector) throws JSONException, IOException {
-		JSONArray cast = conector.getResource2("movie",id+"/credits").getJSONArray("cast");
-        for(int i=0; i<cast.length() ; i++){
-        	this.addCredit(new Credit(cast.getJSONObject(i),this));
-       }
+		JSONArray cast = conector.getResource2("movie", id + "/credits").getJSONArray("cast");
+		for (int i = 0; i < cast.length(); i++) {
+			this.addCredit(new Credit(cast.getJSONObject(i), this));
+		}
 	}
 
 	private void addCredit(Credit credit) {

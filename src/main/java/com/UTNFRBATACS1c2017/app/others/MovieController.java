@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MovieController {
 
 	@RequestMapping("/movie")
-	public String busquedaPelicula(@RequestParam(value = "id", required = true) String id,
-			Model model) throws Exception {
+	public String busquedaPelicula(@RequestParam(value = "id", required = true) String id, Model model)
+			throws Exception {
 		Movie movie = new Movie(id);
 		model.addAttribute(movie);
 		return "movie";

@@ -16,7 +16,7 @@ public class Review {
 	private String author;
 	private String content;
 	private String url;
-	
+
 	/**
 	 * @return the id
 	 */
@@ -25,7 +25,8 @@ public class Review {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	private void setId(int id) {
 		this.id = id;
@@ -39,7 +40,8 @@ public class Review {
 	}
 
 	/**
-	 * @param review_id the reviewId to set
+	 * @param review_id
+	 *            the reviewId to set
 	 */
 	private void setReviewId(String reviewId) {
 		this.reviewId = reviewId;
@@ -53,7 +55,8 @@ public class Review {
 	}
 
 	/**
-	 * @param movieId the movieId to set
+	 * @param movieId
+	 *            the movieId to set
 	 */
 	private void setMovieId(int movieId) {
 		this.movieId = movieId;
@@ -67,7 +70,8 @@ public class Review {
 	}
 
 	/**
-	 * @param author the author to set
+	 * @param author
+	 *            the author to set
 	 */
 	private void setAuthor(String author) {
 		this.author = author;
@@ -81,7 +85,8 @@ public class Review {
 	}
 
 	/**
-	 * @param content the content to set
+	 * @param content
+	 *            the content to set
 	 */
 	private void setContent(String content) {
 		this.content = content;
@@ -95,7 +100,8 @@ public class Review {
 	}
 
 	/**
-	 * @param url the url to set
+	 * @param url
+	 *            the url to set
 	 */
 	private void setUrl(String url) {
 		this.url = url;
@@ -108,5 +114,5 @@ public class Review {
 		this.setContent(jsonReview.getString("content"));
 		this.setUrl(jsonReview.getString("url"));
 	}
-	
+
 }

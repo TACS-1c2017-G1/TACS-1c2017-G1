@@ -14,10 +14,10 @@ public class Image {
 	private int id;
 	private int movieId;
 	private int actorId;
-	private String baseUrl= "http://image.tmdb.org/t/p/";
+	private String baseUrl = "http://image.tmdb.org/t/p/";
 	private int size;
 	private String filePath;
-	
+
 	/**
 	 * @return the id
 	 */
@@ -26,7 +26,8 @@ public class Image {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	private void setId(int id) {
 		this.id = id;
@@ -40,7 +41,8 @@ public class Image {
 	}
 
 	/**
-	 * @param movieId the movieId to set
+	 * @param movieId
+	 *            the movieId to set
 	 */
 	private void setMovieId(int movieId) {
 		this.movieId = movieId;
@@ -54,7 +56,8 @@ public class Image {
 	}
 
 	/**
-	 * @param baseUrl the baseUrl to set
+	 * @param baseUrl
+	 *            the baseUrl to set
 	 */
 	private void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
@@ -68,7 +71,8 @@ public class Image {
 	}
 
 	/**
-	 * @param size the size to set
+	 * @param size
+	 *            the size to set
 	 */
 	private void setSize(int size) {
 		this.size = size;
@@ -89,14 +93,16 @@ public class Image {
 	}
 
 	/**
-	 * @param actorId the actorId to set
+	 * @param actorId
+	 *            the actorId to set
 	 */
 	private void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
 
 	/**
-	 * @param filePath the filePath to set
+	 * @param filePath
+	 *            the filePath to set
 	 */
 	private void setFilePath(String filePath) {
 		this.filePath = filePath;

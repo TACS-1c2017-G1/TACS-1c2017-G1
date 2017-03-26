@@ -28,26 +28,26 @@ public class Actor {
 		JSONObject actorJson = conector.getResource2("person", id);
 		this.setId(actorJson.getInt("id"));
 		this.setName(actorJson.getString("name"));
-		this.setImages(id,conector);
-		this.setCredits(id,conector);
+		this.setImages(id, conector);
+		this.setCredits(id, conector);
 	}
-	
+
 	public Actor() {
 		// TODO Auto-generated constructor stub
 	}
 
 	private void setImages(String id, Conector conector) throws JSONException, IOException {
-		JSONArray imagesJson = conector.getResource2("person",id+"/images").getJSONArray("profiles");
-        for(int i=0; i<imagesJson.length() ; i++){
-        	this.addProfile(new Image(imagesJson.getJSONObject(i),this));
-       }
+		JSONArray imagesJson = conector.getResource2("person", id + "/images").getJSONArray("profiles");
+		for (int i = 0; i < imagesJson.length(); i++) {
+			this.addProfile(new Image(imagesJson.getJSONObject(i), this));
+		}
 	}
 
 	private void setCredits(String id, Conector conector) throws JSONException, IOException {
-		JSONArray creditsJson = conector.getResource2("person",id+"/movie_credits").getJSONArray("cast");
-        for(int i=0; i<creditsJson.length() ; i++){
-        	this.addCredit(new Credit(creditsJson.getJSONObject(i),this));
-       }
+		JSONArray creditsJson = conector.getResource2("person", id + "/movie_credits").getJSONArray("cast");
+		for (int i = 0; i < creditsJson.length(); i++) {
+			this.addCredit(new Credit(creditsJson.getJSONObject(i), this));
+		}
 	}
 
 	public void addCredit(Credit credit) {
@@ -66,7 +66,8 @@ public class Actor {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	private void setId(int id) {
 		this.id = id;
@@ -80,7 +81,8 @@ public class Actor {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	private void setName(String name) {
 		this.name = name;
@@ -94,7 +96,8 @@ public class Actor {
 	}
 
 	/**
-	 * @param profiles the profiles to set
+	 * @param profiles
+	 *            the profiles to set
 	 */
 	private void setProfiles(List<Image> profiles) {
 		this.profiles = profiles;
@@ -108,7 +111,8 @@ public class Actor {
 	}
 
 	/**
-	 * @param credits the credits to set
+	 * @param credits
+	 *            the credits to set
 	 */
 	private void setCredits(List<Credit> credits) {
 		this.credits = credits;

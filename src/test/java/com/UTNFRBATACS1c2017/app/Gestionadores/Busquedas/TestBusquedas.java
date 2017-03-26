@@ -3,12 +3,11 @@
  */
 package com.UTNFRBATACS1c2017.app.Gestionadores.Busquedas;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import com.UTNFRBATACS1c2017.app.others.Movie;
-
-import org.json.*;
-import org.junit.*;
+import org.json.JSONException;
+import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,11 +31,13 @@ public class TestBusquedas {
 		assertNotNull(gestionadorBusquedas);
 	}
 
-//	@Test //FIXME
-//	public void testBuscarPeliculaPorNombreCrearMovie() throws Exception {
-//		JSONArray jsonArray = gestionadorBusquedas.buscarPeliculaPorNombre("Pirates-of-the-Caribbean");
-//		assertTrue(jsonArray.getJSONObject(0).getString("title").startsWith("Pirates of the Caribbean"));
-//	}
+	// @Test //FIXME
+	// public void testBuscarPeliculaPorNombreCrearMovie() throws Exception {
+	// JSONArray jsonArray =
+	// gestionadorBusquedas.buscarPeliculaPorNombre("Pirates-of-the-Caribbean");
+	// assertTrue(jsonArray.getJSONObject(0).getString("title").startsWith("Pirates
+	// of the Caribbean"));
+	// }
 
 	@Test(expected = JSONException.class)
 	public void testBuscarActorPorNombre() throws Exception {
