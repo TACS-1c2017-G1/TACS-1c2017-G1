@@ -13,8 +13,6 @@ public class ActorController {
 			Model model) throws Exception {
 		Actor actor = new Actor(id);
 		model.addAttribute("actor", actor);
-		model.addAttribute("credits", actor.getCredits());
-		model.addAttribute("profiles", actor.getProfiles());
 		return "actor";
 	}
 

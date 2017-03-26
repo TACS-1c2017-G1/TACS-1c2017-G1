@@ -6,6 +6,10 @@
 </head>
 <body>
 	<h1>Movie Search</h1>
+    <form action="#" th:action="@{/searchMovie}">
+    	<input type="text" name="query"/>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
 		<table>
 		<tbody>
 		  <tr>

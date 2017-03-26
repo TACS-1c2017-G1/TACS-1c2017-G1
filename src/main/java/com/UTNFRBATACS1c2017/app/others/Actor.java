@@ -50,7 +50,7 @@ public class Actor {
        }
 	}
 
-	private void addCredit(Credit credit) {
+	public void addCredit(Credit credit) {
 		this.getCredits().add(credit);
 	}
 

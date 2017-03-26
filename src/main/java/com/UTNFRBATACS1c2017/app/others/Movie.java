@@ -74,7 +74,7 @@ public class Movie {
 	/**
 	 * @return the cast
 	 */
-	List<Credit> getCast() {
+	public List<Credit> getCast() {
 		return cast;
 	}
 

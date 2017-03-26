@@ -12,13 +12,7 @@ public class MovieController {
 	public String busquedaPelicula(@RequestParam(value = "id", required = true) String id,
 			Model model) throws Exception {
 		Movie movie = new Movie(id);
-		model.addAttribute("title", movie.getTitle());
-		model.addAttribute("id", movie.getId());
-		model.addAttribute("overview", movie.getOverview());
-		model.addAttribute("cast",movie.getCast());
-		model.addAttribute("reviews",movie.getReviews());
-		model.addAttribute("backdrops",movie.getBackdrops());
-		model.addAttribute("posters",movie.getPosters());
+		model.addAttribute(movie);
 		return "movie";
 	}
 

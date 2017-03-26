@@ -2,17 +2,15 @@ package com.UTNFRBATACS1c2017.app.Gestionadores.Busquedas;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import com.UTNFRBATACS1c2017.app.others.Movie;
 
 @Controller
 public class BusquedasController {
 	Busquedas busqueda = new Busquedas();
 
 	@RequestMapping("/searchMovie")
-	public String busquedaPelicula(@RequestParam(value = "name", required = true) String query,
+	public String busquedaPelicula(@RequestParam(value = "query", required = true) String query,
 			Model model) throws Exception {
 		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query));
 		return "searchMovie";
@@ -30,11 +28,6 @@ public class BusquedasController {
 			throws Exception {
 		model.addAttribute("movies", busqueda.buscarPorNombre(name));
 		return "search";
-	}
-	
-	@RequestMapping(value = "/searchMovie", method=RequestMethod.POST)
-	public String processForm(@ModelAttribute(value="id") String id) {
-		return "redirect:/searchMovie";
 	}
 
 }
