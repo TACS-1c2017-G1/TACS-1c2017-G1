@@ -1,4 +1,4 @@
-package com.UTNFRBATACS1c2017.app.helpers;
+package app.model.tmdb;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Conector {
+public class TheMovieDBDao {
 
 	private String apiURL = "https://api.themoviedb.org/3/";
 	private String api_key = "";
@@ -38,7 +38,7 @@ public class Conector {
 		this.setApi_key(key.substring(0, key.length() - 1));
 		HttpGet httpGet = new HttpGet(this.getApiURL() + resource + this.getApi_key() + "&query=" + query);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
-		Logger logger = LoggerFactory.getLogger(Conector.class);
+		Logger logger = LoggerFactory.getLogger(TheMovieDBDao.class);
 
 		try {
 			HttpEntity entity1 = response1.getEntity();
@@ -59,7 +59,7 @@ public class Conector {
 		HttpGet httpGet = new HttpGet(pedir);
 		System.out.println(pedir);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
-		Logger logger = LoggerFactory.getLogger(Conector.class);
+		Logger logger = LoggerFactory.getLogger(TheMovieDBDao.class);
 
 		try {
 			HttpEntity entity1 = response1.getEntity();
@@ -76,4 +76,5 @@ public class Conector {
 	private String getApi_key() {
 		return api_key;
 	}
+	
 }
