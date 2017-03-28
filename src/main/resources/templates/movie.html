@@ -5,12 +5,48 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>MOVIE</h1>
-	<h2>Title</h2>
-    <p th:text="${title} "/>
-    <h2>Id</h2>
-    <p th:text="${id} " />
+	<form action="#" th:action="@{/searchMovie}">
+    	<input type="text" name="query"/>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+    <h1 th:text="${movie.title} ">Movie</h1>
     <h2>Overview</h2>
-    <p th:text="${overview} " />
+    <p th:text="${movie.overview} " />
+        <h2>Reviews</h2>
+		<table>
+		  <tr>
+		    <th>Author</th>
+		    <th>Content</th>
+		  </tr>
+		    <tr data-th-each="review : ${movie.reviews}">
+		    	<td data-th-text="${review.author}">...</td>
+		        <td><a style="color:black; text-decoration: none;" th:href="@{'https://www.themoviedb.org/review/'+${review.reviewId}}"><p style="color:black; text-decoration: none;" data-th-text="${review.content}" /></a></td>
+		    </tr>
+		</table>
+    <h2>Cast</h2>
+		<table>
+		<tbody>
+		  <tr>
+		    <th>Actor name</th>
+		    <th>Character</th>
+		  </tr>
+		    <tr data-th-each="credit : ${movie.cast}">
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/actor?id='+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.name}" /></a></td>
+		        <td data-th-text="${credit.character}">...</td>
+		    </tr>
+		</tbody>
+		</table>
+   	<div>
+    	<h2>Backdrops</h2>
+    	<a data-th-each="backdrop : ${movie.backdrops}" href="http://google.com" th:href="@{${backdrop.baseUrl}+'original'+${backdrop.filePath}}">
+    		<img data-th-src="${backdrop.baseUrl+'w300'+backdrop.filePath}"/>
+    	</a>
+    	</div>
+    <div>
+    	<h2>Posters</h2>
+    	<a data-th-each="poster : ${movie.posters}" href="http://google.com" th:href="@{${poster.baseUrl}+'original'+${poster.filePath}}">
+    		<img data-th-src="${poster.baseUrl +'w92'+ poster.filePath}"/>
+    	</a>
+    	</div>
 </body>
 </html>

@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class MovieController {
+public class ActorController {
 
-	@RequestMapping("/movie")
+	@RequestMapping("/actor")
 	public String busquedaPelicula(@RequestParam(value = "id", required = true) String id, Model model)
 			throws Exception {
-		Movie movie = new Movie(id);
-		model.addAttribute(movie);
-		return "movie";
+		Actor actor = new Actor(id);
+		model.addAttribute("actor", actor);
+		return "actor";
 	}
 
 }
