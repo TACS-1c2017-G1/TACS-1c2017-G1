@@ -9,7 +9,7 @@ import app.service.BusquedasService;
 
 @Controller
 public class BusquedasController {
-	
+
 	BusquedasService busquedaSrv = new BusquedasService();
 
 	@RequestMapping("/searchMovie")

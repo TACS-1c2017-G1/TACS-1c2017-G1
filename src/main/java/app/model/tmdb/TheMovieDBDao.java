@@ -51,11 +51,11 @@ public class TheMovieDBDao {
 			response1.close();
 		}
 	}
-	
+
 	public JSONObject getResource2(String resource, String query) throws JSONException, IOException {
 		String key = new String(Files.readAllBytes(Paths.get("resources")));
 		this.setApi_key(key.substring(0, key.length() - 1));
-		String pedir = this.getApiURL() + resource +"/"+ query + this.getApi_key();
+		String pedir = this.getApiURL() + resource + "/" + query + this.getApi_key();
 		HttpGet httpGet = new HttpGet(pedir);
 		System.out.println(pedir);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
@@ -64,7 +64,7 @@ public class TheMovieDBDao {
 		try {
 			HttpEntity entity1 = response1.getEntity();
 			String response2 = EntityUtils.toString(entity1);
-			System.out.println("Recurso: " + resource + " Query: " + query + " Respuesta: " + response2);
+			logger.debug("Recurso: " + resource + " Query: " + query + " Respuesta: " + response2);
 			JSONObject respuesta = new JSONObject(response2);
 			EntityUtils.consume(entity1);
 			return respuesta;
@@ -76,5 +76,5 @@ public class TheMovieDBDao {
 	private String getApi_key() {
 		return api_key;
 	}
-	
+
 }
