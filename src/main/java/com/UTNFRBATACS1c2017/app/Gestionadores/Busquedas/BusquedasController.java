@@ -12,7 +12,7 @@ public class BusquedasController {
 	@RequestMapping("/searchMovie")
 	public String busquedaPelicula(@RequestParam(value = "query", required = true) String query, Model model)
 			throws Exception {
-		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query));
+		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query.replaceAll(" ", "-")));
 		return "searchMovie";
 	}
 
