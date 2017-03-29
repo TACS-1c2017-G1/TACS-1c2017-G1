@@ -34,7 +34,7 @@ public class TheMovieDBDao {
 	}
 
 	public JSONObject getResource(String resource, String query) throws JSONException, IOException {
-		String key = new String(Files.readAllBytes(Paths.get("resources")));
+		String key = new String(Files.readAllBytes(Paths.get(".resources")));
 		this.setApi_key(key.substring(0, key.length() - 1));
 		HttpGet httpGet = new HttpGet(this.getApiURL() + resource + this.getApi_key() + "&query=" + query);
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
@@ -53,7 +53,7 @@ public class TheMovieDBDao {
 	}
 
 	public JSONObject getResource2(String resource, String query) throws JSONException, IOException {
-		String key = new String(Files.readAllBytes(Paths.get("resources")));
+		String key = new String(Files.readAllBytes(Paths.get(".resources")));
 		this.setApi_key(key.substring(0, key.length() - 1));
 		String pedir = this.getApiURL() + resource + "/" + query + this.getApi_key();
 		HttpGet httpGet = new HttpGet(pedir);

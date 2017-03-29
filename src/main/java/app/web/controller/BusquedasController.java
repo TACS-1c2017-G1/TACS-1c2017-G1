@@ -2,34 +2,31 @@ package app.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.service.BusquedasService;
 
 @Controller
 public class BusquedasController {
+	BusquedasService busqueda = new BusquedasService();
 
-	BusquedasService busquedaSrv = new BusquedasService();
-
-	@RequestMapping("/searchMovie")
-	public String busquedaPelicula(@RequestParam(value = "name", required = false, defaultValue = "") String name,
-			Model model) throws Exception {
-		model.addAttribute("name", busquedaSrv.buscarPeliculaPorNombre(name));
-		return "searchMovie";
+	@RequestMapping(value = "/search/movie/{query}", method = RequestMethod.GET)
+	public String busquedaPelicula(@PathVariable String query, Model model) throws Exception {
+		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query));
+		return "search/movie";
 	}
 
-	@RequestMapping("/searchActor")
-	public String busquedaActor(@RequestParam(value = "name", required = false, defaultValue = "") String name,
-			Model model) throws Exception {
-		model.addAttribute("name", busquedaSrv.buscarActorPorNombre(name));
-		return "searchActor";
+	@RequestMapping(value = "/search/person/{query}", method = RequestMethod.GET)
+	public String busquedaActor(@PathVariable String query, Model model) throws Exception {
+		model.addAttribute("movies", busqueda.buscarActorPorNombre(query));
+		return "search/actor";
 	}
 
-	@RequestMapping("/search")
-	public String busqueda(@RequestParam(value = "name", required = false, defaultValue = "") String name, Model model)
-			throws Exception {
-		model.addAttribute("name", busquedaSrv.buscarPorNombre(name));
+	@RequestMapping(value = "/search/{query}", method = RequestMethod.GET)
+	public String busqueda(@PathVariable String query, Model model) throws Exception {
+		model.addAttribute("movies", busqueda.buscarPorNombre(query));
 		return "search";
 	}
 
