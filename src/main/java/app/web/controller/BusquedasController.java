@@ -20,14 +20,14 @@ public class BusquedasController {
 
 	@RequestMapping(value = "/search/person/{query}", method = RequestMethod.GET)
 	public String busquedaActor(@PathVariable String query, Model model) throws Exception {
-		model.addAttribute("movies", busqueda.buscarActorPorNombre(query));
+		model.addAttribute("people", busqueda.buscarActorPorNombre(query));
 		return "search/actor";
 	}
 
 	@RequestMapping(value = "/search/{query}", method = RequestMethod.GET)
 	public String busqueda(@PathVariable String query, Model model) throws Exception {
-		model.addAttribute("movies", busqueda.buscarPorNombre(query));
-		return "search";
+		model.addAttribute("things", busqueda.buscarPorNombre(query));
+		return "search/search";
 	}
 
 }

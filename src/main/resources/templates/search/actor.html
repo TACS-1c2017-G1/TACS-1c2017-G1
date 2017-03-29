@@ -7,5 +7,15 @@
 <body>
 	<h1>Actor search</h1>
     <p th:text="${name}" />
+    <table>
+		<tbody>
+		  <tr>
+		    <th>Actor</th>
+		  </tr>
+		    <tr data-th-each="person : ${people}">
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/actor/'+${person.id}}"><p style="color:black; text-decoration: none;" data-th-text="${person.name}+' ('+${person.id}+')'"/></a></td>
+		    </tr>
+		</tbody>
+		</table>
 </body>
 </html>

@@ -122,4 +122,9 @@ public class Actor {
 		// TODO Auto-generated method stub
 
 	}
+
+	public void setInfo(JSONObject jsonObject) {
+		// TODO Auto-generated method stub
+		
+	}
 }
