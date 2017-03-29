@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<form action="#" th:action="@{/searchMovie}">
+	<form action="#" th:action="@{/search/movie/}">
     	<input type="text" name="query"/>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
@@ -19,7 +19,7 @@
 		  </tr>
 		    <tr data-th-each="credit : ${actor.credits}">
 		        <td data-th-text="${credit.character}">...</td>
-		        <td><a style="color:black; text-decoration: none;" th:href="@{'/movie?id='+${credit.movieId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.movieTitle}"/></a></td>
+		        <td><a style="color:black; text-decoration: none;" th:href="@{'/movie/'+${credit.movieId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.movieTitle}"/></a></td>
 		    </tr>
 		</tbody>
 		</table>
