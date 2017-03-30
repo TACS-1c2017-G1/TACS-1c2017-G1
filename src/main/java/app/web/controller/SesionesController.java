@@ -33,4 +33,10 @@ public class SesionesController {
         return usuarioParaDevolver;
     }
 
+    @RequestMapping(value="/logout", method=RequestMethod.POST)
+    @ResponseBody
+    public String desloguearUsuario(@RequestBody UsuarioLogueadoTO usuarioParaDesloguearse) throws IOException{
+       /*acá debo desloguear al usuario va a devolver void pero en forma de prueba*/
+        return "Se deslogueó el usuario correctamente!";
+    }
 }
