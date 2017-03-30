@@ -4,7 +4,7 @@ package app.web.TOs;
  * Created by aye on 29/03/17.
  */
 
-public class UserAndPasswordTO {
+public class UsuarioYContraseniaTo {
 
     private String username;
     private String password;
