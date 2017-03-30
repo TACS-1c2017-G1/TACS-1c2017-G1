@@ -5,15 +5,15 @@ package app.web.TOs;
  */
 public class UsuarioLogueadoTO {
 
-    private String nombre;
+    private String username;
     private Long idSesion;
 
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Long getIdSesion() {
@@ -27,7 +27,7 @@ public class UsuarioLogueadoTO {
     public static UsuarioLogueadoTO create(String nombre, Long idSesion) {
         UsuarioLogueadoTO usuarioLogueadoTO = new UsuarioLogueadoTO();
         usuarioLogueadoTO.setIdSesion(idSesion);
-        usuarioLogueadoTO.setNombre(nombre);
+        usuarioLogueadoTO.setUsername(nombre);
         return usuarioLogueadoTO;
     }
 
