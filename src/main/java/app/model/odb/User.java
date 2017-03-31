@@ -30,7 +30,7 @@ public class User {
 	/**
 	 * @return the id
 	 */
-	private int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -45,7 +45,7 @@ public class User {
 	/**
 	 * @return the name
 	 */
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 
