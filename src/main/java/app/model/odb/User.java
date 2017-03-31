@@ -3,13 +3,8 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.json.JSONException;
 
 /**
  * @author facundo91
@@ -20,22 +15,18 @@ public class User {
 	private String name;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
-	private Date lastAccess;
 
-
-	public User(){
+	
+	User(){
 		super();
 	}
 	
-	public User(int id) throws JSONException, IOException {
+	User(int id,String name){
+		super();
 		this.setId(id);
-		this.setName("AEC");
-		this.setLastAccess(java.sql.Date.valueOf(LocalDate.now()));
-		/*favoriteActors.add(new Actor("100"));
-		favoriteActors.add(new Actor("200"));
-		lists.add(new MovieList("Mi lista"));*/
+		this.setName(name);
 	}
-
+	
 	/**
 	 * @return the id
 	 */
@@ -96,13 +87,6 @@ public class User {
 		this.favoriteActors = favoriteActors;
 	}
 	
-	private Date getLastAccess() {
-		return lastAccess;
-	}
-
-	private void setLastAccess(Date lastAccess) {
-		this.lastAccess = lastAccess;
-	}
 
 	public void createList(String name) {
 		this.getLists().add(new MovieList(name));
