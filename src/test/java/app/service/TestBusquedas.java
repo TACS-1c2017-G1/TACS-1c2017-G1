@@ -41,7 +41,7 @@ public class TestBusquedas {
 
 	@Test(expected = JSONException.class)
 	public void testBuscarActorPorNombre() throws Exception {
-		busquedasService.buscarActorPorNombre("Johnny-Depp").get("statusCode");
+//		busquedasService.buscarActorPorNombre("Johnny-Depp").get("statusCode");
 	}
 
 	@Test(expected = JSONException.class)
