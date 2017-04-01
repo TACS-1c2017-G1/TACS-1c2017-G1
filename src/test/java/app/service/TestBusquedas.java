@@ -39,10 +39,10 @@ public class TestBusquedas {
 	// of the Caribbean"));
 	// }
 
-	//@Test(expected = JSONException.class)
-	//public void testBuscarActorPorNombre() throws Exception {
-	//	busquedasService.buscarActorPorNombre("Johnny-Depp").get("statusCode");
-	//}
+//	@Test(expected = JSONException.class)
+//	public void testBuscarActorPorNombre() throws Exception {
+//		busquedasService.buscarActorPorNombre("Johnny-Depp").get("statusCode");
+//	}
 
 	@Test(expected = JSONException.class)
 	public void testBuscarPorNombre() throws Exception {
