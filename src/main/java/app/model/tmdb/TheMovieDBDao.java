@@ -1,9 +1,5 @@
 package app.model.tmdb;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TheMovieDBDao {
 
@@ -40,16 +40,7 @@ public class TheMovieDBDao {
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
 		Logger logger = LoggerFactory.getLogger(TheMovieDBDao.class);
 
-		try {
-			HttpEntity entity1 = response1.getEntity();
-			String response2 = EntityUtils.toString(entity1);
-			logger.debug("Recurso: " + resource + " Query: " + query + " Respuesta: " + response2);
-			JSONObject respuesta = new JSONObject(response2);
-			EntityUtils.consume(entity1);
-			return respuesta;
-		} finally {
-			response1.close();
-		}
+		return getJsonObject(resource, query, response1, logger);
 	}
 
 	public JSONObject getResource2(String resource, String query) throws JSONException, IOException {
@@ -61,6 +52,10 @@ public class TheMovieDBDao {
 		CloseableHttpResponse response1 = this.getHttpclient().execute(httpGet);
 		Logger logger = LoggerFactory.getLogger(TheMovieDBDao.class);
 
+		return getJsonObject(resource, query, response1, logger);
+	}
+
+	private JSONObject getJsonObject(String resource, String query, CloseableHttpResponse response1, Logger logger) throws IOException {
 		try {
 			HttpEntity entity1 = response1.getEntity();
 			String response2 = EntityUtils.toString(entity1);
