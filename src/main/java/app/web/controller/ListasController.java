@@ -2,16 +2,23 @@ package app.web.controller;
 
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
+import app.service.ListasService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Controller
 @RequestMapping(value="/list")
 public class ListasController {
+
+
+    @Autowired
+    ListasService listasService;
 
     @RequestMapping(value = "/{id_lista}", method = RequestMethod.GET)
     @ResponseBody
@@ -39,7 +46,11 @@ public class ListasController {
         //RequestBody deberá recibir un objeto Movie y PathVariable.
         return "Se eliminó el item.";
     }
-
+    @RequestMapping(value = "/intersection/{idLista1}/{idLista2}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Movie> calcularInterseccionDe(@RequestHeader String token, @PathVariable Integer idLista1, Integer idLista2) throws IOException {
+        return listasService.interseccionEntre(idLista1,idLista2);
+    }
 
 }
 
