@@ -1,7 +1,7 @@
 package app.web.controller;
 
+import app.web.TOs.CredencialTO;
 import app.web.TOs.UsuarioLogueadoTO;
-import app.web.TOs.UsuarioYContraseniaTo;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,19 +17,19 @@ public class SesionesController {
 
     @RequestMapping(value = "/new-user", method = RequestMethod.POST)
     @ResponseBody
-    public String crearUsuario(@RequestBody UsuarioYContraseniaTo userAndPassword) throws IOException{
+    public String crearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
         //Acá hay que crear el usuario y sino tirar excepción.
         return "Cuenta creada correctamente!";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public UsuarioLogueadoTO loguearUsuario(@RequestBody UsuarioYContraseniaTo userAndPassword) throws IOException{
+    public UsuarioLogueadoTO loguearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
         /*
         acá hay que pedir el token y crear la sesión
          mockie un usuario y un numero de sesion random
          */
-        UsuarioLogueadoTO usuarioParaDevolver = UsuarioLogueadoTO.create("ayitaLokura", 345476788993L);
+        UsuarioLogueadoTO usuarioParaDevolver = UsuarioLogueadoTO.create("ayitaLokura", "tuToken");
         return usuarioParaDevolver;
     }
 
