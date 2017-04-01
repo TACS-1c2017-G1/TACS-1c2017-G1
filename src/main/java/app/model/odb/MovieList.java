@@ -20,7 +20,7 @@ public class MovieList {
 	/**
 	 * @return the id
 	 */
-	private int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -35,7 +35,7 @@ public class MovieList {
 	/**
 	 * @return the name
 	 */
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 

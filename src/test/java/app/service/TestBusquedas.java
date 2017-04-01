@@ -3,13 +3,13 @@
  */
 package app.service;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author facundo91
@@ -39,10 +39,11 @@ public class TestBusquedas {
 	// of the Caribbean"));
 	// }
 
-	@Test(expected = JSONException.class)
-	public void testBuscarActorPorNombre() throws Exception {
+//
+//	@Test(expected = JSONException.class)
+//	public void testBuscarActorPorNombre() throws Exception {
 //		busquedasService.buscarActorPorNombre("Johnny-Depp").get("statusCode");
-	}
+//	}
 
 	@Test(expected = JSONException.class)
 	public void testBuscarPorNombre() throws Exception {

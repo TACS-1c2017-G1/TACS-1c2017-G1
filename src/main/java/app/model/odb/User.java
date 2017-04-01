@@ -16,10 +16,21 @@ public class User {
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 
+	
+	User(){
+		super();
+	}
+	
+	User(int id,String name){
+		super();
+		this.setId(id);
+		this.setName(name);
+	}
+	
 	/**
 	 * @return the id
 	 */
-	private int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -34,7 +45,7 @@ public class User {
 	/**
 	 * @return the name
 	 */
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -75,6 +86,7 @@ public class User {
 	private void setFavoriteActors(List<Actor> favoriteActors) {
 		this.favoriteActors = favoriteActors;
 	}
+	
 
 	public void createList(String name) {
 		this.getLists().add(new MovieList(name));
