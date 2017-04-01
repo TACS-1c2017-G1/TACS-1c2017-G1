@@ -6,7 +6,7 @@ package app.web.TOs;
 public class UsuarioLogueadoTO {
 
     private String username;
-    private Long idSesion;
+    private String idSesion;
 
     public String getUsername() {
         return username;
@@ -16,15 +16,15 @@ public class UsuarioLogueadoTO {
         this.username = username;
     }
 
-    public Long getIdSesion() {
+    public String getIdSesion() {
         return idSesion;
     }
 
-    public void setIdSesion(Long idSesion) {
+    public void setIdSesion(String idSesion) {
         this.idSesion = idSesion;
     }
 
-    public static UsuarioLogueadoTO create(String nombre, Long idSesion) {
+    public static UsuarioLogueadoTO create(String nombre, String idSesion) {
         UsuarioLogueadoTO usuarioLogueadoTO = new UsuarioLogueadoTO();
         usuarioLogueadoTO.setIdSesion(idSesion);
         usuarioLogueadoTO.setUsername(nombre);
