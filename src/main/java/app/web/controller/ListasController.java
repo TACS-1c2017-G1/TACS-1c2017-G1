@@ -17,8 +17,8 @@ public class ListasController {
 		
 	@RequestMapping(value = "/list/1234", method = RequestMethod.GET)
 	@ResponseBody
-	public String consultarLista(@RequestHeader(value="Token") String token, @PathVariable int list_id) throws Exception {
-		//
+	public String consultarLista(@RequestHeader(value="Token") String token) throws Exception {
+		//@PathVariable String list_name
 		return "/list/{list_id}";
 	}
 	
@@ -31,15 +31,15 @@ public class ListasController {
 	
 	@RequestMapping(value = "/list/1234/itemAgregado", method = RequestMethod.POST)
 	@ResponseBody
-	public String agregarItem(@RequestHeader(value="Token") String token, @RequestBody Movie movie) throws IOException {
-		//
+	public String agregarItem(@RequestHeader(value="Token") String token, @RequestBody String movie) throws IOException {
+		//RequestBody deberá recibir un objeto Movie y PathVariable.
 		return "Se agregó el item.";
 	}
 	
 	@RequestMapping(value = "/list/1234/itemBorrado", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String eliminarItem(@RequestHeader(value="Token") String Token, @RequestBody Movie movie) throws IOException {
-		//
+	public String eliminarItem(@RequestHeader(value="Token") String Token, @RequestBody String movie) throws IOException {
+		//RequestBody deberá recibir un objeto Movie y PathVariable.
 		return "Se eliminó el item.";
 	}
 	
