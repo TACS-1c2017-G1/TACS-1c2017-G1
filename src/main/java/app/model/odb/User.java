@@ -4,6 +4,7 @@
 package app.model.odb;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -89,7 +90,7 @@ public class User {
 	
 
 	public void createList(String name) {
-		this.getLists().add(new MovieList(name));
+		this.getLists().add(MovieList.create(name, Arrays.asList()));
 	}
 
 	public void addList(MovieList movieList) {
