@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +22,7 @@ public class UserController {
 	
 	@RequestMapping(value="/user/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@PathVariable String id) throws JSONException, IOException{
+	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
 		return new UserView(id);
 	}
 
@@ -41,7 +42,7 @@ public class UserController {
 	
 	@RequestMapping(value="/users",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserSelection listaUsuarios() throws JSONException, IOException{
+	public UserSelection listaUsuarios(@RequestHeader String token) throws JSONException, IOException{
 		return new UserSelection();
 	}
 	
