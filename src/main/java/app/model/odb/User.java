@@ -21,9 +21,9 @@ public class User {
 		super();
 	}
 	
-	User(int id,String name){
+	User(String id,String name){
 		super();
-		this.setId(id);
+		this.setId(Integer.parseInt(id));
 		this.setName(name);
 	}
 	
