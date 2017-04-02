@@ -67,11 +67,10 @@ public class MovieList {
 
 	public static MovieList create(String name, List<Movie> movies){
 		MovieList movieList = new MovieList();
-		movieList.setMovies(movies);
 		movieList.setName(name);
+		movieList.setMovies(movies);
 		return movieList;
 	}
-
 	public void addMovie(Movie movie) {
 		// TODO Auto-generated method stub
 		this.getMovies().add(movie);
