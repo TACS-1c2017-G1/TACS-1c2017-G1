@@ -3,10 +3,10 @@
  */
 package app.model.odb;
 
+import org.apache.commons.collections.ListUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.collections.ListUtils;
 
 /**
  * @author facundo91
@@ -62,8 +62,14 @@ public class MovieList {
 		this.movies = movies;
 	}
 
-	public MovieList(String name) {
-		this.setName(name);
+	public MovieList() {
+	}
+
+	public static MovieList create(String name, List<Movie> movies){
+		MovieList movieList = new MovieList();
+		movieList.setMovies(movies);
+		movieList.setName(name);
+		return movieList;
 	}
 
 	public void addMovie(Movie movie) {

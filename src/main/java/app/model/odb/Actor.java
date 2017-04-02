@@ -22,12 +22,14 @@ public class Actor {
 	private String name;
 	private List<Image> profiles = new ArrayList<Image>();
 	private List<Credit> credits = new ArrayList<Credit>();
+	private String bio;
 
 	public Actor(String id) throws JSONException, IOException {
 		TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
 		JSONObject actorJson = theMovieDBDao.getResource2("person", id);
 		this.setId(actorJson.getInt("id"));
 		this.setName(actorJson.getString("name"));
+		this.setBio(actorJson.getString("biography"));
 		this.setImages(id, theMovieDBDao);
 		this.setCredits(id, theMovieDBDao);
 	}
@@ -127,4 +129,20 @@ public class Actor {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	/**
+	 * @return the bio
+	 */
+	public String getBio() {
+		return bio;
+	}
+
+	/**
+	 * @param bio the bio to set
+	 */
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
 }
