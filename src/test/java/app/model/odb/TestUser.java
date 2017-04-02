@@ -3,16 +3,13 @@
  */
 package app.model.odb;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import app.model.odb.User;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author facundo91
@@ -24,8 +21,8 @@ public class TestUser {
 	Movie movie1 = new Movie();
 	Movie movie2 = new Movie();
 	Movie movie3 = new Movie();
-	MovieList movieList1 = new MovieList("movieList1");
-	MovieList movieList2 = new MovieList("movieList2");
+	MovieList movieList1 = MovieList.create("movieList1", Arrays.asList());
+	MovieList movieList2 = MovieList.create("movieList2", Arrays.asList());
 	Actor actor = new Actor();
 
 	/**
