@@ -6,9 +6,9 @@ public class UserSelection {
 	private User user2;
 	
 	public UserSelection(){
-		user1 = new User("100", "AEC");
+		user1 = User.create("100", "AEC");
 		user1.addList(new MovieList("Lista1"));
-		user2 = new User("150", "WOC");
+		user2 = User.create("150", "WOC");
 		user2.addList(new MovieList("Lista2"));
 	}
 	

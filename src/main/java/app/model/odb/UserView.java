@@ -11,7 +11,7 @@ public class UserView {
 	private User user;
 	
 	public UserView(String id) throws JSONException, IOException{
-		user = new User(id,"AEC");
+		user = User.create(id,"AEC");
 		MovieList movieList = new MovieList("Lista1");
 		movieList.addMovie(new Movie("200"));
 		user.addList(movieList);
