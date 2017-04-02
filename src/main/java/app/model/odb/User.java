@@ -18,10 +18,11 @@ public class User {
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 
 	
-	public static User create(String id,String name){
+	public static User create(String id,String name, List<MovieList> movieList){
 		User user = new User();
 		user.setId(Integer.parseInt(id));
 		user.setName(name);
+		user.setLists(movieList);
 		return user;
 	}
 	
