@@ -11,7 +11,7 @@ public class UserView {
 	private Date lastAccess;
 	private User user;
 	
-	public UserView(int id) throws JSONException, IOException{
+	public UserView(String id) throws JSONException, IOException{
 		user = new User(id,"AEC");
 		MovieList movieList = MovieList.create("Lista1", Arrays.asList());
 		movieList.addMovie(new Movie("200"));

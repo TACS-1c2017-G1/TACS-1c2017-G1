@@ -3,11 +3,13 @@ package app.web.controller;
 import app.model.odb.Actor;
 import app.model.odb.UserView;
 import org.json.JSONException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class UserController {
 	
 	@RequestMapping(value="/user/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@PathVariable(value="id") int id) throws JSONException, IOException{
+	public UserView datosUsuario(@PathVariable String id) throws JSONException, IOException{
 		return new UserView(id);
 	}
 
