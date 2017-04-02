@@ -130,6 +130,7 @@ public class Actor {
 		
 	}
 
+
 	/**
 	 * @return the bio
 	 */
@@ -143,4 +144,5 @@ public class Actor {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
+
 }
