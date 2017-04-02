@@ -1,6 +1,7 @@
 package app.web.controller;
 
 import app.model.odb.Actor;
+import app.model.odb.UserSelection;
 import app.model.odb.UserView;
 import org.json.JSONException;
 
@@ -36,6 +37,12 @@ public class UserController {
 		rankingDeActores.add(actor2);
 
 		return rankingDeActores;
+	}
+	
+	@RequestMapping(value="/users",method=RequestMethod.GET,produces="application/json")
+	@ResponseBody
+	public UserSelection listaUsuarios() throws JSONException, IOException{
+		return new UserSelection();
 	}
 	
 }
