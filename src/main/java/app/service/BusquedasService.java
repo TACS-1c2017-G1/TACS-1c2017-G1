@@ -9,26 +9,27 @@ import org.json.JSONObject;
 import app.model.odb.Actor;
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
-import app.model.tmdb.TheMovieDBDao;
+import app.model.tmdb.TMDbStatic;
 
 public class BusquedasService {
 	private String query;
-	private TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
 
 	public MovieList buscarPeliculaPorNombre(String query) throws Exception {
-		JSONArray resultJsonArray = this.getTheMovieDBDao().getResource("search/movie", query).getJSONArray("results");
+		JSONArray resultJsonArray = this.buscarPeliculaPorNombreJson(query).getJSONArray("results");
 		MovieList resultList = new MovieList();
-		resultList.setName("Resultados de buscar "+query);
+		resultList.setName("Resultados de buscar " + query);
 		for (int i = 0; i < resultJsonArray.length(); i++) {
-			Movie movie = new Movie();
-			movie.setInfo(resultJsonArray.getJSONObject(i));
-			resultList.addMovie(movie);
+			resultList.addMovie(new Movie(resultJsonArray.getJSONObject(i)));
 		}
 		return resultList;
 	}
 
+	public JSONObject buscarPeliculaPorNombreJson(String query) throws Exception {
+		return TMDbStatic.getResource("search/movie", query);
+	}
+
 	public List<Actor> buscarActorPorNombre(String query) throws Exception {
-		JSONArray resultJsonArray = this.getTheMovieDBDao().getResource("search/person", query).getJSONArray("results");
+		JSONArray resultJsonArray = this.buscarActorPorNombreJson(query).getJSONArray("results");
 		List<Actor> resultList = new ArrayList<Actor>();
 		for (int i = 0; i < resultJsonArray.length(); i++) {
 			Actor actor = new Actor();
@@ -38,8 +39,12 @@ public class BusquedasService {
 		return resultList;
 	}
 
+	public JSONObject buscarActorPorNombreJson(String query) throws Exception {
+		return TMDbStatic.getResource("search/person", query);
+	}
+
 	public JSONObject buscarPorNombre(String query) throws Exception {
-		return theMovieDBDao.getResource("search/multi", query);
+		return TMDbStatic.getResource("search/multi", query);
 	}
 
 	/**
@@ -55,13 +60,6 @@ public class BusquedasService {
 	 */
 	public void setQuery(String query) {
 		this.query = query;
-	}
-
-	/**
-	 * @return the conector
-	 */
-	public TheMovieDBDao getTheMovieDBDao() {
-		return theMovieDBDao;
 	}
 
 }
