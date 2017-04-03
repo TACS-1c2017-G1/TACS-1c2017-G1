@@ -117,14 +117,16 @@ public class Movie {
 
 	public Movie(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
-		this.setInfo();
-		this.setCredits();
-		this.setReviews();
-		this.setImages();
-	}
+		try {
+			this.setInfo();
+			this.setCredits();
+			this.setReviews();
+			this.setImages();
+		} catch (Exception e) {
+			throw new JSONException("not found");
+		} finally {
 
-	public JSONObject movieJson(String id) throws JSONException, IOException {
-		return TMDbStatic.getResource2("movie", id);
+		}
 	}
 
 	/**

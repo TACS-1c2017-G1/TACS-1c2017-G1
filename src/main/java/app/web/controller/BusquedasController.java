@@ -13,12 +13,11 @@ import app.service.BusquedasService;
 @Controller
 @RequestMapping(value = "/search")
 public class BusquedasController {
-	BusquedasService busqueda = new BusquedasService();
 
 	@RequestMapping(value = "/movie/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody String busquedaPeliculaJson(@PathVariable String query) throws Exception {
-		return busqueda.buscarPeliculaPorNombreJson(query).toString();
+		return BusquedasService.buscarPeliculaPorNombreJson(query).toString();
 	}
 
 	// @RequestMapping(value = "/movie/{query}", method = RequestMethod.GET)
@@ -31,7 +30,7 @@ public class BusquedasController {
 	@RequestMapping(value = "/person/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody String busquedaActorJson(@PathVariable String query) throws Exception {
-		return busqueda.buscarActorPorNombreJson(query).toString();
+		return BusquedasService.buscarActorPorNombreJson(query).toString();
 	}
 
 	// @RequestMapping(value = "/person/{query}", method = RequestMethod.GET)
@@ -44,7 +43,7 @@ public class BusquedasController {
 	@RequestMapping(value = "/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody String busqueda(@PathVariable String query) throws Exception {
-		return busqueda.buscarPorNombre(query).toString();
+		return BusquedasService.buscarPorNombre(query).toString();
 	}
 
 	// @RequestMapping(value = "/{query}", method = RequestMethod.GET)

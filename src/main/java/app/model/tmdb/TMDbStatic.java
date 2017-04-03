@@ -12,8 +12,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class TMDbStatic {
 
@@ -34,10 +32,8 @@ public abstract class TMDbStatic {
 	private static JSONObject makeRequest(String resource, String query, String pedir)
 			throws IOException, ClientProtocolException {
 		HttpGet httpGet = new HttpGet(pedir);
-		System.out.println(pedir);
 		CloseableHttpResponse response1 = HttpClients.createDefault().execute(httpGet);
-		Logger logger = LoggerFactory.getLogger(TMDbStatic.class);
-		return getJsonObject(resource, query, response1, logger);
+		return getJsonObject(resource, query, response1);
 	}
 
 	public static JSONObject getResource(String resource, String query) throws JSONException, IOException {
@@ -59,12 +55,11 @@ public abstract class TMDbStatic {
 		return "?&api_key=" + key.substring(0, key.length() - 1);
 	}
 
-	private static JSONObject getJsonObject(String resource, String query, CloseableHttpResponse response1,
-			Logger logger) throws IOException {
+	private static JSONObject getJsonObject(String resource, String query, CloseableHttpResponse response1)
+			throws IOException {
 		try {
 			HttpEntity entity1 = response1.getEntity();
 			String response2 = EntityUtils.toString(entity1);
-			logger.debug("Recurso: " + resource + " Query: " + query + " Respuesta: " + response2);
 			JSONObject respuesta = new JSONObject(response2);
 			EntityUtils.consume(entity1);
 			return respuesta;
