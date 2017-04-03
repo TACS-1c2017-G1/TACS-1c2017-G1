@@ -8,19 +8,21 @@ import org.json.JSONObject;
 
 import app.model.odb.Actor;
 import app.model.odb.Movie;
+import app.model.odb.MovieList;
 import app.model.tmdb.TheMovieDBDao;
 
 public class BusquedasService {
-	String query;
-	TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
+	private String query;
+	private TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
 
-	public List<Movie> buscarPeliculaPorNombre(String query) throws Exception {
+	public MovieList buscarPeliculaPorNombre(String query) throws Exception {
 		JSONArray resultJsonArray = this.getTheMovieDBDao().getResource("search/movie", query).getJSONArray("results");
-		List<Movie> resultList = new ArrayList<Movie>();
+		MovieList resultList = new MovieList();
+		resultList.setName("Resultados de buscar "+query);
 		for (int i = 0; i < resultJsonArray.length(); i++) {
 			Movie movie = new Movie();
 			movie.setInfo(resultJsonArray.getJSONObject(i));
-			resultList.add(movie);
+			resultList.addMovie(movie);
 		}
 		return resultList;
 	}
@@ -58,7 +60,7 @@ public class BusquedasService {
 	/**
 	 * @return the conector
 	 */
-	private TheMovieDBDao getTheMovieDBDao() {
+	public TheMovieDBDao getTheMovieDBDao() {
 		return theMovieDBDao;
 	}
 

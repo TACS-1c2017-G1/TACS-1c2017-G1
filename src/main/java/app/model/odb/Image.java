@@ -96,7 +96,7 @@ public class Image {
 	 * @param actorId
 	 *            the actorId to set
 	 */
-	private void setActorId(int actorId) {
+	public void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
 
@@ -104,7 +104,7 @@ public class Image {
 	 * @param filePath
 	 *            the filePath to set
 	 */
-	private void setFilePath(String filePath) {
+	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
@@ -116,5 +116,9 @@ public class Image {
 	public Image(JSONObject jsonImage, Actor actor) {
 		this.setActorId(actor.getId());
 		this.setFilePath(jsonImage.getString("file_path"));
+	}
+
+	public Image() {
+		// TODO Auto-generated constructor stub
 	}
 }

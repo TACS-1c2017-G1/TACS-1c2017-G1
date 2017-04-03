@@ -59,6 +59,13 @@ public class Actor {
 	private void addProfile(Image image) {
 		this.getProfiles().add(image);
 	}
+	
+	private void addProfile(String string) {
+		Image profile_picture = new Image();
+		profile_picture.setFilePath(string);
+		profile_picture.setActorId(this.getId());
+		this.getProfiles().add(profile_picture);
+	}
 
 	/**
 	 * @return the id
@@ -125,9 +132,14 @@ public class Actor {
 
 	}
 
-	public void setInfo(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		
+	public void setInfo(JSONObject jsonActor) {
+		try {
+			this.setId(jsonActor.getInt("id"));
+			this.setName(jsonActor.getString("name"));
+			this.addProfile(jsonActor.getString("profile_path"));
+		} catch (JSONException e) {
+			System.out.print(e);
+		}
 	}
 
 
