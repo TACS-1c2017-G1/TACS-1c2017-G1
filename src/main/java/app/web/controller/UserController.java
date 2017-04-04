@@ -46,10 +46,10 @@ public class UserController {
 	
 	@RequestMapping(value="/{id1}/{id2}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public ArrayList<MovieList> listaUsuarios(@RequestHeader String token,@PathVariable String id1, String id2) throws JSONException, IOException{
+	public ArrayList<Movie> listaUsuarios(@RequestHeader String token,@PathVariable String id1, String id2) throws JSONException, IOException{
 		User user1 = User.create(id1, "AEC",new ArrayList<MovieList>());
 		User user2 = User.create(id2, "AEC",new ArrayList<MovieList>());
-		return new ArrayList<MovieList>();
+		return new ArrayList<Movie>();
 	}
 	
 
