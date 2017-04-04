@@ -30,7 +30,4 @@
   ```
 
 ### Probarlo:
-  Desde algun browser, entrar a http://localhost:8080/searchActor?name=ricardo-darin
-  o http://localhost:8080/searchMovie?name=wild-tales
-  o http://localhost:8080/search?name=Chaplin
-  o http://localhost:8080/movie?id=550
+  Seguir la [documentación de la API](https://drive.google.com/open?id=1Yd18SKcWrIAl3KMnLE5CXw_hf2PsOcV18FiCCuUE2fw)
