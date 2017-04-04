@@ -13,8 +13,8 @@ import java.util.List;
  *
  */
 public class MovieList {
-	private int id;
-	private String name;
+	private int id = 0;
+	private String name = "";
 	private List<Movie> movies = new ArrayList<Movie>();
 
 	/**
@@ -43,14 +43,14 @@ public class MovieList {
 	 * @param name
 	 *            the name to set
 	 */
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
 	 * @return the movies
 	 */
-	private List<Movie> getMovies() {
+	public List<Movie> getMovies() {
 		return movies;
 	}
 

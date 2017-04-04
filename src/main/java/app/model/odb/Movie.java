@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import app.model.tmdb.TheMovieDBDao;
+import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
@@ -25,6 +25,7 @@ public class Movie {
 	private List<Image> backdrops = new ArrayList<Image>();
 	private List<Image> posters = new ArrayList<Image>();
 	private List<Review> reviews = new ArrayList<Review>();
+	private JSONObject jsonResponse;
 
 	/**
 	 * @return the id
@@ -79,26 +80,10 @@ public class Movie {
 	}
 
 	/**
-	 * @param cast
-	 *            the cast to set
-	 */
-	private void setCast(List<Credit> cast) {
-		this.cast = cast;
-	}
-
-	/**
 	 * @return the backdrops
 	 */
 	public List<Image> getBackdrops() {
 		return backdrops;
-	}
-
-	/**
-	 * @param backdrops
-	 *            the backdrops to set
-	 */
-	private void setBackdrops(List<Image> backdrops) {
-		this.backdrops = backdrops;
 	}
 
 	/**
@@ -109,61 +94,48 @@ public class Movie {
 	}
 
 	/**
-	 * @param posters
-	 *            the posters to set
-	 */
-	private void setPosters(List<Image> posters) {
-		this.posters = posters;
-	}
-
-	/**
 	 * @return the reviews
 	 */
 	public List<Review> getReviews() {
 		return reviews;
 	}
 
-	/**
-	 * @param reviews
-	 *            the reviews to set
-	 */
-	private void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	public void setInfo(JSONObject jsonMovie) {
+	public void setInfo() {
 		try {
-			this.setId(jsonMovie.getInt("id"));
-			this.setTitle(jsonMovie.getString("title"));
-			this.setOverview(jsonMovie.getString("overview"));
+			this.setId(this.getJsonResponse().getInt("id"));
+			this.setTitle(this.getJsonResponse().getString("title"));
+			this.setOverview(this.getJsonResponse().getString("overview"));
 		} catch (JSONException e) {
 			System.out.print(e);
 		}
 	}
 
 	public Movie(JSONObject jsonMovie) throws JSONException, IOException {
-		TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
-		this.setInfo(jsonMovie);
-		this.setCredits(jsonMovie.getString("id"), theMovieDBDao);
-		this.setReviews(jsonMovie.getString("id"), theMovieDBDao);
+		this.setJsonResponse(TMDbStatic.getResource2("movie", jsonMovie.getString("id")));
+		this.setInfo();
 	}
 
 	public Movie(String id) throws JSONException, IOException {
-		TheMovieDBDao theMovieDBDao = new TheMovieDBDao();
-		this.setInfo(theMovieDBDao.getResource2("movie", id));
-		this.setCredits(id, theMovieDBDao);
-		this.setReviews(id, theMovieDBDao);
-		this.setImages(id, theMovieDBDao);
+		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
+		try {
+			this.setInfo();
+			this.setCredits();
+			this.setReviews();
+			this.setImages();
+		} catch (Exception e) {
+			throw new JSONException("not found");
+		} finally {
+
+		}
 	}
 
 	/**
 	 * @param id
-	 * @param theMovieDBDao
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	private void setImages(String id, TheMovieDBDao theMovieDBDao) throws JSONException, IOException {
-		JSONObject images = theMovieDBDao.getResource2("movie", id + "/images");
+	private void setImages() throws JSONException, IOException {
+		JSONObject images = TMDbStatic.getResource2("movie", this.getId() + "/images");
 		JSONArray backdrops = images.getJSONArray("backdrops");
 		for (int i = 0; i < backdrops.length(); i++) {
 			this.addBackdrop(new Image(backdrops.getJSONObject(i), this));
@@ -184,12 +156,11 @@ public class Movie {
 
 	/**
 	 * @param id
-	 * @param theMovieDBDao
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	private void setReviews(String id, TheMovieDBDao theMovieDBDao) throws JSONException, IOException {
-		JSONArray reviews = theMovieDBDao.getResource2("movie", id + "/reviews").getJSONArray("results");
+	private void setReviews() throws JSONException, IOException {
+		JSONArray reviews = TMDbStatic.getResource2("movie", this.getId() + "/reviews").getJSONArray("results");
 		for (int i = 0; i < reviews.length(); i++) {
 			this.addReview(new Review(reviews.getJSONObject(i), this));
 		}
@@ -201,12 +172,11 @@ public class Movie {
 
 	/**
 	 * @param id
-	 * @param theMovieDBDao
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	private void setCredits(String id, TheMovieDBDao theMovieDBDao) throws JSONException, IOException {
-		JSONArray cast = theMovieDBDao.getResource2("movie", id + "/credits").getJSONArray("cast");
+	private void setCredits() throws JSONException, IOException {
+		JSONArray cast = TMDbStatic.getResource2("movie", this.getId() + "/credits").getJSONArray("cast");
 		for (int i = 0; i < cast.length(); i++) {
 			this.addCredit(new Credit(cast.getJSONObject(i), this));
 		}
@@ -223,6 +193,21 @@ public class Movie {
 	public void showDetails() {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * @return the jsonResponse
+	 */
+	private JSONObject getJsonResponse() {
+		return jsonResponse;
+	}
+
+	/**
+	 * @param jsonResponse
+	 *            the jsonResponse to set
+	 */
+	private void setJsonResponse(JSONObject jsonResponse) {
+		this.jsonResponse = jsonResponse;
 	}
 
 }

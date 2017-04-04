@@ -1,33 +1,56 @@
 package app.web.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import app.service.BusquedasService;
 
 @Controller
+@RequestMapping(value = "/search")
 public class BusquedasController {
-	BusquedasService busqueda = new BusquedasService();
 
-	@RequestMapping(value = "/search/movie/{query}", method = RequestMethod.GET)
-	public String busquedaPelicula(@PathVariable String query, Model model) throws Exception {
-		model.addAttribute("movies", busqueda.buscarPeliculaPorNombre(query));
-		return "search/movie";
+	@RequestMapping(value = "/movie/{query}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody String busquedaPeliculaJson(@PathVariable String query) throws Exception {
+		return BusquedasService.buscarPeliculaPorNombreJson(query).toString();
 	}
 
-	@RequestMapping(value = "/search/person/{query}", method = RequestMethod.GET)
-	public String busquedaActor(@PathVariable String query, Model model) throws Exception {
-		model.addAttribute("people", busqueda.buscarActorPorNombre(query));
-		return "search/actor";
+	// @RequestMapping(value = "/movie/{query}", method = RequestMethod.GET)
+	// public String busquedaPelicula(@PathVariable String query, Model model)
+	// throws Exception {
+	// model.addAttribute("movies", this.busquedaPeliculaJson(query));
+	// return "search/movie";
+	// }
+
+	@RequestMapping(value = "/person/{query}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody String busquedaActorJson(@PathVariable String query) throws Exception {
+		return BusquedasService.buscarActorPorNombreJson(query).toString();
 	}
 
-	@RequestMapping(value = "/search/{query}", method = RequestMethod.GET)
-	public String busqueda(@PathVariable String query, Model model) throws Exception {
-		model.addAttribute("things", busqueda.buscarPorNombre(query));
-		return "search/search";
+	// @RequestMapping(value = "/person/{query}", method = RequestMethod.GET)
+	// public String busquedaActor(@PathVariable String query, Model model)
+	// throws Exception {
+	// model.addAttribute("people", this.busquedaActorJson(query));
+	// return "search/actor";
+	// }
+
+	@RequestMapping(value = "/{query}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody String busqueda(@PathVariable String query) throws Exception {
+		return BusquedasService.buscarPorNombre(query).toString();
 	}
+
+	// @RequestMapping(value = "/{query}", method = RequestMethod.GET)
+	// public String busqueda(@PathVariable String query, Model model) throws
+	// Exception {
+	// model.addAttribute("things", this.busqueda(query));
+	// return "search/search";
+	// }
 
 }
