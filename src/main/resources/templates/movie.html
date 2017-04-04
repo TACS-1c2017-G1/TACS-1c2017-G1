@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title th:text="${movie.title}">Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 </head>
-<body>
+<body ng-app="">
 	<div th:replace="fragments/searcher">&nbsp;</div>
     <h1 th:text="${movie.title} ">Movie</h1>
     <h2>Overview</h2>
@@ -28,7 +29,7 @@
 		    <th>Character</th>
 		  </tr>
 		    <tr data-th-each="credit : ${movie.cast}">
-		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/actor/'+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.name}" /></a></td>
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/person/'+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.name}" /></a></td>
 		        <td data-th-text="${credit.character}">...</td>
 		    </tr>
 		</tbody>
@@ -45,5 +46,10 @@
     		<img data-th-src="${poster.baseUrl +'w92'+ poster.filePath}"/>
     	</a>
     	</div>
+		<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- <script type="text/javascript" src="webjars/angularjs/1.6.3/angular.min.js"></script> -->
 </body>
 </html>

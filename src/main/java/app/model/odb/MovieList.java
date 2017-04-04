@@ -3,18 +3,18 @@
  */
 package app.model.odb;
 
+import org.apache.commons.collections.ListUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.collections.ListUtils;
 
 /**
  * @author facundo91
  *
  */
 public class MovieList {
-	private int id;
-	private String name;
+	private int id = 0;
+	private String name = "";
 	private List<Movie> movies = new ArrayList<Movie>();
 
 	/**
@@ -43,14 +43,14 @@ public class MovieList {
 	 * @param name
 	 *            the name to set
 	 */
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
 	 * @return the movies
 	 */
-	private List<Movie> getMovies() {
+	public List<Movie> getMovies() {
 		return movies;
 	}
 
@@ -62,10 +62,15 @@ public class MovieList {
 		this.movies = movies;
 	}
 
-	public MovieList(String name) {
-		this.setName(name);
+	public MovieList() {
 	}
 
+	public static MovieList create(String name, List<Movie> movies){
+		MovieList movieList = new MovieList();
+		movieList.setName(name);
+		movieList.setMovies(movies);
+		return movieList;
+	}
 	public void addMovie(Movie movie) {
 		// TODO Auto-generated method stub
 		this.getMovies().add(movie);

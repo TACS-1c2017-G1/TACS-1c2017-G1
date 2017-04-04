@@ -1,24 +1,24 @@
 package app.web.controller;
 
 import app.model.odb.Actor;
+import app.model.odb.Movie;
 import app.model.odb.UserView;
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
-	
-	@RequestMapping(value="/user/{id}",method=RequestMethod.GET,produces="application/json")
+
+	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@PathVariable(value="id") int id) throws JSONException, IOException{
+	public UserView datosUsuario(@PathVariable String id) throws JSONException, IOException{
 		return new UserView(id);
 	}
 
@@ -35,5 +35,18 @@ public class UserController {
 
 		return rankingDeActores;
 	}
-	
+
+    @RequestMapping(value="/favorite-actors",method=RequestMethod.GET)
+    @ResponseBody
+    public List<Actor> actoresFavoritosUsuario(@RequestHeader(value="Token") String token) throws IOException{
+        return Arrays.asList(new Actor(), new Actor());
+    }
+
+    @RequestMapping(value="/favorite-actors/movies",method=RequestMethod.GET)
+    @ResponseBody
+    public List<Movie> peliculasActoresFavoritos(@RequestHeader(value="Token") String token) throws IOException{
+        return Arrays.asList(new Movie());
+    }
+
+
 }
