@@ -2,7 +2,9 @@ package app.web.controller;
 
 import app.model.dto.ActorDto;
 import app.model.dto.MoviDto;
-import app.model.odb.*;
+import app.model.odb.Actor;
+import app.model.odb.Movie;
+import app.model.odb.UserView;
 import app.service.ActoresFavoritosService;
 import app.web.TOs.CredencialTO;
 import org.json.JSONException;
@@ -50,9 +52,7 @@ public class UserController {
 
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String id1, String id2) throws JSONException, IOException{
-		User user1 = User.create(id1, "AEC",new ArrayList<MovieList>());
-		User user2 = User.create(id2, "AEC",new ArrayList<MovieList>());
+	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable Integer id1, Integer id2) throws JSONException, IOException{
 		return new ArrayList<Movie>();
 	}
 	
