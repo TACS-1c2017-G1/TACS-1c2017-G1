@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,13 +20,14 @@ import app.model.odb.Actor;
 import app.model.odb.UserView;
 import app.service.ActoresFavoritosService;
 
+
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@PathVariable String id) throws JSONException, IOException{
+	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
 		return new UserView(id);
 	}
 
@@ -43,6 +45,15 @@ public class UserController {
 		return rankingDeActores;
 	}
 
+	
+
+	@RequestMapping(value="/{id1}/{id2}",method=RequestMethod.GET,produces="application/json")
+	@ResponseBody
+	public ArrayList<Movie> listaUsuarios(@RequestHeader String token,@PathVariable String id1, String id2) throws JSONException, IOException{
+		User user1 = User.create(id1, "AEC",new ArrayList<MovieList>());
+		User user2 = User.create(id2, "AEC",new ArrayList<MovieList>());
+		return new ArrayList<Movie>();
+	}
 	
     
     @RequestMapping(value = "/favoriteactor/mark/{idactor}", method = RequestMethod.PUT, produces="application/json")

@@ -3,6 +3,7 @@ package app.model.odb;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,8 +13,9 @@ public class UserView {
 	private User user;
 	
 	public UserView(String id) throws JSONException, IOException{
-		user = new User(id,"AEC");
-		MovieList movieList = MovieList.create("Lista1", Arrays.asList());
+
+		user = User.create(id,"AEC",new ArrayList<MovieList>());
+		MovieList movieList = MovieList.create("Lista1",new ArrayList<Movie>());
 		movieList.addMovie(new Movie("200"));
 		user.addList(movieList);
 		user.createList("Lista2");
