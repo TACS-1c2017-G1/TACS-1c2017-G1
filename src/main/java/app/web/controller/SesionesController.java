@@ -15,12 +15,6 @@ import java.io.IOException;
 @RequestMapping("/authentication")
 public class SesionesController {
 
-    @RequestMapping(value = "/new-user", method = RequestMethod.POST)
-    @ResponseBody
-    public String crearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
-        //Acá hay que crear el usuario y sino tirar excepción.
-        return "Cuenta creada correctamente!";
-    }
 
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
