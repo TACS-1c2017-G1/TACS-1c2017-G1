@@ -1,14 +1,9 @@
 package app.web.controller;
 
+import app.service.BusquedasService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import app.service.BusquedasService;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/search")
@@ -16,7 +11,7 @@ public class BusquedasController {
 
 	@RequestMapping(value = "/movie/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busquedaPeliculaJson(@PathVariable String query) throws Exception {
+	public @ResponseBody String busquedaPeliculaJson(@RequestHeader String Token, @PathVariable String query) throws Exception {
 		return BusquedasService.buscarPeliculaPorNombreJson(query).toString();
 	}
 
@@ -29,7 +24,7 @@ public class BusquedasController {
 
 	@RequestMapping(value = "/person/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busquedaActorJson(@PathVariable String query) throws Exception {
+	public @ResponseBody String busquedaActorJson(@RequestHeader String Token, @PathVariable String query) throws Exception {
 		return BusquedasService.buscarActorPorNombreJson(query).toString();
 	}
 
@@ -42,7 +37,7 @@ public class BusquedasController {
 
 	@RequestMapping(value = "/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busqueda(@PathVariable String query) throws Exception {
+	public @ResponseBody String busqueda(@RequestHeader String Token, @PathVariable String query) throws Exception {
 		return BusquedasService.buscarPorNombre(query).toString();
 	}
 

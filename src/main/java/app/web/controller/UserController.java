@@ -35,7 +35,7 @@ public class UserController {
 
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Actor> rankingDeActores(@PathVariable Long idlistaDePeliculas) throws JSONException, IOException{
+	public List<Actor> rankingDeActores(@RequestHeader String Token, @PathVariable Long idlistaDePeliculas) throws JSONException, IOException{
 		List<Actor> rankingDeActores = new ArrayList<Actor>();
 		Actor actor1 = new Actor("10990");
 		Actor actor2 = new Actor("10980");
