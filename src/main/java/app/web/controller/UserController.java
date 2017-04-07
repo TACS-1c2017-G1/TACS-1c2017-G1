@@ -6,8 +6,10 @@ import app.model.odb.Actor;
 import app.model.odb.Movie;
 import app.model.odb.UserView;
 import app.service.ActoresFavoritosService;
+import app.service.UserService;
 import app.web.TOs.CredencialTO;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+
+	@Autowired
+	UserService servicioDeUsuario;
 
 	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
@@ -68,9 +73,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<ActorDto> verActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
-		List<ActorDto> list = ActoresFavoritosService.verActoresFavoritos();
-		return list;
+	public List<ActorDto> verActoresFavoritos(@RequestHeader String token) throws IOException {
+		return servicioDeUsuario.getActoresFavoritos(token);
 	}
 	
 	
