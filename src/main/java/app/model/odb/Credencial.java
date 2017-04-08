@@ -25,10 +25,10 @@ public class Credencial {
     }
 
     public static Credencial create(String nombre, String idSesion) {
-        Credencial usuarioLogueadoTO = new Credencial();
-        usuarioLogueadoTO.setPassword(idSesion);
-        usuarioLogueadoTO.setUsername(nombre);
-        return usuarioLogueadoTO;
+        Credencial credencial = new Credencial();
+        credencial.setPassword(idSesion);
+        credencial.setUsername(nombre);
+        return credencial;
     }
 
     public Credencial() {}

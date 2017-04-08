@@ -13,16 +13,14 @@ import java.util.List;
  */
 public class User {
 	private int id;
-	private String name;
+	private Credencial credencial;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 
 	
-	public static User create(String id,String name, List<MovieList> movieList){
+	public static User create(Credencial credencial){
 		User user = new User();
-		user.setId(Integer.parseInt(id));
-		user.setName(name);
-		user.setLists(movieList);
+		user.setCredencial(credencial);
 		return user;
 	}
 	
@@ -41,19 +39,12 @@ public class User {
 		this.id = id;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public Credencial getCredencial() {
+		return credencial;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	private void setName(String name) {
-		this.name = name;
+	public void setCredencial(Credencial credencial) {
+		this.credencial = credencial;
 	}
 
 	/**

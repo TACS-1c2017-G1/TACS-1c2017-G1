@@ -3,11 +3,13 @@ package app.web.controller;
 import app.model.dto.ActorDto;
 import app.model.dto.MoviDto;
 import app.model.odb.Actor;
+import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.UserView;
 import app.service.ActoresFavoritosService;
-import app.web.TOs.CredencialTO;
+import app.service.UserService;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +23,13 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+	@Autowired
+	UserService servicioDeUsuario;
+
 	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
-	public String crearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
-		//Acá hay que crear el usuario y sino tirar excepción.
-		return "Cuenta creada correctamente!";
+	public void crearUsuario(@RequestBody Credencial userAndPassword) throws IOException{
+		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
