@@ -2,7 +2,6 @@ package app.web.controller;
 
 import app.web.TOs.CredencialTO;
 import app.web.TOs.UsuarioLogueadoTO;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import java.io.IOException;
 public class SesionesController {
 
 
-    @RequestMapping(value="/login", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
     public UsuarioLogueadoTO loguearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
         /*
