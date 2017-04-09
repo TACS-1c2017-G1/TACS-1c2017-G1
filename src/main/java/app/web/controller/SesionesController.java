@@ -1,7 +1,10 @@
 package app.web.controller;
 
-import app.web.TOs.CredencialTO;
+import app.model.odb.Credencial;
+import app.model.odb.Sesion;
+import app.service.SesionesService;
 import app.web.TOs.UsuarioLogueadoTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +15,13 @@ import java.io.IOException;
 @RequestMapping("/authentication")
 public class SesionesController {
 
+    @Autowired
+    SesionesService servicioDeSesiones;
 
     @RequestMapping(value="/login", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public UsuarioLogueadoTO loguearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
-        /*
-        acá hay que pedir el token y crear la sesión
-         mockie un usuario y un numero de sesion random
-         */
-        UsuarioLogueadoTO usuarioParaDevolver = UsuarioLogueadoTO.create("ayitaLokura", "tuToken");
-        return usuarioParaDevolver;
+    public Sesion loguearUsuario(@RequestBody Credencial userAndPassword) throws IOException{
+        return servicioDeSesiones.loguearUsuario(userAndPassword);
     }
 
     @RequestMapping(value="/logout", method=RequestMethod.POST)
