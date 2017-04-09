@@ -46,4 +46,8 @@ public class Sesion {
 
         return sesion;
     }
+
+    public void desactivarSesion() {
+        this.setEstaActiva(Boolean.FALSE);
+    }
 }
