@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public void crearNuevoUsuario(Credencial userAndPassword) {
+    public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError{
         //Aca hay que persistir.
         User.create(userAndPassword);
     }

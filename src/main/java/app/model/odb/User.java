@@ -18,8 +18,11 @@ public class User {
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 
 	
-	public static User create(Credencial credencial){
+	public static User create(Credencial credencial) throws ExceptionInInitializerError {
 		User user = new User();
+		if(credencial.esInvalida()){
+			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
+		}
 		user.setCredencial(credencial);
 		return user;
 	}
@@ -150,4 +153,7 @@ public class User {
 		actor.showDetails();
 	}
 
+	public static String usuarioOContraseniaVacio() {
+			return "El usuario o la contraseña no pueden estar vacíos.";
+	}
 }

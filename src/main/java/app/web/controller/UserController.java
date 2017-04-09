@@ -28,13 +28,13 @@ public class UserController {
 
 	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
-	public void crearUsuario(@RequestBody Credencial userAndPassword) throws IOException{
+	public void crearUsuario(@RequestBody Credencial userAndPassword) throws Exception,IOException{
 		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
+	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException,ExceptionInInitializerError{
 		return new UserView(id);
 	}
 
