@@ -28,22 +28,23 @@ public class ListasController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public String crearLista(@RequestHeader String token, @RequestBody MovieList nuevaLista) throws IOException {
+    public String crearLista(@RequestHeader String token, @RequestBody String nuevaLista) throws IOException {
         /* Acá no va a devolver el string sino un void con el status 200 en caso positivo o excepción en caso de que falle la creacioN*/
-        return "Se creó la lista.";
+    	listasService.crearLista(nuevaLista);
+    	return "Se creó la lista.";
     }
 
     @RequestMapping(value = "/{id_lista}/", method = RequestMethod.POST)
     @ResponseBody
     public String agregarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable Long id_lista) throws IOException {
-        //RequestBody deberá recibir un objeto Movie y PathVariable.
+    	listasService.agregarItem(movie, id_lista);
         return "Se agregó el item.";
     }
 
     @RequestMapping(value = "/{id_lista}/", method = RequestMethod.DELETE)
     @ResponseBody
     public String eliminarItem(@RequestHeader String Token, @RequestBody Movie movie, @PathVariable Long id_lista) throws IOException {
-        //RequestBody deberá recibir un objeto Movie y PathVariable.
+        listasService.eliminarItem(movie, id_lista);
         return "Se eliminó el item.";
     }
     @RequestMapping(value = "/intersection/{idLista1}/{idLista2}", method = RequestMethod.GET)

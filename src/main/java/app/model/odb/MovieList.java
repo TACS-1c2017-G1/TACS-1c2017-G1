@@ -4,6 +4,7 @@
 package app.model.odb;
 
 import org.apache.commons.collections.ListUtils;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,15 @@ import java.util.List;
  * @author facundo91
  *
  */
+@Entity
+@Table(name = "MOVIELIST")
 public class MovieList {
+	@Id @GeneratedValue
+	@Column(name = "id")
 	private int id = 0;
+	@Column(name = "name")
 	private String name = "";
+	@Column(name = "movies")
 	private List<Movie> movies = new ArrayList<Movie>();
 
 	/**
