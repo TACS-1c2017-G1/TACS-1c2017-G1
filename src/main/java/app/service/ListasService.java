@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
-import resources.hibernate.util.*;
+import resources.hibernate.HibernateUtil;
  
 import org.hibernate.Session;
 
