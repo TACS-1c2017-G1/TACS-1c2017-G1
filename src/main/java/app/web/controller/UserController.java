@@ -20,6 +20,7 @@ import app.model.odb.Actor;
 import app.model.odb.Movie;
 import app.model.odb.User;
 import app.service.ActoresFavoritosService;
+import app.service.AdministrativoService;
 import app.web.TOs.CredencialTO;
 
 
@@ -58,8 +59,9 @@ public class UserController {
 
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable Integer id1, Integer id2) throws JSONException, IOException{
-		return new ArrayList<Movie>();
+	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String id1, String id2) throws JSONException, IOException{
+		ArrayList<Movie> interseccion = AdministrativoService.obtenerInterseccionListas(User.create(id1),User.create(id2));
+		return interseccion;
 	}
 	
     
