@@ -3,9 +3,16 @@
  */
 package app.model.odb;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
@@ -16,16 +23,55 @@ public class User {
 	private String name;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
+	private JSONObject jsonResponse;
 
-	
-	public static User create(String id,String name, List<MovieList> movieList){
+	public static User create(String id, String name, List<MovieList> movieList) {
+
 		User user = new User();
 		user.setId(Integer.parseInt(id));
 		user.setName(name);
 		user.setLists(movieList);
 		return user;
 	}
-	
+
+	public static User create(String id) throws IOException {
+		User user = new User();
+		user.setLists();
+		return user;
+	}
+
+	private void setLists() throws IOException {
+		try {
+			this.setJsonResponse(TMDbStatic.getResource2("account", id + "/lists"));
+			this.setLists(fromJsonArrayToList(this.getJsonResponse().getJSONArray("lists")));
+		} catch (JSONException e) {
+			throw new JSONException(e.toString());
+		} finally {
+
+		}
+
+	}
+
+	private List<MovieList> fromJsonArrayToList(JSONArray jArray) throws JSONException, IOException {
+		List<MovieList> listMovieList = new ArrayList<MovieList>();
+		if (jArray != null) {
+			for (int i = 0; i < jArray.length(); i++) {
+				JSONObject jsonMovieList = jArray.getJSONObject(i);
+				String listName = jsonMovieList.getString("name");
+				JSONArray jsonMovies = jsonMovieList.getJSONArray("movies");
+				List<Movie> movies = new ArrayList<Movie>();
+				for (int j = 0; j < jsonMovies.length(); j++) {
+					JSONObject jsonMovie = jsonMovies.getJSONObject(j);
+					Movie movie = new Movie(jsonMovie.getString("id"));
+					movies.add(movie);
+				}
+				MovieList movieList = MovieList.create(listName, movies);
+				listMovieList.add(movieList);
+			}
+		}
+		return listMovieList;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -85,7 +131,14 @@ public class User {
 	private void setFavoriteActors(List<Actor> favoriteActors) {
 		this.favoriteActors = favoriteActors;
 	}
-	
+
+	public JSONObject getJsonResponse() {
+		return jsonResponse;
+	}
+
+	public void setJsonResponse(JSONObject jsonResponse) {
+		this.jsonResponse = jsonResponse;
+	}
 
 	public void createList(String name) {
 		this.getLists().add(MovieList.create(name, Arrays.asList()));

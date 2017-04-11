@@ -1,18 +1,17 @@
 package app.model.odb;
 
-import org.json.JSONException;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserView {
 	private Date lastAccess;
 	private User user;
+	private JSONObject jsonResponse;
 	
-	public UserView(String id) throws JSONException, IOException{
+	/*public UserView(String id) throws JSONException, IOException{
 
 		user = User.create(id,"AEC",new ArrayList<MovieList>());
 		MovieList movieList = MovieList.create("Lista1",new ArrayList<Movie>());
@@ -21,7 +20,13 @@ public class UserView {
 		user.createList("Lista2");
 		user.markActorAsFavorite(new Actor("200"));
 		lastAccess = Calendar.getInstance().getTime();
+	}*/
+	
+	public UserView(String id) throws JSONException, IOException{
+		user = User.create(id);
 	}
+	
+	
 	
 	public Date getLastAccess() {
 		return lastAccess;
@@ -34,6 +39,20 @@ public class UserView {
 	}
 	private void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return the jsonResponse
+	 */
+	public JSONObject getJsonResponse() {
+		return jsonResponse;
+	}
+
+	/**
+	 * @param jsonResponse the jsonResponse to set
+	 */
+	public void setJsonResponse(JSONObject jsonResponse) {
+		this.jsonResponse = jsonResponse;
 	}
 	
 	
