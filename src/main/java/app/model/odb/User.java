@@ -6,6 +6,7 @@ package app.model.odb;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -23,6 +24,7 @@ public class User {
 	private String name;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
+	private Date lastAccess;
 	private JSONObject jsonResponse;
 
 	public static User create(String id, String name, List<MovieList> movieList) {
@@ -210,6 +212,20 @@ public class User {
 
 	public void showActorDetails(Actor actor) {
 		actor.showDetails();
+	}
+
+	/**
+	 * @return the lastAccess
+	 */
+	public Date getLastAccess() {
+		return lastAccess;
+	}
+
+	/**
+	 * @param lastAccess the lastAccess to set
+	 */
+	public void setLastAccess(Date lastAccess) {
+		this.lastAccess = lastAccess;
 	}
 
 }

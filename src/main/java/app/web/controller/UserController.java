@@ -1,20 +1,26 @@
 package app.web.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import app.model.dto.ActorDto;
 import app.model.dto.MoviDto;
 import app.model.odb.Actor;
 import app.model.odb.Movie;
-import app.model.odb.UserView;
+import app.model.odb.User;
 import app.service.ActoresFavoritosService;
 import app.web.TOs.CredencialTO;
-import org.json.JSONException;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -30,8 +36,8 @@ public class UserController {
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
-		return new UserView(id);
+	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
+		return User.create(id);
 	}
 
 
