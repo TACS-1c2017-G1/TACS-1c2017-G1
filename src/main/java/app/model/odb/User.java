@@ -40,7 +40,12 @@ public class User {
 		User user = new User();
 		user.setId(Integer.parseInt(id));
 		user.setLists();
+		//Ver si es local o remoto
+		//user.setName(name);
+		//Ver como lo implementa Jere
 		//user.setFavoriteActors();
+		//Ver como lo implementan en el login
+		//user.setLastAccess(lastAccess);
 		return user;
 	}
 
@@ -57,10 +62,9 @@ public class User {
 
 	private void setFavoriteActors() throws IOException {
 		try {
-			this.setJsonResponse(TMDbStatic.getResource2("account", id + "/lists"));
-			this.setLists(fromJsonArrayToList(this.getJsonResponse().getJSONArray("lists")));
+			
 		} catch (JSONException e) {
-			throw new JSONException(e.toString());
+			
 		} finally {
 
 		}
