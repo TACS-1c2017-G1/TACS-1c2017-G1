@@ -38,11 +38,24 @@ public class User {
 
 	public static User create(String id) throws IOException {
 		User user = new User();
+		user.setId(Integer.parseInt(id));
 		user.setLists();
+		//user.setFavoriteActors();
 		return user;
 	}
 
 	private void setLists() throws IOException {
+		try {
+			this.setJsonResponse(TMDbStatic.getResource2("account", id + "/lists"));
+			this.setLists(fromJsonArrayToList(this.getJsonResponse().getJSONArray("results")));
+		} catch (JSONException e) {
+			throw new JSONException(e.toString());
+		} finally {
+
+		}
+	}
+
+	private void setFavoriteActors() throws IOException {
 		try {
 			this.setJsonResponse(TMDbStatic.getResource2("account", id + "/lists"));
 			this.setLists(fromJsonArrayToList(this.getJsonResponse().getJSONArray("lists")));
@@ -59,15 +72,8 @@ public class User {
 		if (jArray != null) {
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject jsonMovieList = jArray.getJSONObject(i);
-				String listName = jsonMovieList.getString("name");
-				JSONArray jsonMovies = jsonMovieList.getJSONArray("movies");
-				List<Movie> movies = new ArrayList<Movie>();
-				for (int j = 0; j < jsonMovies.length(); j++) {
-					JSONObject jsonMovie = jsonMovies.getJSONObject(j);
-					Movie movie = new Movie(jsonMovie.getString("id"));
-					movies.add(movie);
-				}
-				MovieList movieList = MovieList.create(listName, movies);
+				int listId = jsonMovieList.getInt("id");
+				MovieList movieList = MovieList.create(listId);
 				listMovieList.add(movieList);
 			}
 		}
@@ -134,7 +140,7 @@ public class User {
 		this.favoriteActors = favoriteActors;
 	}
 
-	public JSONObject getJsonResponse() {
+	private JSONObject getJsonResponse() {
 		return jsonResponse;
 	}
 
@@ -222,7 +228,8 @@ public class User {
 	}
 
 	/**
-	 * @param lastAccess the lastAccess to set
+	 * @param lastAccess
+	 *            the lastAccess to set
 	 */
 	public void setLastAccess(Date lastAccess) {
 		this.lastAccess = lastAccess;

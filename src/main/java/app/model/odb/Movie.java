@@ -210,4 +210,12 @@ public class Movie {
 		this.jsonResponse = jsonResponse;
 	}
 
+	public static Movie create(int movieId, String movieName) {
+		// TODO Auto-generated method stub
+		Movie movie = new Movie();
+		movie.setId(movieId);
+		movie.setTitle(movieName);
+		return movie;
+	}
+
 }
