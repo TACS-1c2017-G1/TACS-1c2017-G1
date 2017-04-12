@@ -3,10 +3,17 @@
  */
 package app.model.odb;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
@@ -19,6 +26,7 @@ public class User {
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 	private Date lastAccess;
 
+
 	public static User create(String id, String name, List<MovieList> movieList) {
 
 		User user = new User();
@@ -27,6 +35,7 @@ public class User {
 		user.setLists(movieList);
 		return user;
 	}
+
 
 	/**
 	 * @return the id

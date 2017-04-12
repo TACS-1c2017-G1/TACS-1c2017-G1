@@ -59,8 +59,9 @@ public class UserController {
 
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable Integer id1, Integer id2) throws JSONException, IOException{
-		return new ArrayList<Movie>();
+	public List<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String id1, @PathVariable String id2) throws JSONException, IOException{
+		List<Movie> interseccion = AdministrativoService.obtenerInterseccionListas(User.create(id1),User.create(id2));
+		return interseccion;
 	}
 	
     

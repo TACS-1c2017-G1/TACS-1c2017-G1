@@ -16,6 +16,7 @@ public class MovieList {
 	private int id = 0;
 	private String name = "";
 	private List<Movie> movies = new ArrayList<Movie>();
+	private JSONObject jsonResponse;
 
 	/**
 	 * @return the id
@@ -72,6 +73,7 @@ public class MovieList {
 		return movieList;
 	}
 
+
 	public void addMovie(Movie movie) {
 		// TODO Auto-generated method stub
 		this.getMovies().add(movie);
@@ -107,4 +109,5 @@ public class MovieList {
 		// TODO Auto-generated method stub
 		return this.getMovies().isEmpty();
 	}
+
 }
