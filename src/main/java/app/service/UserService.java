@@ -5,6 +5,7 @@ import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
 import app.repositories.RepositorioDeUsuarios;
+import app.repositories.RepositorioDeUsuarios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,28 +18,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-	
-	private RepositorioDeUsuarios repoUsers = RepositorioDeUsuarios.getInstance();
 
-	/**
-	 * @return the repoUsers
-	 */
-	private RepositorioDeUsuarios getRepoUsers() {
-		return repoUsers;
-	}
-
-	/**
-	 * @param repoUsers the repoUsers to set
-	 */
-	private void setRepoUsers(RepositorioDeUsuarios repo) {
-		this.repoUsers = repo;
-	}
+    private RepositorioDeUsuarios getRepositorio(){
+        return RepositorioDeUsuarios.getInstance();
+    }
 
     public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError{
-        //Aca hay que persistir.
-        User.create(userAndPassword);
+        User usuarioNuevo = User.create(userAndPassword);
+        this.getRepositorio().insert(usuarioNuevo);
     }
-    
+
     public List<Movie> obtenerInterseccionListas(String id1, String id2) {
 		User user1 = this.obtenerUsuario(id1);
 		User user2 = this.obtenerUsuario(id2);
@@ -54,7 +43,7 @@ public class UserService {
 		}
 		return interseccion;
 	}
-    
+
     public User obtenerUsuario(String id) {
 		return repoUsers.search(Integer.parseInt(id));
 	}
