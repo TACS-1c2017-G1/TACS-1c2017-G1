@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,13 +23,23 @@ import app.model.tmdb.TMDbStatic;
  * @author facundo91
  *
  */
+@Entity
+@Table(name = "MOVIE")
 public class Movie {
+	@Id @GeneratedValue
+	@Column(name = "id")
 	private int id;
+	@Column(name = "title")
 	private String title;
+	@Column(name = "overview")
 	private String overview;
+	@Column(name = "cast")
 	private List<Credit> cast = new ArrayList<Credit>();
+	@Column(name = "backdrops")
 	private List<Image> backdrops = new ArrayList<Image>();
+	@Column(name = "posters")
 	private List<Image> posters = new ArrayList<Image>();
+	@Column(name = "reviwes")
 	private List<Review> reviews = new ArrayList<Review>();
 	private JSONObject jsonResponse;
 
