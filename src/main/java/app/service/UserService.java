@@ -5,13 +5,11 @@ import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
 import app.repositories.RepositorioDeUsuarios;
-import app.repositories.RepositorioDeUsuarios;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Rodrigo on 08/04/2017.
@@ -24,7 +22,7 @@ public class UserService {
     }
 
     public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError{
-        User usuarioNuevo = User.create(userAndPassword);
+    	User usuarioNuevo = User.create(userAndPassword);
         this.getRepositorio().insert(usuarioNuevo);
     }
 
@@ -45,6 +43,6 @@ public class UserService {
 	}
 
     public User obtenerUsuario(String id) {
-		return repoUsers.search(Integer.parseInt(id));
+		return this.getRepositorio().search(Integer.parseInt(id));
 	}
 }

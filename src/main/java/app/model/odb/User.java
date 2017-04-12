@@ -20,13 +20,6 @@ public class User {
 	private Date lastAccess;
 
 
-	
-	public static User create(String id, List<MovieList> movieList) {
-		User user = new User();
-		user.setId(Integer.parseInt(id));
-		user.setLists(movieList);
-		return user;
-	}
 
 
 	

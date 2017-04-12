@@ -6,6 +6,6 @@ package app.repositories;
 public interface IRepositorio <T> {
 
     public void insert(T object);
-    public void update(Object object);
-    public void delete(Object object);
+    public void update(T object);
+    public void delete(T object);
 }

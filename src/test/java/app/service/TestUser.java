@@ -1,16 +1,16 @@
 package app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
-
+import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
 import app.repositories.RepositorioDeUsuarios;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestUser {
 	
@@ -23,7 +23,7 @@ public class TestUser {
 		pelis.add(Movie.create(150,"Matrix"));
 		listas.add(MovieList.create("Lista 1", pelis));
 		listas.add(MovieList.create("Lista 2", pelis));
-		RepositorioDeUsuarios.getInstance().insert(User.create("100", listas));
+		RepositorioDeUsuarios.getInstance().insert(User.create(Credencial.create("Carlos","123")));
 		Assert.assertTrue(servicioUsuario.obtenerUsuario("100").getId()==100);
 	}
 	
@@ -39,8 +39,8 @@ public class TestUser {
 		pelis2.add(Movie.create(100,"Star Wars"));
 		listas1.add(MovieList.create("Lista 1", pelis1));
 		listas2.add(MovieList.create("Lista 2", pelis2));
-		RepositorioDeUsuarios.getInstance().insert(User.create("100", listas1));
-		RepositorioDeUsuarios.getInstance().insert(User.create("50", listas2));
+		RepositorioDeUsuarios.getInstance().insert(User.create(Credencial.create("Carlos","124")));
+		RepositorioDeUsuarios.getInstance().insert(User.create(Credencial.create("Carlos","124")));
 		List<Movie> interseccion = new ArrayList<Movie>();
 		interseccion.add(Movie.create(100,"Star Wars"));
 		Assert.assertEquals(servicioUsuario.obtenerInterseccionListas("100", "50"),interseccion);

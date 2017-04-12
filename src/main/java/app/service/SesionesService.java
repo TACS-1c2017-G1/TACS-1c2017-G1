@@ -3,25 +3,31 @@ package app.service;
 import app.model.odb.Credencial;
 import app.model.odb.Sesion;
 import app.model.odb.User;
+import app.repositories.RepositorioDeSesiones;
+import app.repositories.RepositorioDeUsuarios;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SesionesService {
 
+    private RepositorioDeSesiones getRepositorio(){
+        return RepositorioDeSesiones.getInstance();
+    }
+
     public Sesion loguearUsuario(Credencial credencial) {
-        //TODO:Aca deberiamos buscar en la BD el usuario correspondiente y validar su password.
-        //TODO: si no existe el usuario
-        User usuario = User.create(credencial);
-        //TODO: Aca deberiamos persistir la sesion.
-        return Sesion.create(credencial.getUsername());
+        User user = RepositorioDeUsuarios.getInstance().searchByUsername(credencial.getUsername());
+        if(!user.getCredencial().getPassword().equals(credencial.getPassword())){
+            throw new RuntimeException("Usuario y/o contraseña inválida");
+        }
+        Sesion nuevaSesion =Sesion.create(user.getCredencial().getUsername());
+        this.getRepositorio().insert(nuevaSesion);
+        return nuevaSesion;
     }
 
     public void desloguearUsuario(String token) {
-        //TODO: acá hay que buscar en la BD la sesión por el token y ponerla como inactiva.
-        //TODO: validaciones cuando tengamos db: Ver si no existe la sesion tirar exception.
-        Sesion sesion = Sesion.create("Rodrigo");
-        sesion.setIdSesion(token);
-        sesion.desactivarSesion();
+        Sesion sesionADesactivar = this.getRepositorio().searchById(token);
+        sesionADesactivar.desactivarSesion();
+        this.getRepositorio().update(sesionADesactivar);
 
     }
 }
