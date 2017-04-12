@@ -56,19 +56,8 @@ public class User {
 		} catch (JSONException e) {
 			throw new JSONException(e.toString());
 		} finally {
-
-		}
-	}
-
-	private void setFavoriteActors() throws IOException {
-		try {
 			
-		} catch (JSONException e) {
-			
-		} finally {
-
 		}
-
 	}
 
 	private List<MovieList> fromJsonArrayToList(JSONArray jArray) throws JSONException, IOException {
