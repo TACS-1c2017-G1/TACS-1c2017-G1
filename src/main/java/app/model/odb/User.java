@@ -3,17 +3,10 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
@@ -25,7 +18,6 @@ public class User {
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 	private Date lastAccess;
-	private JSONObject jsonResponse;
 
 	public static User create(String id, String name, List<MovieList> movieList) {
 
@@ -34,54 +26,6 @@ public class User {
 		user.setName(name);
 		user.setLists(movieList);
 		return user;
-	}
-
-	public static User create(String id) throws IOException {
-		User user = new User();
-		user.setId(Integer.parseInt(id));
-		user.setLists();
-		//Ver si es local o remoto
-		//user.setName(name);
-		//Ver como lo implementa Jere
-		//user.setFavoriteActors();
-		//Ver como lo implementan en el login
-		//user.setLastAccess(lastAccess);
-		return user;
-	}
-
-	private void setLists() throws IOException {
-		try {
-			this.setJsonResponse(TMDbStatic.getResource2("account", id + "/lists"));
-			this.setLists(fromJsonArrayToList(this.getJsonResponse().getJSONArray("results")));
-		} catch (JSONException e) {
-			throw new JSONException(e.toString());
-		} finally {
-
-		}
-	}
-
-	private void setFavoriteActors() throws IOException {
-		try {
-			
-		} catch (JSONException e) {
-			
-		} finally {
-
-		}
-
-	}
-
-	private List<MovieList> fromJsonArrayToList(JSONArray jArray) throws JSONException, IOException {
-		List<MovieList> listMovieList = new ArrayList<MovieList>();
-		if (jArray != null) {
-			for (int i = 0; i < jArray.length(); i++) {
-				JSONObject jsonMovieList = jArray.getJSONObject(i);
-				int listId = jsonMovieList.getInt("id");
-				MovieList movieList = MovieList.create(listId);
-				listMovieList.add(movieList);
-			}
-		}
-		return listMovieList;
 	}
 
 	/**
@@ -142,14 +86,6 @@ public class User {
 	 */
 	private void setFavoriteActors(List<Actor> favoriteActors) {
 		this.favoriteActors = favoriteActors;
-	}
-
-	private JSONObject getJsonResponse() {
-		return jsonResponse;
-	}
-
-	public void setJsonResponse(JSONObject jsonResponse) {
-		this.jsonResponse = jsonResponse;
 	}
 
 	public void createList(String name) {

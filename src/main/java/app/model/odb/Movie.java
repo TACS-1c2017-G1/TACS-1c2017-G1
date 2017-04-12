@@ -115,6 +115,12 @@ public class Movie {
 		this.setInfo();
 	}
 
+	//Constructor para testing
+	public Movie(String id, String nombre){
+		this.setId(Integer.parseInt(id));
+		this.setTitle(nombre);
+	}
+	
 	public Movie(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
 		try {

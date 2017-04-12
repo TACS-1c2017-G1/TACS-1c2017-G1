@@ -20,6 +20,7 @@ import app.model.odb.Actor;
 import app.model.odb.Movie;
 import app.model.odb.User;
 import app.service.ActoresFavoritosService;
+import app.service.AdministrativoService;
 import app.web.TOs.CredencialTO;
 
 
@@ -37,7 +38,7 @@ public class UserController {
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
 	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
-		return User.create(id);
+		return AdministrativoService.obtenerUsuario(id);
 	}
 
 
