@@ -44,4 +44,8 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
     		return User.create("0", "ERROR: USER DOESN'T EXIST", new ArrayList<MovieList>());
     	}
     }
+
+	public void clear() {
+		usuarios.clear();
+	}
 }
