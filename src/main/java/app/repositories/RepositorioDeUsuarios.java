@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Rodrigo on 11/04/2017.
  */
-public class RepositorioDeUsuarios implements IRepositorio {
+public class RepositorioDeUsuarios implements IRepositorio<User> {
     private static RepositorioDeUsuarios ourInstance = new RepositorioDeUsuarios();
 
     public static RepositorioDeUsuarios getInstance() {
@@ -21,7 +21,8 @@ public class RepositorioDeUsuarios implements IRepositorio {
     }
 
     @Override
-    public void insert(Object object) {
+    public void insert(User usuario) {
+        usuarios.add(usuario);
     }
 
     @Override
