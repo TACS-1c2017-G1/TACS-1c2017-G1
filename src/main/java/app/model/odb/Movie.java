@@ -114,7 +114,7 @@ public class Movie {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", jsonMovie.getString("id")));
 		this.setInfo();
 	}
-
+	
 	public Movie(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
 		try {

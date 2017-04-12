@@ -38,7 +38,7 @@ public class UserController {
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
 	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
-		return User.create(id);
+		return AdministrativoService.obtenerUsuario(id);
 	}
 
 
