@@ -4,15 +4,17 @@ package app.model.odb;
  * Created by Rodrigo on 08/04/2017.
  */
 public class Sesion {
-    private Long idSesion;
+    private String idSesion;
     private String username;
     private Boolean estaActiva;
 
-    public Long getIdSesion() {
+    private static TokenGenerator generadorDeTokens = new TokenGenerator();
+
+    public String getIdSesion() {
         return idSesion;
     }
 
-    public void setIdSesion(Long idSesion) {
+    public void setIdSesion(String idSesion) {
         this.idSesion = idSesion;
     }
 
@@ -35,10 +37,10 @@ public class Sesion {
     public Sesion() {
     }
 
-    public static Sesion create(Long idSesion, String username){
+    public static Sesion create(String username){
 
         Sesion sesion = new Sesion();
-        sesion.setIdSesion(idSesion);
+        sesion.setIdSesion(generadorDeTokens.generateToken(username));
         sesion.setUsername(username);
         sesion.setEstaActiva(Boolean.TRUE);
 
