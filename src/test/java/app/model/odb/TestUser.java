@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author facundo91
@@ -203,4 +202,22 @@ public class TestUser {
 //		fail("Not yet implemented"); // TODO
 	}
 
+	@Test
+	public void testUsernameVoid() throws ExceptionInInitializerError{
+		try {
+			User.create(Credencial.create("", "12345"));
+			fail();
+		} catch (ExceptionInInitializerError e) {
+			assertEquals(e.getMessage(),User.usuarioOContraseniaVacio());
+		}
+	}
+	@Test
+	public void testPasswordVoid() throws ExceptionInInitializerError{
+		try {
+			User.create(Credencial.create("Hola", ""));
+			fail();
+		} catch (ExceptionInInitializerError e) {
+			assertEquals(e.getMessage(),User.usuarioOContraseniaVacio());
+		}
+	}
 }

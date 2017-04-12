@@ -24,11 +24,15 @@ public class Credencial {
         this.password = password;
     }
 
-    public static Credencial create(String nombre, String idSesion) {
-        Credencial usuarioLogueadoTO = new Credencial();
-        usuarioLogueadoTO.setPassword(idSesion);
-        usuarioLogueadoTO.setUsername(nombre);
-        return usuarioLogueadoTO;
+    public static Credencial create(String nombre, String password) {
+        Credencial credencial = new Credencial();
+        credencial.setPassword(password);
+        credencial.setUsername(nombre);
+        return credencial;
+    }
+
+    public Boolean esInvalida(){
+        return this.getPassword().isEmpty() || this.getUsername().isEmpty();
     }
 
     public Credencial() {}
