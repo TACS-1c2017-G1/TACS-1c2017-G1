@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,28 +18,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import app.model.dto.ActorDto;
 import app.model.dto.MoviDto;
 import app.model.odb.Actor;
+import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.User;
 import app.service.ActoresFavoritosService;
-import app.service.AdministrativoService;
-import app.web.TOs.CredencialTO;
+import app.service.UserService;
+
 
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
+	@Autowired
+	UserService servicioDeUsuario;
+
 	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
-	public String crearUsuario(@RequestBody CredencialTO userAndPassword) throws IOException{
-		//Acá hay que crear el usuario y sino tirar excepción.
-		return "Cuenta creada correctamente!";
+	public void crearUsuario(@RequestBody Credencial userAndPassword) throws Exception,IOException{
+		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
+
 	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
-		return AdministrativoService.obtenerUsuario(id);
+		return servicioDeUsuario.obtenerUsuario(id);
 	}
 
 
@@ -60,7 +65,7 @@ public class UserController {
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
 	public List<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String id1, @PathVariable String id2) throws JSONException, IOException{
-		List<Movie> interseccion = AdministrativoService.obtenerInterseccionListas(id1,id2);
+		List<Movie> interseccion = servicioDeUsuario.obtenerInterseccionListas(id1,id2);
 		return interseccion;
 	}
 	

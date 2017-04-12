@@ -3,17 +3,10 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
@@ -21,18 +14,29 @@ import app.model.tmdb.TMDbStatic;
  */
 public class User {
 	private int id;
-	private String name;
+	private Credencial credencial;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
 	private Date lastAccess;
 
 
-	public static User create(String id, String name, List<MovieList> movieList) {
-
+	
+	public static User create(String id, List<MovieList> movieList) {
 		User user = new User();
 		user.setId(Integer.parseInt(id));
-		user.setName(name);
 		user.setLists(movieList);
+		return user;
+	}
+
+
+	
+	public static User create(Credencial credencial) throws ExceptionInInitializerError {
+
+		User user = new User();
+		if(credencial.esInvalida()){
+			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
+		}
+		user.setCredencial(credencial);
 		return user;
 	}
 
@@ -52,19 +56,12 @@ public class User {
 		this.id = id;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public Credencial getCredencial() {
+		return credencial;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	private void setName(String name) {
-		this.name = name;
+	public void setCredencial(Credencial credencial) {
+		this.credencial = credencial;
 	}
 
 	/**
@@ -167,6 +164,10 @@ public class User {
 
 	public void showActorDetails(Actor actor) {
 		actor.showDetails();
+	}
+
+	public static String usuarioOContraseniaVacio() {
+			return "El usuario o la contraseña no pueden estar vacíos.";
 	}
 
 	/**
