@@ -3,7 +3,6 @@ package app.web.controller;
 import app.model.odb.Credencial;
 import app.model.odb.Sesion;
 import app.service.SesionesService;
-import app.web.TOs.UsuarioLogueadoTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -24,10 +23,10 @@ public class SesionesController {
         return servicioDeSesiones.loguearUsuario(userAndPassword);
     }
 
-    @RequestMapping(value="/logout", method=RequestMethod.POST)
+    @RequestMapping(value="/logout", method=RequestMethod.PUT)
     @ResponseBody
-    public String desloguearUsuario(@RequestHeader String Token, @RequestBody UsuarioLogueadoTO usuarioParaDesloguearse) throws IOException{
+    public void desloguearUsuario(@RequestHeader String token) throws IOException{
        /*acá debo desloguear al usuario va a devolver void pero en forma de prueba*/
-        return "Se deslogueó el usuario correctamente!";
+        servicioDeSesiones.desloguearUsuario(token);
     }
 }
