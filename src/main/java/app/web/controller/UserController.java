@@ -1,22 +1,29 @@
 package app.web.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import app.model.dto.ActorDto;
 import app.model.dto.MoviDto;
 import app.model.odb.Actor;
 import app.model.odb.Credencial;
 import app.model.odb.Movie;
-import app.model.odb.UserView;
+import app.model.odb.User;
 import app.service.ActoresFavoritosService;
 import app.service.UserService;
-import org.json.JSONException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -34,8 +41,9 @@ public class UserController {
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public UserView datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException,ExceptionInInitializerError{
-		return new UserView(id);
+
+	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
+		return servicioDeUsuario.obtenerUsuario(id);
 	}
 
 
@@ -56,8 +64,9 @@ public class UserController {
 
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-	public ArrayList<Movie> listaUsuarios(@RequestHeader String token, @PathVariable Integer id1, Integer id2) throws JSONException, IOException{
-		return new ArrayList<Movie>();
+	public List<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String id1, @PathVariable String id2) throws JSONException, IOException{
+		List<Movie> interseccion = servicioDeUsuario.obtenerInterseccionListas(id1,id2);
+		return interseccion;
 	}
 	
     

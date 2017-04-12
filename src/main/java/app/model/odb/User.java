@@ -5,6 +5,7 @@ package app.model.odb;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,9 +17,21 @@ public class User {
 	private Credencial credencial;
 	private List<MovieList> lists = new ArrayList<MovieList>();
 	private List<Actor> favoriteActors = new ArrayList<Actor>();
+	private Date lastAccess;
+
+
+	
+	public static User create(String id, List<MovieList> movieList) {
+		User user = new User();
+		user.setId(Integer.parseInt(id));
+		user.setLists(movieList);
+		return user;
+	}
+
 
 	
 	public static User create(Credencial credencial) throws ExceptionInInitializerError {
+
 		User user = new User();
 		if(credencial.esInvalida()){
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
@@ -26,7 +39,8 @@ public class User {
 		user.setCredencial(credencial);
 		return user;
 	}
-	
+
+
 	/**
 	 * @return the id
 	 */
@@ -79,7 +93,6 @@ public class User {
 	private void setFavoriteActors(List<Actor> favoriteActors) {
 		this.favoriteActors = favoriteActors;
 	}
-	
 
 	public void createList(String name) {
 		this.getLists().add(MovieList.create(name, Arrays.asList()));
@@ -156,4 +169,20 @@ public class User {
 	public static String usuarioOContraseniaVacio() {
 			return "El usuario o la contraseña no pueden estar vacíos.";
 	}
+
+	/**
+	 * @return the lastAccess
+	 */
+	public Date getLastAccess() {
+		return lastAccess;
+	}
+
+	/**
+	 * @param lastAccess
+	 *            the lastAccess to set
+	 */
+	public void setLastAccess(Date lastAccess) {
+		this.lastAccess = lastAccess;
+	}
+
 }

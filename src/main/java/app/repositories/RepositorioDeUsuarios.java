@@ -1,8 +1,10 @@
 package app.repositories;
 
-import app.model.odb.User;
-
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
+import app.model.odb.MovieList;
+import app.model.odb.User;
 
 /**
  * Created by Rodrigo on 11/04/2017.
@@ -31,5 +33,14 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
 
     @Override
     public void delete(Object object) {
+    }
+    
+    public User search(int idBusqueda){
+    	try{
+    	return usuarios.stream().filter(usuario -> usuario.getId()==idBusqueda).findFirst().get();
+    	}
+    	catch (NoSuchElementException e){
+    		return User.create("0", new ArrayList<MovieList>());
+    	}
     }
 }
