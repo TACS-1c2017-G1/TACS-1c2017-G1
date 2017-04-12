@@ -1,8 +1,10 @@
 package app.repositories;
 
+import app.model.odb.MovieList;
 import app.model.odb.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -39,7 +41,7 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
     	return usuarios.stream().filter(usuario -> usuario.getId()==idBusqueda).findFirst().get();
     	}
     	catch (NoSuchElementException e){
-    		return new User();
+    		return User.create("0", "ERROR: USER DOESN'T EXIST", new ArrayList<MovieList>());
     	}
     }
 }
