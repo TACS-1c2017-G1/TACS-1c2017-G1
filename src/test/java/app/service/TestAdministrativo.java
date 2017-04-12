@@ -40,7 +40,7 @@ public class TestAdministrativo {
 	public void testBusquedaUsuario() {
 		List<Movie> pelis = new ArrayList<Movie>();
 		List<MovieList> listas = new ArrayList<MovieList>();
-		pelis.add(new Movie("150","Matrix"));
+		pelis.add(Movie.create(150,"Matrix"));
 		listas.add(MovieList.create("Lista 1", pelis));
 		listas.add(MovieList.create("Lista 2", pelis));
 		RepositorioDeUsuarios.getInstance().insert(User.create("100", "AEC", listas));
