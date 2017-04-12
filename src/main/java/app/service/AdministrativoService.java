@@ -1,8 +1,6 @@
 package app.service;
 
-public class AdministrativoService {
-	
-	
 
+public class AdministrativoService {
 	
 }

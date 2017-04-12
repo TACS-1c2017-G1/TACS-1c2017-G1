@@ -4,7 +4,6 @@
 package app.service;
 
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +19,7 @@ public class TestAdministrativo {
 	@Before
 	public void setUp() throws Exception {
 	}
+	
 
 	@Test
 	public void testAdministrativoService() throws Exception {
