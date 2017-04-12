@@ -211,7 +211,6 @@ public class Movie {
 	}
 
 	public static Movie create(int movieId, String movieName) {
-		// TODO Auto-generated method stub
 		Movie movie = new Movie();
 		movie.setId(movieId);
 		movie.setTitle(movieName);

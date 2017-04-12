@@ -16,7 +16,6 @@ public class MovieList {
 	private int id = 0;
 	private String name = "";
 	private List<Movie> movies = new ArrayList<Movie>();
-	private JSONObject jsonResponse;
 
 	/**
 	 * @return the id

@@ -1,6 +1,13 @@
 package app.service;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import app.model.odb.Movie;
+import app.model.odb.MovieList;
 import app.model.odb.User;
 import app.repositories.RepositorioDeUsuarios;
 
