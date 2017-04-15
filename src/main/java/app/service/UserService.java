@@ -8,6 +8,7 @@ import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
+import app.model.odb.Credit;
 import app.repositories.RepositorioDeUsuarios;
 
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -111,11 +113,30 @@ public class UserService {
 	}
 	
 	
-	public List<Movie> verPeliculasConActoresFavoritos( String token ) throws JSONException, IOException {
+	public List<Movie> verPeliculasConMasDeUnActorFavorito( String token ) throws JSONException, IOException {
 		
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
 		ArrayList<Movie> listPelConMasDeUnActorFav = new ArrayList<Movie>(0);
+		for (MovieList unaMovieList : usuario.getLists() ) {
+			for (Movie unaMovie : unaMovieList.getMovies() ) {
+				if ( contieneMasDeUnActorFavorito(unaMovie, usuario.getFavoriteActors()) )
+					listPelConMasDeUnActorFav.add(unaMovie);
+				
+			}
+		}
 		return listPelConMasDeUnActorFav;
+	}
+	
+	private boolean contieneMasDeUnActorFavorito( Movie movie, List<Actor> actoresFav ) {
+		Optional<Actor> optActor = null;
+		int countActoresFav = 0;
+		Iterator<Credit> credIt = movie.getCast().iterator();
+		while ( countActoresFav < 2 && credIt.hasNext() ) {
+			optActor = actoresFav.stream().filter( actor -> actor.getId() == credIt.next().getActorId() ).findFirst();
+			if ( optActor.isPresent() )
+				countActoresFav++;
+		}
+		return countActoresFav > 1;
 	}
 
 }
