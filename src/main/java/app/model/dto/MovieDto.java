@@ -3,7 +3,7 @@ package app.model.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviDto {
+public class MovieDto {
 	
 	private String title;
 	
@@ -11,12 +11,12 @@ public class MoviDto {
 	
 	private List<ActorDto> actors = new ArrayList<ActorDto>(0);
 	
-	public MoviDto(String title, String year) {
+	public MovieDto(String title, String year) {
 		this.title = title;
 		this.year = year;
 	}
 	
-	public MoviDto() {
+	public MovieDto() {
 		
 	}
 

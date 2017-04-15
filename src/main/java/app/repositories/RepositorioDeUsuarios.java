@@ -54,6 +54,10 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
         return usuarios.stream().filter(user ->
                 user.getCredencial().getUsername().equals(username))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("No existe el usuario que intenta loguear"));
+                .orElseThrow(() -> new RuntimeException("No existe el usuario buscado"));
+    }
+    
+    public ArrayList<User> getUsers() {
+    	return usuarios;
     }
 }

@@ -30,4 +30,12 @@ public class SesionesService {
         this.getRepositorio().update(sesionADesactivar);
 
     }
+    
+    
+    public User obtenerUsuarioPorToken( String token ) {
+    	if ( token == null )
+    		throw new RuntimeException("Token nulo, no se puede realizar la operación.");
+    	Sesion sesion = this.getRepositorio().searchById(token);
+    	return RepositorioDeUsuarios.getInstance().searchByUsername(sesion.getUsername());
+    }
 }

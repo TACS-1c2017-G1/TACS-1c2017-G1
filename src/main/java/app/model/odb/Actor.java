@@ -24,14 +24,22 @@ public class Actor {
 	private List<Credit> credits = new ArrayList<Credit>();
 	private String bio;
 	private JSONObject jsonResponse;
+	private int statusCode;
+	private String statusMessage;
 
 	public Actor(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
-		this.setId(this.getJsonResponse().getInt("id"));
-		this.setName(this.getJsonResponse().getString("name"));
-		this.setBio(this.getJsonResponse().getString("biography"));
-		this.setImages(id);
-		this.setCredits(id);
+		try {	
+			this.setId(this.getJsonResponse().getInt("id"));
+			this.setName(this.getJsonResponse().getString("name"));
+			this.setBio(this.getJsonResponse().getString("biography"));
+			this.setImages(id);
+			this.setCredits(id);
+		}
+		catch (JSONException e) {
+			this.setStatusCode(this.getJsonResponse().getInt("status_code"));
+			this.setStatusMessage(this.getJsonResponse().getString("status_message"));
+		}
 	}
 
 	public JSONObject actorJson(String id) throws JSONException, IOException {
@@ -162,5 +170,24 @@ public class Actor {
 	private void setJsonResponse(JSONObject jsonResponse) {
 		this.jsonResponse = jsonResponse;
 	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	private void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public String getStatusMessage() {
+		return statusMessage;
+	}
+
+	private void setStatusMessage(String statusMessage) {
+		this.statusMessage = statusMessage;
+	}
+	
+	
+	
 
 }

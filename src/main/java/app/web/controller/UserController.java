@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import app.model.dto.ActorDto;
-import app.model.dto.MoviDto;
+import app.model.dto.MovieDto;
+import app.model.dto.RespuestaDto;
 import app.model.odb.Actor;
 import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.User;
-import app.service.ActoresFavoritosService;
 import app.service.UserService;
 
 
@@ -32,6 +32,7 @@ public class UserController {
 
 	@Autowired
 	UserService servicioDeUsuario;
+		
 
 	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
@@ -39,9 +40,9 @@ public class UserController {
 		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
+	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody
-
 	public User datosUsuario(@RequestHeader String token,@PathVariable String id) throws JSONException, IOException{
 		return servicioDeUsuario.obtenerUsuario(id);
 	}
@@ -72,34 +73,30 @@ public class UserController {
     
     @RequestMapping(value = "/favoriteactor/{idactor}/", method = RequestMethod.PUT, produces="application/json")
 	@ResponseBody
-	public ActorDto marcarActorFavorito(@RequestHeader String token, @PathVariable String idactor, Model model) throws Exception {
-		ActorDto actor = ActoresFavoritosService.maracarActorFavorito(idactor);
-		return actor;
+	public RespuestaDto marcarActorFavorito(@RequestHeader String token, @PathVariable String idactor, Model model) throws Exception {
+    	return servicioDeUsuario.maracarActorFavorito(token, idactor);
 	}
 
 	
-	
 	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<ActorDto> verActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
-		List<ActorDto> list = ActoresFavoritosService.verActoresFavoritos();
-		return list;
+	public List<Actor> verActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
+		return servicioDeUsuario.verActoresFavoritos(token);
 	}
 	
 	
 	@RequestMapping(value = "/favoriteactor/ranking", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<ActorDto> verRankingActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
-		List<ActorDto> list = ActoresFavoritosService.verRankingActoresFavoritos();
+		List<ActorDto> list = servicioDeUsuario.verRankingActoresFavoritos(token);
 		return list;
 	}
 	
 	
 	@RequestMapping(value = "/favoriteactor/movies", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<MoviDto> verPeliculasConActoresFavoritos(@RequestHeader String token, Model model) throws Exception {
-		List<MoviDto> list = ActoresFavoritosService.verPeliculasConActoresFavoritos();
-		return list;
+	public List<Movie> verPeliculasConActoresFavoritos(@RequestHeader String token, Model model) throws Exception {
+		return servicioDeUsuario.verPeliculasConActoresFavoritos(token);
 	}
 
 }

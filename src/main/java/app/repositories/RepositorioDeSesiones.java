@@ -47,8 +47,8 @@ public class RepositorioDeSesiones implements IRepositorio<Sesion>{
     }
 
     public Sesion searchById(String idSesion) {
-        return sesiones.stream().filter(sesion -> sesion.getIdSesion() == idSesion && sesion.getEstaActiva()).findFirst()
-                .orElseThrow(() -> new RuntimeException("La sesion que intenta cerrar ya no existe."));
+        return sesiones.stream().filter(sesion -> sesion.getIdSesion().equals(idSesion) && sesion.getEstaActiva()).findFirst()
+                .orElseThrow(() -> new RuntimeException("La sesion buscada no existe."));
 
     }
 
