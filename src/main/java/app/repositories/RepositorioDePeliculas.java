@@ -2,8 +2,11 @@ package app.repositories;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import app.model.odb.Movie;
 
+@Repository
 public class RepositorioDePeliculas implements IRepositorio<Movie>{
 	
 	private static RepositorioDePeliculas ourInstance = new RepositorioDePeliculas();

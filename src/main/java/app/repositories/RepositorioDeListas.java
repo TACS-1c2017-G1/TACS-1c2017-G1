@@ -2,9 +2,12 @@ package app.repositories;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 
+@Repository
 public class RepositorioDeListas implements IRepositorio<MovieList> {
 	private static RepositorioDeListas ourInstance = new RepositorioDeListas();
 
@@ -30,24 +33,21 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
     public MovieList search(int idBusqueda) {
         return listas.stream().filter(lista -> lista.getId() == idBusqueda).findFirst().orElse(null);
     }
-
-    public void eliminarItem(Movie movie, int idList){
-    	this.search(idList).removeMovie(movie);
-    }
     
-    public void agregarItem(Movie movie, int idList){
-    	this.search(idList).addMovie(movie);
-    }
-    
-	@Override
-	public void update(MovieList object) {
-		// TODO Auto-generated method stub
-
+	public void update(Movie movie, int idList) {
+		this.search(idList).removeMovie(movie);
+		this.search(idList).addMovie(movie);
 	}
 
 	@Override
 	public void delete(MovieList object) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void update(MovieList object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

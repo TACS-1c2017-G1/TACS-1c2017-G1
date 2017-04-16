@@ -37,7 +37,7 @@ public class ListasService {
 	public void agregarItem(Movie movie, int id_list, String token) {
 		this.getRepositorioPelicuas().insert(movie);
 		this.consultarLista(id_list, token).addMovie(movie);
-		this.getRepositorioListas().agregarItem(movie, id_list);
+		this.getRepositorioListas().update(movie, id_list);
 	}
 	
 	public static JSONObject buscarPeliculaPorNombreJson(String query) throws Exception {
@@ -46,7 +46,7 @@ public class ListasService {
 
 	public void eliminarItem(Movie movie, int id_list, String token) {
 		this.consultarLista(id_list, token).removeMovie(movie);
-		this.getRepositorioListas().eliminarItem(movie, id_list);
+		this.getRepositorioListas().update(movie, id_list);
 	}
 	
 	public MovieList consultarLista(int id_list, String token){
