@@ -24,11 +24,11 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
 
     @Override
     public void insert(User usuario) {
-       if(this.search(usuario.getId()) == null){
-           usuarios.add(usuario);
-       }else{
-           throw new RuntimeException("Ya existe el usuario que quiere crear");
-       }
+        Optional<User> usuarioLog = this.buscarUsuarioSiExiste(usuario.getCredencial().getUsername());
+        if (usuarioLog.isPresent()) {
+            throw new RuntimeException("Ya existe el usuario que quiere crear");
+        }
+        usuarios.add(usuario);
     }
 
     @Override
@@ -51,13 +51,16 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
     }
 
     public User searchByUsername(String username) {
+        return this.buscarUsuarioSiExiste(username).orElseThrow(() -> new RuntimeException("No existe el usuario que intenta loguear"));
+    }
+
+    public Optional<User> buscarUsuarioSiExiste(String username) {
         return usuarios.stream().filter(user ->
                 user.getCredencial().getUsername().equals(username))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No existe el usuario buscado"));
+                .findFirst();
+
     }
-    
     public ArrayList<User> getUsers() {
-    	return usuarios;
+        return usuarios;
     }
 }

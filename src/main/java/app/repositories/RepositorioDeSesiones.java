@@ -33,7 +33,7 @@ public class RepositorioDeSesiones implements IRepositorio<Sesion>{
 
     @Override
     public void update(Sesion sesion) {
-        this.delete(this.searchById(sesion.getIdSesion()));
+        this.delete(sesion);
         this.insert(sesion);
     }
 
@@ -43,7 +43,7 @@ public class RepositorioDeSesiones implements IRepositorio<Sesion>{
     }
 
     public Sesion searchByUsername(String username) {
-        return sesiones.stream().filter(sesion -> sesion.getUsername() == username && sesion.getEstaActiva()).findFirst().orElse(null);
+        return sesiones.stream().filter(sesion -> sesion.getUsername().equals(username) && sesion.getEstaActiva()).findFirst().orElse(null);
     }
 
     public Sesion searchById(String idSesion) {
