@@ -15,8 +15,8 @@ import java.util.List;
 public class User {
 	private int id;
 	private Credencial credencial;
-	private List<MovieList> lists = new ArrayList<MovieList>();
-	private List<Actor> favoriteActors = new ArrayList<Actor>();
+	private List<MovieList> lists;
+	private List<Actor> favoriteActors;
 	private Date lastAccess;
 
 
@@ -61,6 +61,9 @@ public class User {
 	 * @return the lists
 	 */
 	public List<MovieList> getLists() {
+		if (lists == null) {
+			lists = new ArrayList<>();
+		}
 		return lists;
 	}
 
@@ -76,6 +79,9 @@ public class User {
 	 * @return the favoriteActors
 	 */
 	public List<Actor> getFavoriteActors() {
+		if(favoriteActors == null){
+			favoriteActors = new ArrayList<>();
+		}
 		return favoriteActors;
 	}
 

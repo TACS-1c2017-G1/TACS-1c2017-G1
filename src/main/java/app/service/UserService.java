@@ -1,16 +1,9 @@
 package app.service;
 
 import app.model.dto.ActorDto;
-import app.model.dto.MovieDto;
 import app.model.dto.RespuestaDto;
-import app.model.odb.Actor;
-import app.model.odb.Credencial;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
-import app.model.odb.User;
-import app.model.odb.Credit;
+import app.model.odb.*;
 import app.repositories.RepositorioDeUsuarios;
-
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +51,11 @@ public class UserService {
 
     
     public User obtenerUsuario(String id) {
-		return this.getRepositorio().search(Integer.parseInt(id));
+		User user = this.getRepositorio().search(Integer.parseInt(id));
+		if(user == null){
+			throw new RuntimeException("No existe el usuario con id " + id.toString());
+		}
+		return user;
 	}
     
     
