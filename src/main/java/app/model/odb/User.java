@@ -45,7 +45,7 @@ public class User {
 	 * @param id
 	 *            the id to set
 	 */
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -71,7 +71,7 @@ public class User {
 	 * @param lists
 	 *            the lists to set
 	 */
-	private void setLists(List<MovieList> lists) {
+	public void setLists(List<MovieList> lists) {
 		this.lists = lists;
 	}
 
