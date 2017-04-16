@@ -1,28 +1,20 @@
 package app.web.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import app.model.dto.ActorDto;
-import app.model.dto.MovieDto;
 import app.model.dto.RespuestaDto;
 import app.model.odb.Actor;
 import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.User;
 import app.service.UserService;
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 
 
@@ -50,15 +42,8 @@ public class UserController {
 
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Actor> rankingDeActores(@RequestHeader String Token, @PathVariable Long idlistaDePeliculas) throws JSONException, IOException{
-		List<Actor> rankingDeActores = new ArrayList<Actor>();
-		Actor actor1 = new Actor("10990");
-		Actor actor2 = new Actor("10980");
-
-		rankingDeActores.add(actor1);
-		rankingDeActores.add(actor2);
-
-		return rankingDeActores;
+	public List<Actor> rankingDeActores(@RequestHeader String token, @PathVariable Long idlistaDePeliculas) throws JSONException, IOException{
+		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token,idlistaDePeliculas);
 	}
 
 	

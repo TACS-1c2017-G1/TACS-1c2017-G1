@@ -1,21 +1,6 @@
 package app.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.json.JSONException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import app.model.dto.ActorDto;
 import app.model.dto.RespuestaDto;
 import app.model.odb.Actor;
 import app.model.odb.Credencial;
@@ -23,7 +8,19 @@ import app.model.odb.Credit;
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
+import app.model.odb.*;
 import app.repositories.RepositorioDeUsuarios;
+
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by Rodrigo on 08/04/2017.
@@ -61,11 +58,7 @@ public class UserService {
 
     
     public User obtenerUsuario(String id) {
-		User user = this.getRepositorio().search(Integer.parseInt(id));
-		if(user == null){
-			throw new RuntimeException("No existe el usuario con id " + id.toString());
-		}
-		return user;
+		return this.getRepositorio().search(Integer.parseInt(id));
 	}
     
     
@@ -108,7 +101,7 @@ public class UserService {
 	public List<Actor> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
 		
 		Map<Actor,Integer> rankingActores = new HashMap<Actor,Integer>();
-		List<User> usuarios = obtenerUsuarios();	
+		List<User> usuarios = obtenerUsuarios();
 		usuarios.stream().forEach(u-> {
 			u.getFavoriteActors().stream().forEach(a ->{
 				if (rankingActores.containsKey(a)){
@@ -154,4 +147,9 @@ public class UserService {
 		return countActoresFav > 1;
 	}
 
+	public List<Actor> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
+    	User usuario = sesionesService.obtenerUsuarioPorToken(token);
+
+    	return null;
+	}
 }
