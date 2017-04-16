@@ -162,4 +162,8 @@ public class User {
 		this.lastAccess = lastAccess;
 	}
 
+	public MovieList getList(int id_list){
+		return lists.get(lists.indexOf(MovieList.create(id_list)));
+	}
+	
 }
