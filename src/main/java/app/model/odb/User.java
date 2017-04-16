@@ -79,13 +79,6 @@ public class User {
 		return favoriteActors;
 	}
 
-	/**
-	 * @param favoriteActors
-	 *            the favoriteActors to set
-	 */
-	private void setFavoriteActors(List<Actor> favoriteActors) {
-		this.favoriteActors = favoriteActors;
-	}
 
 	public void createList(String name) {
 		this.getLists().add(MovieList.create(name, Arrays.asList()));
@@ -135,21 +128,6 @@ public class User {
 		// TODO
 	}
 
-	public void markActorAsFavorite(Actor actor) {
-		this.getFavoriteActors().add(actor);
-	}
-
-	public void unmarkActorAsFavorite(Actor actor) {
-		this.getFavoriteActors().remove(actor);
-	}
-
-	public void listFavorites() {
-		// TODO
-	}
-
-	public void listMoviesWithMoreThanOneFavoriteActor() {
-		// TODO
-	}
 
 	public void showMovieDetails(Movie movie) {
 		movie.showDetails();

@@ -141,27 +141,6 @@ public class TestUser {
 //		fail("Not yet implemented"); // TODO
 	}
 
-	/**
-	 * Test method for
-	 * {@link app.model.odb.User#markActorAsFavorite(app.model.odb.Actor)}.
-	 */
-	@Test
-	public final void testMarkActorAsFavorite() {
-		user1.markActorAsFavorite(actor);
-		assertEquals(actor, user1.getFavoriteActors().get(0));
-	}
-
-	/**
-	 * Test method for
-	 * {@link app.model.odb.User#unmarkActorAsFavorite(app.model.odb.Actor)}.
-	 */
-	@Test
-	public final void testUnmarkActorAsFavorite() {
-		user1.markActorAsFavorite(actor);
-		assertEquals(actor, user1.getFavoriteActors().get(0));
-		user1.unmarkActorAsFavorite(actor);
-		assertTrue(user1.getFavoriteActors().isEmpty());
-	}
 
 	/**
 	 * Test method for {@link app.model.odb.User#listFavorites()}.

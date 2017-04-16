@@ -96,7 +96,7 @@ public class UserController {
 	@RequestMapping(value = "/favoriteactor/movies", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Movie> verPeliculasConActoresFavoritos(@RequestHeader String token, Model model) throws Exception {
-		return servicioDeUsuario.verPeliculasConActoresFavoritos(token);
+		return servicioDeUsuario.verPeliculasConMasDeUnActorFavorito(token);
 	}
 
 }
