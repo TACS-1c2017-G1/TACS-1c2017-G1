@@ -11,15 +11,9 @@ public class MovieController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Movie busquedaPeliculaJson(@RequestHeader String Token, @PathVariable String id) throws Exception {
+	public @ResponseBody Movie busquedaPeliculaJson(@RequestHeader String Token, @PathVariable String id)
+			throws Exception {
 		return new Movie(id);
 	}
-
-	// @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	// public String busquedaPelicula(@PathVariable String id, Model model)
-	// throws Exception {
-	// model.addAttribute(this.busquedaPeliculaJson(id));
-	// return "movie";
-	// }
 
 }
