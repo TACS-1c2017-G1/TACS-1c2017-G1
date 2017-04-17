@@ -1,13 +1,8 @@
 package app.service;
 
 import app.model.dto.ActorDto;
+import app.model.dto.MovieDto;
 import app.model.dto.RespuestaDto;
-import app.model.odb.Actor;
-import app.model.odb.Credencial;
-import app.model.odb.Credit;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
-import app.model.odb.User;
 import app.model.odb.*;
 import app.repositories.RepositorioDeUsuarios;
 
@@ -28,32 +23,34 @@ public class UserService {
     @Autowired
     SesionesService sesionesService;
 
-    private RepositorioDeUsuarios getRepositorio(){
+
+
+    private RepositorioDeUsuarios getRepositorio() {
         return RepositorioDeUsuarios.getInstance();
     }
 
-    public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError{
-    	User usuarioNuevo = User.create(userAndPassword);
+    public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
+        User usuarioNuevo = User.create(userAndPassword);
         this.getRepositorio().insert(usuarioNuevo);
     }
 
     public List<Movie> obtenerInterseccionListas(String id1, String id2) {
-		User user1 = this.obtenerUsuario(id1);
-		User user2 = this.obtenerUsuario(id2);
-		List<MovieList> user1Lists = user1.getLists();
-		List<MovieList> user2Lists = user2.getLists();
-		List<Movie> interseccion = new ArrayList<Movie>();
-		for (MovieList ml1:user1Lists){
-			List<Movie> movies1 = ml1.getMovies();
-			for (MovieList ml2:user2Lists){
-				List<Movie> movies2 = ml2.getMovies();
-				interseccion.addAll(movies2.stream().filter(movies1::contains).collect(Collectors.toList()));
-			}
-		}
-		return interseccion;
-	}
+        User user1 = this.obtenerUsuario(id1);
+        User user2 = this.obtenerUsuario(id2);
+        List<MovieList> user1Lists = user1.getLists();
+        List<MovieList> user2Lists = user2.getLists();
+        List<Movie> interseccion = new ArrayList<Movie>();
+        for (MovieList ml1 : user1Lists) {
+            List<Movie> movies1 = ml1.getMovies();
+            for (MovieList ml2 : user2Lists) {
+                List<Movie> movies2 = ml2.getMovies();
+                interseccion.addAll(movies2.stream().filter(movies1::contains).collect(Collectors.toList()));
+            }
+        }
+        return interseccion;
+    }
 
-    
+
     public User obtenerUsuario(String id) {
 		User user = this.getRepositorio().search(Integer.parseInt(id));
 		if(user == null){
@@ -61,18 +58,18 @@ public class UserService {
 		}
 		return user;
 	}
-    
-    
+
+
     public ArrayList<User> obtenerUsuarios() {
-    	return this.getRepositorio().getUsers();
+        return this.getRepositorio().getUsers();
     }
-    
-    
+
+
     public RespuestaDto maracarActorFavorito( String token, String idActor ) throws JSONException, IOException {
     	try {
 	    	User usuario = sesionesService.obtenerUsuarioPorToken(token);
 	    	Optional<Actor> optActor = usuario.getFavoriteActors().stream().filter(actor -> actor.getId() == Integer.parseInt(idActor)).findFirst();
-	    	RespuestaDto rta = new RespuestaDto(); 
+	    	RespuestaDto rta = new RespuestaDto();
 	    	if (optActor.isPresent()) {
 	    		usuario.getFavoriteActors().remove(optActor.get());
 	    		rta.setCode(1);
@@ -83,7 +80,7 @@ public class UserService {
 	    		rta.setCode(0);
 	    		rta.setMessage("Actor favorito agregado: "+ idActor);
 	    	}
-	    	
+
 	    	return rta;
     	}
     	catch (NumberFormatException e) {
@@ -91,14 +88,14 @@ public class UserService {
     		throw new RuntimeException("El id de actor posee un formato inválido.");
     	}
 	}
-	
-	
+
+
 	public List<Actor> verActoresFavoritos( String token ) throws JSONException, IOException {
     	User usuario = sesionesService.obtenerUsuarioPorToken(token);
 	    return usuario.getFavoriteActors();
 	}
-	
-	
+
+
 	public List<Actor> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
 
 		Map<Actor,Integer> rankingActores = new HashMap<Actor,Integer>();
@@ -120,22 +117,22 @@ public class UserService {
 		List<Actor> actoresOrdenados = sorted.map(e-> e.getKey()).collect(Collectors.toList());
 		return actoresOrdenados;
 	}
-	
-	
+
+
 	public List<Movie> verPeliculasConMasDeUnActorFavorito( String token ) throws JSONException, IOException {
-		
+
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
 		ArrayList<Movie> listPelConMasDeUnActorFav = new ArrayList<Movie>(0);
 		for (MovieList unaMovieList : usuario.getLists() ) {
 			for (Movie unaMovie : unaMovieList.getMovies() ) {
 				if ( contieneMasDeUnActorFavorito(unaMovie, usuario.getFavoriteActors()) )
 					listPelConMasDeUnActorFav.add(unaMovie);
-				
+
 			}
 		}
 		return listPelConMasDeUnActorFav;
 	}
-	
+
 	private boolean contieneMasDeUnActorFavorito( Movie movie, List<Actor> actoresFav ) {
 		Optional<Actor> optActor = null;
 		int countActoresFav = 0;
@@ -148,37 +145,41 @@ public class UserService {
 		return countActoresFav > 1;
 	}
 
-    public List<Actor> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
+    public List<ActorEnPelicula> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
         User usuario = sesionesService.obtenerUsuarioPorToken(token);
 
-        List<Actor> listaDeActores = new ArrayList<Actor>();
         MovieList listaDePeliculas = usuario.getLists().stream().filter(movieList -> movieList.getId() == idlistaDePeliculas)
-                                        .findFirst()
-                                        .orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
 
-        List<Movie> peliculas = listaDePeliculas.getMovies();
+        List<ActorEnPelicula> actoresEnPeliculas = obtenerTodosLosActoresEnPeliculas(listaDePeliculas.getMovies());
 
+        Map<ActorEnPelicula, Integer> aparicionDeActores = mapearPorRepeticionesLosActoresEnPeliculas(actoresEnPeliculas);
+
+        List<ActorEnPelicula> actoresOrdenados = aparicionDeActores.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).map(Map.Entry::getKey).collect(Collectors.toList());
+        //TODO en el futuro podemos ver la posibilidad de devolver actor en vez de actorENPelicula.
+        return actoresOrdenados;
+    }
+
+    private Map<ActorEnPelicula, Integer> mapearPorRepeticionesLosActoresEnPeliculas(List<ActorEnPelicula> actoresEnPeliculas) {
+        Map<ActorEnPelicula, Integer> aparicionDeActores = new HashMap<>();
+        actoresEnPeliculas.forEach(actorEnPelicula -> evaluarApariciones(actorEnPelicula, aparicionDeActores));
+        return aparicionDeActores;
+    }
+
+    private List<ActorEnPelicula> obtenerTodosLosActoresEnPeliculas(List<Movie> peliculas) {
         List<ActorEnPelicula> actoresEnPeliculas = new ArrayList<ActorEnPelicula>();
         peliculas.forEach(pelicula -> actoresEnPeliculas.addAll(pelicula.getCast()));
-
-        Hashtable<Integer,Integer> aparicionDeActores = new Hashtable<Integer,Integer>();
-
-        for (int i = 0; i < actoresEnPeliculas.size(); i++) {
-            ActorEnPelicula actor = actoresEnPeliculas.get(i);
-            Integer key = actor.getActorId();
-
-            if(aparicionDeActores.containsKey(key)) {
-                Integer valor = aparicionDeActores.get(key);
-                aparicionDeActores.replace(key, valor++);
-            }else
-                aparicionDeActores.put(key, 1);
-        }
-
-//        actoresEnPeliculas.forEach
-//                (actor -> aparicionDeActores.containsKey(actor.getActorId())
-//                            ? aparicionDeActores.replace(actor.getActorId(), aparicionDeActores.get(actor.getActorId()) + 1)
-//                            : aparicionDeActores.put(actor.getActorId(),1));
-
-        return null;
+        return actoresEnPeliculas;
     }
+
+    private void evaluarApariciones(ActorEnPelicula actor, Map<ActorEnPelicula, Integer> aparicionDeActores) {
+
+        if (aparicionDeActores.containsKey(actor)) {
+            Integer valor = aparicionDeActores.get(actor);
+            aparicionDeActores.replace(actor, valor++);
+        } else
+            aparicionDeActores.put(actor, 1);
+    }
+
 }
