@@ -26,6 +26,11 @@ public class TestUser {
 		RepositorioDeUsuarios.getInstance().insert(User.create(Credencial.create("Carlos","123")));
 		Assert.assertTrue(servicioUsuario.obtenerUsuario("0").getId()==0);
 	}
+	
+	@Test(expected=RuntimeException.class)
+	public void testBusquedaUsuarioInexistente() {
+		servicioUsuario.obtenerUsuario("0");
+	}
 
 	@Test
 	public void testInterseccionListasUsuario(){
