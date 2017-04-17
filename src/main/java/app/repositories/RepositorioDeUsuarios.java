@@ -59,8 +59,8 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
         return usuarios.stream().filter(user ->
                 user.getCredencial().getUsername().equals(username))
                 .findFirst();
-
     }
+
     public ArrayList<User> getUsers() {
         return usuarios;
     }

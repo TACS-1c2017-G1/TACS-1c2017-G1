@@ -46,7 +46,6 @@ public class UserController {
 		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token,idlistaDePeliculas);
 	}
 
-	
 
 	@RequestMapping(value="/{id1}/{id2}/",method=RequestMethod.GET,produces="application/json")
 	@ResponseBody

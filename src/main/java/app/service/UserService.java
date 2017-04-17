@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,9 +24,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserService {
-	
-	@Autowired
-	SesionesService sesionesService;
+
+    @Autowired
+    SesionesService sesionesService;
 
     private RepositorioDeUsuarios getRepositorio(){
         return RepositorioDeUsuarios.getInstance();
@@ -58,7 +55,11 @@ public class UserService {
 
     
     public User obtenerUsuario(String id) {
-		return this.getRepositorio().search(Integer.parseInt(id));
+		User user = this.getRepositorio().search(Integer.parseInt(id));
+		if(user == null){
+			throw new RuntimeException("No existe el usuario con id " + id.toString());
+		}
+		return user;
 	}
     
     
@@ -99,7 +100,7 @@ public class UserService {
 	
 	
 	public List<Actor> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
-		
+
 		Map<Actor,Integer> rankingActores = new HashMap<Actor,Integer>();
 		List<User> usuarios = obtenerUsuarios();
 		usuarios.stream().forEach(u-> {
@@ -147,9 +148,37 @@ public class UserService {
 		return countActoresFav > 1;
 	}
 
-	public List<Actor> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
-    	User usuario = sesionesService.obtenerUsuarioPorToken(token);
+    public List<Actor> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
+        User usuario = sesionesService.obtenerUsuarioPorToken(token);
 
-    	return null;
-	}
+        List<Actor> listaDeActores = new ArrayList<Actor>();
+        MovieList listaDePeliculas = usuario.getLists().stream().filter(movieList -> movieList.getId() == idlistaDePeliculas)
+                                        .findFirst()
+                                        .orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
+
+        List<Movie> peliculas = listaDePeliculas.getMovies();
+
+        List<ActorEnPelicula> actoresEnPeliculas = new ArrayList<ActorEnPelicula>();
+        peliculas.forEach(pelicula -> actoresEnPeliculas.addAll(pelicula.getCast()));
+
+        Hashtable<Integer,Integer> aparicionDeActores = new Hashtable<Integer,Integer>();
+
+        for (int i = 0; i < actoresEnPeliculas.size(); i++) {
+            ActorEnPelicula actor = actoresEnPeliculas.get(i);
+            Integer key = actor.getActorId();
+
+            if(aparicionDeActores.containsKey(key)) {
+                Integer valor = aparicionDeActores.get(key);
+                aparicionDeActores.replace(key, valor++);
+            }else
+                aparicionDeActores.put(key, 1);
+        }
+
+//        actoresEnPeliculas.forEach
+//                (actor -> aparicionDeActores.containsKey(actor.getActorId())
+//                            ? aparicionDeActores.replace(actor.getActorId(), aparicionDeActores.get(actor.getActorId()) + 1)
+//                            : aparicionDeActores.put(actor.getActorId(),1));
+
+        return null;
+    }
 }

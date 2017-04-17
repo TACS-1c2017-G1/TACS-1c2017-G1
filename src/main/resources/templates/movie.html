@@ -28,9 +28,9 @@
 		    <th>Actor name</th>
 		    <th>Character</th>
 		  </tr>
-		    <tr data-th-each="credit : ${movie.cast}">
-		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/person/'+${credit.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${credit.name}" /></a></td>
-		        <td data-th-text="${credit.character}">...</td>
+		    <tr data-th-each="actorEnPelicula : ${movie.cast}">
+		    	<td><a style="color:black; text-decoration: none;" th:href="@{'/person/'+${actorEnPelicula.actorId}}"><p style="color:black; text-decoration: none;" data-th-text="${actorEnPelicula.name}" /></a></td>
+		        <td data-th-text="${actorEnPelicula.character}">...</td>
 		    </tr>
 		</tbody>
 		</table>
