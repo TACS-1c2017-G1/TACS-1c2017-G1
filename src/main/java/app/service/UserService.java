@@ -32,7 +32,7 @@ import app.repositories.RepositorioDeUsuarios;
 public class UserService {
 	
 	@Autowired
-	SesionesService sesionesService;
+	SesionesService sesionesService = new SesionesService();
 
     private RepositorioDeUsuarios getRepositorio(){
         return RepositorioDeUsuarios.getInstance();
@@ -113,7 +113,7 @@ public class UserService {
 			for (Actor actorFavoritoUsuario:usuario.getFavoriteActors()){
 				if (rankingActores.containsKey(actorFavoritoUsuario)){
 					int valor = rankingActores.get(actorFavoritoUsuario);
-					rankingActores.put(actorFavoritoUsuario, valor++);
+					rankingActores.put(actorFavoritoUsuario, ++valor);
 				}
 				else
 				{
@@ -123,7 +123,8 @@ public class UserService {
 		}
 		Stream<Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
-		return sorted.map(e-> e.getKey()).collect(Collectors.toList());
+		List<Actor> actoresOrdenados = sorted.map(e-> e.getKey()).collect(Collectors.toList());
+		return actoresOrdenados;
 	}
 	
 	
