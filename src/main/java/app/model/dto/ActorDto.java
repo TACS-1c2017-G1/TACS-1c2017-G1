@@ -1,13 +1,13 @@
 package app.model.dto;
 
 public class ActorDto {
-	
+
 	private String name;
-	
+
 	private String id;
-	
+
 	private boolean favorite;
-	
+
 	public ActorDto() {
 	}
 
@@ -15,8 +15,7 @@ public class ActorDto {
 		this.id = id;
 		this.name = name;
 	}
-	
-	
+
 	public String getName() {
 		return name;
 	}

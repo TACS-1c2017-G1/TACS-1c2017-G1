@@ -1,9 +1,9 @@
 package app.model.dto;
 
 public class RespuestaDto {
-	
+
 	int code;
-	
+
 	String message;
 
 	public int getCode() {
@@ -21,7 +21,5 @@ public class RespuestaDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
 
 }

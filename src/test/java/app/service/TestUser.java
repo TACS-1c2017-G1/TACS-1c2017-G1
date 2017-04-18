@@ -1,14 +1,7 @@
 package app.service;
 
-import app.model.odb.Actor;
-import app.model.odb.Credencial;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
-import app.model.odb.Sesion;
-import app.model.odb.User;
+import app.model.odb.*;
 import app.repositories.RepositorioDeUsuarios;
-import app.web.controller.SesionesController;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,11 +15,8 @@ public class TestUser {
 
 	UserService servicioUsuario = new UserService();
 
-	
 	@Before
-	public void setUp(){
-		
-	}
+	public void setUp(){}
 	
 	@Test
 	public void testBusquedaUsuario() {
@@ -35,8 +25,9 @@ public class TestUser {
 		pelis.add(Movie.create(150,"Matrix"));
 		listas.add(MovieList.create("Lista 1", pelis));
 		listas.add(MovieList.create("Lista 2", pelis));
-		RepositorioDeUsuarios.getInstance().insert(User.create(Credencial.create("Carlos","123")));
-		Assert.assertTrue(servicioUsuario.obtenerUsuario("0").getId()==0);
+		User usuario = User.create(Credencial.create("Carlos","123"));
+		RepositorioDeUsuarios.getInstance().insert(usuario);
+		Assert.assertTrue(servicioUsuario.obtenerUsuarios().get(0).getId()==usuario.getId());
 	}
 	
 	@Test(expected=RuntimeException.class)

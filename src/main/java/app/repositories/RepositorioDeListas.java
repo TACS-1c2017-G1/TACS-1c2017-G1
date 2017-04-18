@@ -3,6 +3,7 @@ package app.repositories;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
+
 import app.model.odb.MovieList;
 
 @Repository
@@ -27,15 +28,15 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 			throw new RuntimeException("Ya existe la lista que quiere crear");
 		}
 	}
-	
-    public MovieList search(int idBusqueda) {
-        return listas.stream().filter(lista -> lista.getId() == idBusqueda).findFirst().orElse(null);
-    }
-    
-    @Override
+
+	public MovieList search(int idBusqueda) {
+		return listas.stream().filter(lista -> lista.getId() == idBusqueda).findFirst().orElse(null);
+	}
+
+	@Override
 	public void update(MovieList lista) {
 		this.delete(this.search(lista.getId()));
-        this.insert(lista);
+		this.insert(lista);
 	}
 
 	@Override

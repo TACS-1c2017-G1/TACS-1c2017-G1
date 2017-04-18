@@ -1,5 +1,10 @@
 package app.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.repositories.RepositorioDeListas;

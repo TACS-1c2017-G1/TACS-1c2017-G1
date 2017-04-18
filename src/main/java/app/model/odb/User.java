@@ -7,22 +7,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
 public class User {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private Credencial credencial;
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;
 	private Date lastAccess;
 
+
+
+
+	
 	public static User create(Credencial credencial) throws ExceptionInInitializerError {
 
 		User user = new User();
-		if(credencial.esInvalida()){
+		System.out.println("user id: " + user.getId());
+		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
 		user.setCredencial(credencial);
