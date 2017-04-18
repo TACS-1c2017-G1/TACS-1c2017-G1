@@ -1,10 +1,9 @@
 package app.repositories;
 
-import java.util.ArrayList;
-
+import app.model.odb.MovieList;
 import org.springframework.stereotype.Repository;
 
-import app.model.odb.MovieList;
+import java.util.ArrayList;
 
 @Repository
 public class RepositorioDeListas implements IRepositorio<MovieList> {

@@ -1,11 +1,10 @@
 package app.repositories;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
+import app.model.odb.User;
 import org.springframework.stereotype.Repository;
 
-import app.model.odb.User;
+import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Created by Rodrigo on 11/04/2017.

@@ -1,10 +1,9 @@
 package app.repositories;
 
-import java.util.ArrayList;
-
+import app.model.odb.Sesion;
 import org.springframework.stereotype.Repository;
 
-import app.model.odb.Sesion;
+import java.util.ArrayList;
 
 /**
  * Created by aye on 12/04/17.

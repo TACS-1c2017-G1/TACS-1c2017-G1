@@ -3,9 +3,9 @@
  */
 package app.model.odb;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.json.JSONObject;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91

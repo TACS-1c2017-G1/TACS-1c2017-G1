@@ -3,16 +3,15 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
+import app.model.tmdb.TMDbStatic;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import app.model.tmdb.TMDbStatic;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91

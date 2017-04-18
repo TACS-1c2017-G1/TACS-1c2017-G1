@@ -1,28 +1,16 @@
 package app.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import app.model.dto.RespuestaDto;
+import app.model.odb.*;
+import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.model.dto.RespuestaDto;
-import app.model.odb.Actor;
-import app.model.odb.ActorEnPelicula;
-import app.model.odb.Credencial;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
-import app.model.odb.User;
-import app.repositories.RepositorioDeUsuarios;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Rodrigo on 08/04/2017.

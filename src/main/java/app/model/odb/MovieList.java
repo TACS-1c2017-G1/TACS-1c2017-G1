@@ -3,11 +3,11 @@
  */
 package app.model.odb;
 
+import org.apache.commons.collections.ListUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
-import org.apache.commons.collections.ListUtils;
 
 /**
  * @author facundo91
