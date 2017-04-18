@@ -23,6 +23,7 @@ public class User {
 	public static User create(Credencial credencial) throws ExceptionInInitializerError {
 
 		User user = new User();
+		System.out.println("user id: " + user.getId());
 		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
