@@ -71,7 +71,18 @@ public class MovieList {
 		movieList.setMovies(movies);
 		return movieList;
 	}
+	
+	public static MovieList create(String name){
+		MovieList movieList = new MovieList();
+		movieList.setName(name);
+		return movieList;
+}
 
+	public static Object create(int id_list) {
+		MovieList movieList = new MovieList();
+		movieList.setId(id_list);
+		return movieList;
+	}
 
 	public void addMovie(Movie movie) {
 		// TODO Auto-generated method stub
