@@ -1,11 +1,8 @@
 package app.service;
 
-import app.model.dto.ActorDto;
-import app.model.dto.MovieDto;
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
 import app.repositories.RepositorioDeUsuarios;
-
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Rodrigo on 08/04/2017.
@@ -112,7 +110,7 @@ public class UserService {
 				}
 			});
 		});
-		Stream<Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
+		Stream<Map.Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
 		List<Actor> actoresOrdenados = sorted.map(e-> e.getKey()).collect(Collectors.toList());
 		return actoresOrdenados;
@@ -136,7 +134,7 @@ public class UserService {
 	private boolean contieneMasDeUnActorFavorito( Movie movie, List<Actor> actoresFav ) {
 		Optional<Actor> optActor = null;
 		int countActoresFav = 0;
-		Iterator<Credit> credIt = movie.getCast().iterator();
+		Iterator<ActorEnPelicula> credIt = movie.getCast().iterator();
 		while ( countActoresFav < 2 && credIt.hasNext() ) {
 			optActor = actoresFav.stream().filter( actor -> actor.getId() == credIt.next().getActorId() ).findFirst();
 			if ( optActor.isPresent() )
