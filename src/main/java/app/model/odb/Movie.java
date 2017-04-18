@@ -3,21 +3,23 @@
  */
 package app.model.odb;
 
-import app.model.tmdb.TMDbStatic;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
  *
  */
 public class Movie {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private String title;
 	private String overview;
 	private List<ActorEnPelicula> cast = new ArrayList<ActorEnPelicula>();
@@ -113,7 +115,7 @@ public class Movie {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", jsonMovie.getString("id")));
 		this.setInfo();
 	}
-	
+
 	public Movie(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
 		try {
@@ -216,7 +218,9 @@ public class Movie {
 		return movie;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -227,7 +231,9 @@ public class Movie {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

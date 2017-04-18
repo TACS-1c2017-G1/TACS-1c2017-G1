@@ -3,6 +3,8 @@
  */
 package app.model.odb;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.json.JSONObject;
 
 /**
@@ -10,7 +12,7 @@ import org.json.JSONObject;
  *
  */
 public class ActorEnPelicula {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private int actorId; // just id in the TMDb API
 	private int movieId;
 	private String movieTitle;
@@ -67,33 +69,11 @@ public class ActorEnPelicula {
 	}
 
 	/**
-	 * @return the creditId
-	 */
-	private String getCreditId() {
-		return creditId;
-	}
-
-	/**
 	 * @param creditId
 	 *            the creditId to set
 	 */
 	public void setCreditId(String creditId) {
 		this.creditId = creditId;
-	}
-
-	/**
-	 * @return the id
-	 */
-	private int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	private void setId(int id) {
-		this.id = id;
 	}
 
 	/**
