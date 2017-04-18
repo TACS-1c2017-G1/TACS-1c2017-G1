@@ -3,8 +3,6 @@ package app.repositories;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
-
-import app.model.odb.Movie;
 import app.model.odb.MovieList;
 
 @Repository
@@ -41,8 +39,8 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 	}
 
 	@Override
-	public void delete(MovieList object) {
-		// TODO Auto-generated method stub
+	public void delete(MovieList lista) {
+		listas.remove(lista.getId());
 
 	}
 
