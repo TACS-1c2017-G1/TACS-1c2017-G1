@@ -93,7 +93,7 @@ public class Actor {
 	 * @param id
 	 *            the id to set
 	 */
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -108,7 +108,7 @@ public class Actor {
 	 * @param name
 	 *            the name to set
 	 */
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -185,6 +185,34 @@ public class Actor {
 
 	private void setStatusMessage(String statusMessage) {
 		this.statusMessage = statusMessage;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Actor))
+			return false;
+		Actor other = (Actor) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 	
 	

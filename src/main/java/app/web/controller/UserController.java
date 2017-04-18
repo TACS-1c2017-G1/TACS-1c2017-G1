@@ -87,9 +87,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/favoriteactor/ranking", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<ActorDto> verRankingActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
-		List<ActorDto> list = servicioDeUsuario.verRankingActoresFavoritos(token);
-		return list;
+	public List<Actor> verRankingActoresFavoritos(@RequestHeader String token, Model model) throws IOException {
+		return servicioDeUsuario.verRankingActoresFavoritos(token);
 	}
 	
 	

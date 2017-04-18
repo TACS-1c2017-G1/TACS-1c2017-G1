@@ -1,19 +1,29 @@
 package app.service;
 
-import app.model.dto.ActorDto;
-import app.model.dto.RespuestaDto;
-import app.model.odb.*;
-import app.repositories.RepositorioDeUsuarios;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import app.model.dto.RespuestaDto;
+import app.model.odb.Actor;
+import app.model.odb.Credencial;
+import app.model.odb.Credit;
+import app.model.odb.Movie;
+import app.model.odb.MovieList;
+import app.model.odb.User;
+import app.repositories.RepositorioDeUsuarios;
 
 /**
  * Created by Rodrigo on 08/04/2017.
@@ -95,18 +105,26 @@ public class UserService {
 	}
 	
 	
-	public List<ActorDto> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
+	public List<Actor> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
 		
-		List<ActorDto> actoresFavoritosList = new ArrayList<ActorDto>(0);
-		ActorDto actor = new ActorDto("123", "un Nombre");
-		actor.setFavorite(true);
-		actoresFavoritosList.add(actor);
-		
-		actor = new ActorDto("321", "otro Nombre");
-		actor.setFavorite(true);
-		actoresFavoritosList.add(actor);
-		
-		return actoresFavoritosList;
+		Map<Actor,Integer> rankingActores = new HashMap<Actor,Integer>();
+		List<User> usuarios = obtenerUsuarios();	
+		usuarios.stream().forEach(u-> {
+			u.getFavoriteActors().stream().forEach(a ->{
+				if (rankingActores.containsKey(a)){
+					int valor = rankingActores.get(a);
+					rankingActores.put(a, ++valor);
+				}
+				else
+				{
+					rankingActores.put(a, 1);
+				}
+			});
+		});
+		Stream<Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
+				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
+		List<Actor> actoresOrdenados = sorted.map(e-> e.getKey()).collect(Collectors.toList());
+		return actoresOrdenados;
 	}
 	
 	
