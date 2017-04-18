@@ -32,7 +32,7 @@ import app.repositories.RepositorioDeUsuarios;
 public class UserService {
 	
 	@Autowired
-	SesionesService sesionesService = new SesionesService();
+	SesionesService sesionesService;
 
     private RepositorioDeUsuarios getRepositorio(){
         return RepositorioDeUsuarios.getInstance();
@@ -108,19 +108,19 @@ public class UserService {
 	public List<Actor> verRankingActoresFavoritos( String token ) throws JSONException, IOException {
 		
 		Map<Actor,Integer> rankingActores = new HashMap<Actor,Integer>();
-		List<User> usuarios = obtenerUsuarios();
-		for (User usuario:usuarios){
-			for (Actor actorFavoritoUsuario:usuario.getFavoriteActors()){
-				if (rankingActores.containsKey(actorFavoritoUsuario)){
-					int valor = rankingActores.get(actorFavoritoUsuario);
-					rankingActores.put(actorFavoritoUsuario, ++valor);
+		List<User> usuarios = obtenerUsuarios();	
+		usuarios.stream().forEach(u-> {
+			u.getFavoriteActors().stream().forEach(a ->{
+				if (rankingActores.containsKey(a)){
+					int valor = rankingActores.get(a);
+					rankingActores.put(a, ++valor);
 				}
 				else
 				{
-					rankingActores.put(actorFavoritoUsuario, 1);
+					rankingActores.put(a, 1);
 				}
-			}
-		}
+			});
+		});
 		Stream<Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
 		List<Actor> actoresOrdenados = sorted.map(e-> e.getKey()).collect(Collectors.toList());
