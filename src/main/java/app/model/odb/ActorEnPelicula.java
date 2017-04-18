@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * @author facundo91
  *
  */
-public class Credit {
+public class ActorEnPelicula {
 	private int id;
 	private int actorId; // just id in the TMDb API
 	private int movieId;
@@ -18,7 +18,7 @@ public class Credit {
 	private String character;
 	private String name;
 
-	public Credit(JSONObject jsonCredit, Movie movie) {
+	public ActorEnPelicula(JSONObject jsonCredit, Movie movie) {
 		this.setMovieId(movie.getId());
 		this.setActorId(jsonCredit.getInt("id"));
 		this.setCreditId(jsonCredit.getString("credit_id"));
@@ -27,7 +27,7 @@ public class Credit {
 		this.setMovieTitle(movie.getTitle());
 	}
 
-	public Credit(JSONObject jsonCredit, Actor actor) {
+	public ActorEnPelicula(JSONObject jsonCredit, Actor actor) {
 		this.setMovieId(jsonCredit.getInt("id"));
 		this.setActorId(actor.getId());
 		this.setCreditId(jsonCredit.getString("credit_id"));

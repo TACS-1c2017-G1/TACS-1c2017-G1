@@ -33,9 +33,19 @@ public class SesionesService {
     
     
     public User obtenerUsuarioPorToken( String token ) {
-    	if ( token == null )
-    		throw new RuntimeException("Token nulo, no se puede realizar la operación.");
-    	Sesion sesion = this.getRepositorio().searchById(token);
-    	return RepositorioDeUsuarios.getInstance().searchByUsername(sesion.getUsername());
+        if (token == null)
+            throw new RuntimeException("Token nulo, no se puede realizar la operación.");
+        Sesion sesion = this.getRepositorio().searchById(token);
+        validarSesionActiva(sesion);
+        return RepositorioDeUsuarios.getInstance().searchByUsername(sesion.getUsername());
     }
+
+
+
+    public void validarSesionActiva(Sesion sesion) {
+        if (!sesion.getEstaActiva()) {
+            throw new RuntimeException("La sesión ya expiró, vuelva a loguearse por favor");
+        }
+    }
+
 }

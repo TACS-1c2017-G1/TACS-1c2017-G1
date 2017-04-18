@@ -3,15 +3,14 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import app.model.tmdb.TMDbStatic;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import app.model.tmdb.TMDbStatic;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author facundo91
@@ -21,7 +20,7 @@ public class Movie {
 	private int id;
 	private String title;
 	private String overview;
-	private List<Credit> cast = new ArrayList<Credit>();
+	private List<ActorEnPelicula> cast = new ArrayList<ActorEnPelicula>();
 	private List<Image> backdrops = new ArrayList<Image>();
 	private List<Image> posters = new ArrayList<Image>();
 	private List<Review> reviews = new ArrayList<Review>();
@@ -75,7 +74,7 @@ public class Movie {
 	/**
 	 * @return the cast
 	 */
-	public List<Credit> getCast() {
+	public List<ActorEnPelicula> getCast() {
 		return cast;
 	}
 
@@ -178,12 +177,12 @@ public class Movie {
 	private void setCredits() throws JSONException, IOException {
 		JSONArray cast = TMDbStatic.getResource2("movie", this.getId() + "/credits").getJSONArray("cast");
 		for (int i = 0; i < cast.length(); i++) {
-			this.addCredit(new Credit(cast.getJSONObject(i), this));
+			this.addCredit(new ActorEnPelicula(cast.getJSONObject(i), this));
 		}
 	}
 
-	private void addCredit(Credit credit) {
-		this.getCast().add(credit);
+	private void addCredit(ActorEnPelicula actorEnPelicula) {
+		this.getCast().add(actorEnPelicula);
 	}
 
 	public Movie() {

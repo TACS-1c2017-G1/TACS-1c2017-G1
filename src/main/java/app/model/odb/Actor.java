@@ -3,15 +3,14 @@
  */
 package app.model.odb;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import app.model.tmdb.TMDbStatic;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import app.model.tmdb.TMDbStatic;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author facundo91
@@ -21,7 +20,7 @@ public class Actor {
 	private int id;
 	private String name;
 	private List<Image> profiles = new ArrayList<Image>();
-	private List<Credit> credits = new ArrayList<Credit>();
+	private List<ActorEnPelicula> actorEnPeliculas = new ArrayList<ActorEnPelicula>();
 	private String bio;
 	private JSONObject jsonResponse;
 	private int statusCode;
@@ -34,7 +33,7 @@ public class Actor {
 			this.setName(this.getJsonResponse().getString("name"));
 			this.setBio(this.getJsonResponse().getString("biography"));
 			this.setImages(id);
-			this.setCredits(id);
+			this.setActorEnPeliculas(id);
 		}
 		catch (JSONException e) {
 			this.setStatusCode(this.getJsonResponse().getInt("status_code"));
@@ -45,7 +44,7 @@ public class Actor {
 	public JSONObject actorJson(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
 		this.setImages(id);
-		this.setCredits(id);
+		this.setActorEnPeliculas(id);
 		return this.getJsonResponse();
 	}
 
@@ -60,15 +59,15 @@ public class Actor {
 		}
 	}
 
-	private void setCredits(String id) throws JSONException, IOException {
+	private void setActorEnPeliculas(String id) throws JSONException, IOException {
 		JSONArray creditsJson = TMDbStatic.getResource2("person", id + "/movie_credits").getJSONArray("cast");
 		for (int i = 0; i < creditsJson.length(); i++) {
-			this.addCredit(new Credit(creditsJson.getJSONObject(i), this));
+			this.addCredit(new ActorEnPelicula(creditsJson.getJSONObject(i), this));
 		}
 	}
 
-	public void addCredit(Credit credit) {
-		this.getCredits().add(credit);
+	public void addCredit(ActorEnPelicula actorEnPelicula) {
+		this.getActorEnPeliculas().add(actorEnPelicula);
 	}
 
 	private void addProfile(Image image) {
@@ -120,10 +119,10 @@ public class Actor {
 	}
 
 	/**
-	 * @return the credits
+	 * @return the actorEnPeliculas
 	 */
-	public List<Credit> getCredits() {
-		return credits;
+	public List<ActorEnPelicula> getActorEnPeliculas() {
+		return actorEnPeliculas;
 	}
 
 	public void showDetails() {
