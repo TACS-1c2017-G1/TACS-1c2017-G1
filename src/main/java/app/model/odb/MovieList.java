@@ -5,6 +5,7 @@ package app.model.odb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.collections.ListUtils;
 
@@ -13,7 +14,7 @@ import org.apache.commons.collections.ListUtils;
  *
  */
 public class MovieList {
-	private int id = 0;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private String name = "";
 	private List<Movie> movies = new ArrayList<Movie>();
 
@@ -65,18 +66,18 @@ public class MovieList {
 	public MovieList() {
 	}
 
-	public static MovieList create(String name, List<Movie> movies){
+	public static MovieList create(String name, List<Movie> movies) {
 		MovieList movieList = new MovieList();
 		movieList.setName(name);
 		movieList.setMovies(movies);
 		return movieList;
 	}
-	
-	public static MovieList create(String name){
+
+	public static MovieList create(String name) {
 		MovieList movieList = new MovieList();
 		movieList.setName(name);
 		return movieList;
-}
+	}
 
 	public static Object create(int id_list) {
 		MovieList movieList = new MovieList();
@@ -85,18 +86,15 @@ public class MovieList {
 	}
 
 	public void addMovie(Movie movie) {
-		// TODO Auto-generated method stub
 		this.getMovies().add(movie);
 	}
 
 	public void removeMovie(Movie movie) {
-		// TODO Auto-generated method stub
 		this.getMovies().remove(movie);
 	}
 
 	public void list() {
 		// TODO Auto-generated method stub
-
 	}
 
 	public List<Movie> intersectionWith(MovieList movieList2) {
@@ -111,12 +109,10 @@ public class MovieList {
 	}
 
 	public int size() {
-		// TODO Auto-generated method stub
 		return this.getMovies().size();
 	}
 
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return this.getMovies().isEmpty();
 	}
 

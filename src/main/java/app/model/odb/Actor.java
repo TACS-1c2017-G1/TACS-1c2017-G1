@@ -3,21 +3,23 @@
  */
 package app.model.odb;
 
-import app.model.tmdb.TMDbStatic;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import app.model.tmdb.TMDbStatic;
 
 /**
  * @author facundo91
  *
  */
 public class Actor {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private String name;
 	private List<Image> profiles = new ArrayList<Image>();
 	private List<ActorEnPelicula> actorEnPeliculas = new ArrayList<ActorEnPelicula>();
@@ -28,14 +30,13 @@ public class Actor {
 
 	public Actor(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
-		try {	
+		try {
 			this.setId(this.getJsonResponse().getInt("id"));
 			this.setName(this.getJsonResponse().getString("name"));
 			this.setBio(this.getJsonResponse().getString("biography"));
 			this.setImages(id);
 			this.setActorEnPeliculas(id);
-		}
-		catch (JSONException e) {
+		} catch (JSONException e) {
 			this.setStatusCode(this.getJsonResponse().getInt("status_code"));
 			this.setStatusMessage(this.getJsonResponse().getString("status_message"));
 		}
@@ -186,7 +187,9 @@ public class Actor {
 		this.statusMessage = statusMessage;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -197,7 +200,9 @@ public class Actor {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -213,8 +218,5 @@ public class Actor {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

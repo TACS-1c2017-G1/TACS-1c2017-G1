@@ -7,32 +7,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
 public class User {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private Credencial credencial;
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;
 	private Date lastAccess;
 
-
-
-
-	
 	public static User create(Credencial credencial) throws ExceptionInInitializerError {
 
 		User user = new User();
-		if(credencial.esInvalida()){
+		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
 		user.setCredencial(credencial);
 		return user;
 	}
-
 
 	/**
 	 * @return the id
@@ -79,12 +75,11 @@ public class User {
 	 * @return the favoriteActors
 	 */
 	public List<Actor> getFavoriteActors() {
-		if(favoriteActors == null){
+		if (favoriteActors == null) {
 			favoriteActors = new ArrayList<>();
 		}
 		return favoriteActors;
 	}
-
 
 	public void createList(String name) {
 		this.getLists().add(MovieList.create(name, Arrays.asList()));
@@ -134,7 +129,6 @@ public class User {
 		// TODO
 	}
 
-
 	public void showMovieDetails(Movie movie) {
 		movie.showDetails();
 	}
@@ -144,7 +138,7 @@ public class User {
 	}
 
 	public static String usuarioOContraseniaVacio() {
-			return "El usuario o la contraseña no pueden estar vacíos.";
+		return "El usuario o la contraseña no pueden estar vacíos.";
 	}
 
 	/**
@@ -162,8 +156,8 @@ public class User {
 		this.lastAccess = lastAccess;
 	}
 
-	public MovieList getList(int id_list){
+	public MovieList getList(int id_list) {
 		return lists.get(lists.indexOf(MovieList.create(id_list)));
 	}
-	
+
 }

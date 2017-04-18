@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDto {
-	
+
 	private String title;
-	
+
 	private String year;
-	
+
 	private List<ActorDto> actors = new ArrayList<ActorDto>(0);
-	
+
 	public MovieDto(String title, String year) {
 		this.title = title;
 		this.year = year;
 	}
-	
+
 	public MovieDto() {
-		
+
 	}
 
 	public String getTitle() {
@@ -43,10 +43,9 @@ public class MovieDto {
 	public void setActors(List<ActorDto> actors) {
 		this.actors = actors;
 	}
-	
+
 	public void addActor(ActorDto actor) {
 		this.actors.add(actor);
 	}
-	
-	
+
 }

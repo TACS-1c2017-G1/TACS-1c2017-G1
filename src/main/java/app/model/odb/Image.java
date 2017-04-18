@@ -3,6 +3,8 @@
  */
 package app.model.odb;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.json.JSONObject;
 
 /**
@@ -11,34 +13,12 @@ import org.json.JSONObject;
  */
 // http://image.tmdb.org/t/p/w185/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
 public class Image {
-	private int id;
+	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private int movieId;
 	private int actorId;
 	private String baseUrl = "http://image.tmdb.org/t/p/";
 	private int size;
 	private String filePath;
-
-	/**
-	 * @return the id
-	 */
-	private int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	private void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the movieId
-	 */
-	private int getMovieId() {
-		return movieId;
-	}
 
 	/**
 	 * @param movieId
@@ -56,40 +36,10 @@ public class Image {
 	}
 
 	/**
-	 * @param baseUrl
-	 *            the baseUrl to set
-	 */
-	private void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
-
-	/**
-	 * @return the size
-	 */
-	private int getSize() {
-		return size;
-	}
-
-	/**
-	 * @param size
-	 *            the size to set
-	 */
-	private void setSize(int size) {
-		this.size = size;
-	}
-
-	/**
 	 * @return the filePath
 	 */
 	public String getFilePath() {
 		return filePath;
-	}
-
-	/**
-	 * @return the actorId
-	 */
-	private int getActorId() {
-		return actorId;
 	}
 
 	/**
