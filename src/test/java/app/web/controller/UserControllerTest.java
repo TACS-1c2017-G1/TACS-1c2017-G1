@@ -38,5 +38,4 @@ public class UserControllerTest extends RestTestBase {
                 .andExpect(status().is(200));
     }
 
-
 }

@@ -19,10 +19,6 @@ public class User {
 	private List<Actor> favoriteActors;
 	private Date lastAccess;
 
-
-
-
-	
 	public static User create(Credencial credencial) throws ExceptionInInitializerError {
 
 		User user = new User();
@@ -30,6 +26,7 @@ public class User {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
 		user.setCredencial(credencial);
+		user.setLists(new ArrayList<MovieList>());
 		return user;
 	}
 
@@ -163,7 +160,7 @@ public class User {
 	}
 
 	public MovieList getList(int id_list){
-		return lists.get(lists.indexOf(MovieList.create(id_list)));
+		return lists.stream().filter(movieList -> movieList.getId() == id_list).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
 	}
 	
 }

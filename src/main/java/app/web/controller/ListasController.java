@@ -25,8 +25,8 @@ public class ListasController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
-	public void crearLista(@RequestHeader String token, @RequestBody String nuevaLista) throws IOException {
-		listasService.crearLista(nuevaLista);
+	public MovieList crearLista(@RequestHeader String token, @RequestBody String nuevaLista) throws IOException {
+		return listasService.crearLista(nuevaLista, token);
 	}
 
 	@RequestMapping(value = "/{id_lista}/", method = RequestMethod.POST)
