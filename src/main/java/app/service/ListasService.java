@@ -35,12 +35,16 @@ public class ListasService {
 	public void agregarItem(Movie movie, int id_list, String token) {
 		this.getRepositorioPelicuas().insert(movie);
 		this.consultarLista(id_list, token).addMovie(movie);
-		this.getRepositorioListas().update(movie, id_list);
+		MovieList lista = this.getRepositorioListas().search(id_list);
+		lista.addMovie(movie);
+		this.getRepositorioListas().update(lista);
 	}
 
 	public void eliminarItem(Movie movie, int id_list, String token) {
 		this.consultarLista(id_list, token).removeMovie(movie);
-		this.getRepositorioListas().update(movie, id_list);
+		MovieList lista = this.getRepositorioListas().search(id_list);
+		lista.removeMovie(movie);
+		this.getRepositorioListas().update(lista);
 	}
 	
 	public MovieList consultarLista(int id_list, String token){

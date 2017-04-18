@@ -34,9 +34,10 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
         return listas.stream().filter(lista -> lista.getId() == idBusqueda).findFirst().orElse(null);
     }
     
-	public void update(Movie movie, int idList) {
-		this.search(idList).removeMovie(movie);
-		this.search(idList).addMovie(movie);
+    @Override
+	public void update(MovieList lista) {
+		this.delete(this.search(lista.getId()));
+        this.insert(lista);
 	}
 
 	@Override
@@ -45,9 +46,4 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 
 	}
 
-	@Override
-	public void update(MovieList object) {
-		// TODO Auto-generated method stub
-		
-	}
 }
