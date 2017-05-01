@@ -23,6 +23,16 @@ myApp.config(function($stateProvider) {
         }
       }
     },
+    {
+      name: 'login',
+      url: '/login',
+      controller: 'loginController',
+      views: {
+        'container@': {
+          templateUrl: 'templates/login.html'
+        }
+      }
+    },
 
     {
       name: 'other',
