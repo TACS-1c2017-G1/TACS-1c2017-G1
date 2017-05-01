@@ -1,21 +1,24 @@
-<div ng-controller="loginController">
-  <div class="col-md-3"></div>
-  <div class="col-md-5">
-    <form>
-      <section class="login-form center">
-        <img src="images/logo.png" class="img-responsive center" alt=""/>
-        <h2 class="form-signin-heading">Identificarse</h2>
-        <input name="userName" type="text" ng-model="userName" placeholder="Usuario" class="form-control input-lg"/>
+<div class="container" ng-controller="loginController">
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3">
+        <div class="col-md-6">
+          <form>
+            <section class="login-form center">
+              <img src="images/logo.png" class="img-responsive center" alt=""/>
+              <h2 class="form-signin-heading">Identificarse</h2>
+              <input name="userName" autofocus type="text" ng-model="userName" placeholder="Usuario" class="form-control input-lg"/>
 
-        <input name="password" type="password" ng-model="password" placeholder="Password"
-               class="form-control input-lg"/>
+              <input name="password" type="password" ng-model="password" placeholder="Password"
+                     class="form-control input-lg"/>
 
-        <button type="button" ng-click="autenticarse()" class="btn btn-lg btn-success btn-block">Ingresar
-        </button>
-        <div>
-          <a href="#/register">Registrarse</a>
+              <button type="button" ng-click="autenticarse()" class="btn btn-lg btn-success btn-block">Ingresar
+              </button>
+              <div>
+                <a href="#/register">Registrarse</a>
+              </div>
+            </section>
+          </form>
         </div>
-      </section>
-    </form>
+      </div>
   </div>
 </div>
