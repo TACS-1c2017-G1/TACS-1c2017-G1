@@ -8,7 +8,6 @@ myApp.controller('loginController', function($rootScope,$scope,$state,Sesion) {
     Sesion.login({username: $scope.userName, password: $scope.password})
       .then(function(response) {
           sesionActual = response.data;
-          console.log(sesionActual);
           $rootScope.usuarioLogueado = true;
           $state.go('home');
       })
