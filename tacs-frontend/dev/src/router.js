@@ -1,6 +1,7 @@
 myApp.config(function($stateProvider) {
   // An array of state definitions
   var states = [{
+
       name: 'layouts',
       url: '',
       abstract: true,

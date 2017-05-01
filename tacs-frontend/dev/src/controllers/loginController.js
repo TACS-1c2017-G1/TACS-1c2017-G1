@@ -1,19 +1,20 @@
-myApp.controller('loginController', function($scope,Sesion) {
+myApp.controller('loginController', function($rootScope,$scope,$state,Sesion) {
+
+  var sesionActual = undefined;
 
   $scope.autenticarse = function () {
 
-    var sesionActual = undefined;
-
     Sesion.login({username: $scope.userName, password: $scope.password})
-      .then(function (response) {
+      .then(function(response) {
           sesionActual = response.data;
           console.log(sesionActual);
+          $rootScope.usuarioLogueado = true;
+          $state.go('home');
       })
-      .catch(function (error) {
+      .catch(function(error) {
           alert(error.data.message);
       })
-
-
   };
+
 });
 
