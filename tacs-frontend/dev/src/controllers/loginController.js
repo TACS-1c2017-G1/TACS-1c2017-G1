@@ -1,12 +1,11 @@
-myApp.controller('buscarMoviesController', function($scope,Sesion) {
+myApp.controller('loginController', function($scope,Sesion) {
   $scope.userName = "";
   $scope.password = "";
 
   $scope.autenticarse = function () {
 
-    SweetAlert.swal({
+    alert({
       title: "Logeandose",
-      text: "Entrando en la Matrix...",
       showConfirmButton: false
     });
 
