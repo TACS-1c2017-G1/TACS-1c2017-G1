@@ -1,6 +1,7 @@
 myApp.controller('loginController', function($rootScope,$scope,$state,Sesion) {
 
-  var sesionActual = undefined;
+  $scope.userName = "";
+  $scope.password = "";
 
   $scope.autenticarse = function () {
 
