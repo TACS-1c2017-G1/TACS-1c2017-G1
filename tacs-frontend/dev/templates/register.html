@@ -2,18 +2,31 @@
 
   <div ng-controller="registerController">
     <div class="col-md-3"></div>
+<<<<<<< HEAD
     <div class="col-md-5 center-block text-center">
       <form>
         <section class="login-form center-block">
           <img src="images/logo.png"/>
           <h2 class="form-signin-heading">Registrarse</h2>
           <input name="userName" type="text" ng-model="userName" required="true" placeholder="Usuario" class="form-control input-lg"/>
+=======
+    <div class="col-md-5">
+      <form>
+        <section class="login-form center-block">
+          <img src="images/logo.png" class="img-responsive" alt="" />
+          <h2 class="form-signin-heading">Registrarse</h2>
+          <input name="userName" type="text" ng-model="userName" placeholder="Usuario" class="form-control input-lg"/>
+>>>>>>> a28d904fe56a99f983dce5b6f234ecb2b3f5dddc
 
           <input name="password" type="password" ng-model="password1" placeholder="Password" class="form-control input-lg"/>
 
           <input name="password" type="password" ng-model="password2" placeholder="Repetir Password" class="form-control input-lg"/>
 
+<<<<<<< HEAD
           <div ng-show="contraseniasDistintas()"><p>Las contraseñas no coinciden</p></div>
+=======
+          <div style="color: #c12e2a" ng-show="(password1 != password2)"><p>Las contraseñas no coinciden</p></div>
+>>>>>>> a28d904fe56a99f983dce5b6f234ecb2b3f5dddc
 
           <div class="pwstrength_viewport_progress"></div>
 

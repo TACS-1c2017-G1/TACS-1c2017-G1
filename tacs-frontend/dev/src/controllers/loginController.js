@@ -14,6 +14,7 @@ myApp.controller('loginController', function($rootScope,$scope,$state,Sesion) {
       .catch(function(error) {
           alert(error.data.message);
       })
+
   };
 
 });
