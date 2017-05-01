@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/authentication")
 public class SesionesController {
 

@@ -1,6 +1,7 @@
 myApp.config(function($stateProvider) {
   // An array of state definitions
   var states = [{
+
       name: 'layouts',
       url: '',
       abstract: true,
@@ -20,6 +21,16 @@ myApp.config(function($stateProvider) {
       views: {
         'container@': {
           templateUrl: 'templates/home.html'
+        }
+      }
+    },
+    {
+      name: 'login',
+      url: '/login',
+      controller: 'loginController',
+      views: {
+        'container@': {
+          templateUrl: 'templates/login.html'
         }
       }
     },
