@@ -33,7 +33,16 @@ myApp.config(function($stateProvider) {
         }
       }
     },
-
+    {
+      name: 'register',
+      url: '/register',
+      controller: 'registerController',
+      views: {
+        'container@': {
+          templateUrl: 'templates/register.html'
+        }
+      }
+    },
     {
       name: 'other',
       url: '/other',
