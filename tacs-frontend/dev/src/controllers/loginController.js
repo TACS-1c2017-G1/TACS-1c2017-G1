@@ -3,13 +3,7 @@ myApp.controller('loginController', function($scope,Sesion) {
   $scope.password = "";
 
   $scope.autenticarse = function () {
-
-    alert({
-      title: "Logeandose",
-      showConfirmButton: false
-    });
-
-    Sesion.login({userName: $scope.userName, password: $scope.password});
+    Sesion.login({username: $scope.userName, password: $scope.password});
   };
 });
 

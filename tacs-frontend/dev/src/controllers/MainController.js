@@ -2,6 +2,6 @@
 
 myApp.controller('MainController', function($scope) {
 
-    $scope.usuarioLogueado = false;
+    $scope.usuarioLogueado = true;
 
 });
