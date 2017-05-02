@@ -1,1 +1,30 @@
-home
+<div class="container" ng-controller="HomeController">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="input-group search-panel">
+                <input type="text" class="form-control" autofocus ng-model="textoDeBusqueda">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="buscar(textoDeBusqueda)"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped" ng-show="resultados.length > 0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Tipo</th>
+            <th>Titulo</th>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="item in resultados">
+            <td> {{item.id}}</td>
+            <td> {{item.media_type}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.name}}</td>
+        </tr>
+    </table>
+
+</div>
