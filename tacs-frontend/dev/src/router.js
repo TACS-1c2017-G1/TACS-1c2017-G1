@@ -45,11 +45,11 @@ myApp.config(function($stateProvider) {
       }
     },
     {
-      name: 'other',
-      url: '/other',
+      name: 'actoresFavoritos',
+      url: '/actoresFavoritos',
       views: {
         'container@': {
-          templateUrl: 'templates/other.html'
+          templateUrl: 'templates/actoresFavoritos.html'
         }
       }
     },
