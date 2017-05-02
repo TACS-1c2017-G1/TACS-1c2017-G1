@@ -73,6 +73,16 @@ myApp.config(function($stateProvider) {
           templateUrl: 'templates/buscar/movies.html'
         }
       }
+    },
+
+    {
+      name: 'users',
+      url: '/user',
+      views: {
+        'container@': {
+          templateUrl: 'templates/admin/users.html'
+        }
+      }
     }
 
   ]

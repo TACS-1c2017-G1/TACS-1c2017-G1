@@ -11,4 +11,10 @@ myApp.service('Usuario', function ($http) {
     return $http.post('http://localhost:8080/user/',credentials);
   };
 
+    self.getUsers = function(sesionActual,callback){
+        return $http.get('http://localhost:8080/user/list', {
+            headers: {'token': sesionActual.idSesion}
+        }).then(callback);
+    }
+
 });
