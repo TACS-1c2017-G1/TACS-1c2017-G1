@@ -1,26 +1,69 @@
 <div class="text-center" ng-controller="userController as userCTRL">
     <h4>Lista de usuarios:</h4>
-    <div class="jumbotron">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr class="center">
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Username
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="user in userCTRL.showUsers()">
-                    <td>{{ user.id}}
-                    </td>
-                    <td>{{ user.credencial.username }}</td>
-                </tr>
-                </tbody>
-            </table>
+
+    <div class="table-responsive">
+        <table class="table table-bordered  table-hover text-center">
+            <thead>
+            <tr class="center">
+                <th>
+                    ID
+                </th>
+                <th>
+                    Username
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in userCTRL.showUsers()">
+                <td>{{ user.id}}</td>
+                <td>{{ user.credencial.username }}</td>
+                <td>
+                    <button type="button" ng-click="userCTRL.getInfo(user.id)" class="btn btn-info">
+                        <span class="glyphicon glyphicon-list-alt">
+                        </span> Ver detalles
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div ng-show="userCTRL.visibleData" class="ng-cloak">
+        <div class="panel panel-default panel-info panel-modest">
+            <div class="panel-heading">Datos de usuario</div>
+            <div class="panel-body">Username: {{userCTRL.getUsername()}}</div>
+            <br>
+            <div class="panel-body">Cantidad de listas creadas: {{userCTRL.numList()}}</div>
+            <br>
+            <div class="panel-body">Cantidad de actores favoritos: {{userCTRL.numFavAct()}}</div>
+            <br>
+            <div class="panel-body">Último acceso: {{userCTRL.getLastAccess()}}</div>
+            <br>
+            <div class="panel-body">Listas creadas:
+                <table class="table table-bordered  table-hover text-center">
+                    <thead>
+                    <tr class="center">
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Peliculas
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="movieList in userCTRL.getMovies()">
+                        <td>{{ movieList.name}}</td>
+                        <td>{{ movieList.movies }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <br>
+        <button type="button" ng-click="userCTRL.hide()" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove">
+                        </span> Cerrar
+        </button>
     </div>
 </div>

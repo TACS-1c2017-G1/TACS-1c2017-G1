@@ -18,5 +18,20 @@ img {
 #ImagenHeader {
   width: 15%;
 }
+table th {
+  text-align: center;
+}
+
+#modest,
+#modest .panel-body,
+.panel-modest,
+.panel-modest .panel-body {
+  display: inline-block;
+}
+
+.table {
+  margin: auto;
+  width: 50% !important;
+}
 
 /*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW5TdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNDLENBQUM7RUFDQSxpQkFBQTs7QUFJRjtFQUNDLGNBQUE7O0FBR0Q7RUFDQyxnQkFBQTtFQUNBLFdBQUE7O0FBR0Q7RUFDQyxnQkFBQTtFQUNBLG1CQUFBOztBQUdEO0VBQ0MsbUJBQUE7O0FBR0Q7RUFDQyxVQUFBIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XHJcblx0Ji5hY3RpdmUge1xyXG5cdFx0Zm9udC13ZWlnaHQ6IGJvbGQ7XHJcblx0fVxyXG59XHJcblxyXG5pbWd7XHJcblx0bWF4LXdpZHRoOiA2MCU7XHJcbn1cclxuXHJcbiNmb3JtTG9naW57XHJcblx0bWFyZ2luLXRvcDogNTBweDtcclxuXHRmbG9hdDogbm9uZTtcclxufVxyXG5cclxuI2lucHV0VXNlcm5hbWV7XHJcblx0bWFyZ2luLXRvcDogMjVweDtcclxuXHRtYXJnaW4tYm90dG9tOiAxMnB4O1xyXG59XHJcblxyXG4jaW5wdXRQYXNzd29yZHtcclxuXHRtYXJnaW4tYm90dG9tOiAyNXB4O1xyXG59XHJcblxyXG4jSW1hZ2VuSGVhZGVye1xyXG5cdHdpZHRoOiAxNSU7XHJcbn0iXSwiZmlsZSI6Im1haW5TdHlsZS5jc3MifQ== */

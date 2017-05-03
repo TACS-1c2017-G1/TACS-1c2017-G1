@@ -5,14 +5,21 @@
 
 myApp.service('Usuario', function ($http) {
 
-  var self = this;
+    var self = this;
 
-  self.register = function (credentials) {
-    return $http.post('http://localhost:8080/user/',credentials);
-  };
+    self.register = function (credentials) {
+        return $http.post('http://localhost:8080/user/', credentials);
+    };
 
-    self.getUsers = function(sesionActual,callback){
+    self.getUsers = function (sesionActual, callback) {
         return $http.get('http://localhost:8080/user/list', {
+            headers: {'token': sesionActual.idSesion}
+        }).then(callback);
+    }
+
+    self.getData = function (sesionActual, id, callback) {
+        return $http.get('http://localhost:8080/user/' + id, {
+            params: id,
             headers: {'token': sesionActual.idSesion}
         }).then(callback);
     }

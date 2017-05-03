@@ -77,7 +77,7 @@ myApp.config(function($stateProvider) {
 
     {
       name: 'users',
-      url: '/user',
+      url: '/users',
       views: {
         'container@': {
           templateUrl: 'templates/admin/users.html'
