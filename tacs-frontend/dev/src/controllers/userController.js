@@ -1,8 +1,10 @@
-myApp.controller('userController', function ($rootScope,$scope,$state,Usuario) {
+myApp.controller('userController', function ($rootScope, $scope, $state, Usuario) {
     var self = this;
     self.users = [];
-    self.selectedUser ="";
+    self.usersSelec = [];
+    self.selectedUser = "";
     self.visibleData = false;
+
 
     self.importUsers = function () {
         Usuario.getUsers(sesionActual,
@@ -13,7 +15,29 @@ myApp.controller('userController', function ($rootScope,$scope,$state,Usuario) {
 
     self.importUsers();
 
-    self.dateFormat = function(date) {
+    self.cleanSelected = function () {
+        self.visibleData = false;
+        self.users.map(function (us) {
+            us.selected = false;
+        })
+    }
+
+    self.compareSelected = function () {
+        self.usersSelec = self.users.filter(function (user) {
+            return user.selected
+        })
+        if (self.usersSelec.length > 2){
+            self.errorMessage = "Seleccione sólo dos usuarios"
+        }
+        else {
+            self.visibleData = false;
+            $state.go('users.lists', {usersSel:self.usersSelec})
+        }
+
+    }
+
+
+    self.dateFormat = function (date) {
         var year = date.getFullYear();
         var month = (1 + date.getMonth()).toString();
         month = month.length > 1 ? month : '0' + month;
@@ -27,16 +51,15 @@ myApp.controller('userController', function ($rootScope,$scope,$state,Usuario) {
     };
 
     self.getUsername = function () {
-        try{
-            if (self.selectedUser.credencial===null){
+        try {
+            if (self.selectedUser.credencial === null) {
                 return "Sin Username"
             }
-            else
-            {
+            else {
                 return self.selectedUser.credencial.username;
             }
         }
-        catch(e){
+        catch (e) {
 
         }
 
@@ -44,64 +67,59 @@ myApp.controller('userController', function ($rootScope,$scope,$state,Usuario) {
     }
 
     self.getLastAccess = function () {
-        try{
-            if (self.selectedUser.lastAccess===null){
+        try {
+            if (self.selectedUser.lastAccess === null) {
                 return "No inició sesión"
             }
-            else
-            {
+            else {
                 var d = new Date(self.selectedUser.lastAccess);
-                console.log(d.toDateString())
                 return self.dateFormat(d);
             }
         }
-        catch(e){
+        catch (e) {
 
         }
 
     }
 
     self.numList = function () {
-        try{
-            if (self.selectedUser.lists === null){
+        try {
+            if (self.selectedUser.lists === null) {
                 return "No hay información"
             }
-            else
-            {
+            else {
                 return self.selectedUser.lists.length
             }
         }
-        catch(e){
+        catch (e) {
 
         }
     }
 
     self.getMovies = function () {
-        try{
-            if (self.selectedUser.lists === null){
+        try {
+            if (self.selectedUser.lists === null) {
                 return "No hay información"
             }
-            else
-            {
+            else {
                 return self.selectedUser.lists
             }
         }
-        catch(e){
+        catch (e) {
 
         }
     }
 
     self.numFavAct = function () {
-        try{
-            if (self.selectedUser.favoriteActors === null){
+        try {
+            if (self.selectedUser.favoriteActors === null) {
                 return "No hay información"
             }
-            else
-            {
+            else {
                 return self.selectedUser.favoriteActors.length
             }
         }
-        catch(e){
+        catch (e) {
 
         }
 
@@ -111,9 +129,9 @@ myApp.controller('userController', function ($rootScope,$scope,$state,Usuario) {
     self.hide = function () {
         self.visibleData = false;
     }
-    
-    self.getInfo = function(id){
-        Usuario.getData(sesionActual,id,
+
+    self.getInfo = function (id) {
+        Usuario.getData(sesionActual, id,
             function (response) {
                 self.selectedUser = response.data;
                 self.visibleData = true;

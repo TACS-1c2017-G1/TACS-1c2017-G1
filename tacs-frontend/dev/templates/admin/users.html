@@ -1,10 +1,14 @@
 <div class="text-center" ng-controller="userController as userCTRL">
     <h4>Lista de usuarios:</h4>
+    <div class="alert alert-danger" ng-show="userCTRL.errorMessage" class="ng-hide">
+        {{userCTRL.errorMessage}}
+    </div>
 
     <div class="table-responsive">
         <table class="table table-bordered  table-hover text-center">
             <thead>
             <tr class="center">
+                <th></th>
                 <th>
                     ID
                 </th>
@@ -15,6 +19,11 @@
             </thead>
             <tbody>
             <tr ng-repeat="user in userCTRL.showUsers()">
+                <td>
+                    <label> Seleccione para comparar:
+                        <input type="checkbox" ng-model="user.selected">
+                    </label>
+                </td>
                 <td>{{ user.id}}</td>
                 <td>{{ user.credencial.username }}</td>
                 <td>
@@ -54,7 +63,11 @@
                     <tbody>
                     <tr ng-repeat="movieList in userCTRL.getMovies()">
                         <td>{{ movieList.name}}</td>
-                        <td>{{ movieList.movies }}</td>
+                        <td>
+                        <p ng-repeat="movie in movieList.movies">
+                            {{ movie.title}}
+                        </p>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -64,6 +77,17 @@
         <button type="button" ng-click="userCTRL.hide()" class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove">
                         </span> Cerrar
+        </button>
+    </div>
+    <br>
+    <div class="btn-group">
+        <button type="button" ng-click="userCTRL.compareSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-list">
+                        </span> Comparar seleccionados
+        </button>
+        <button type="button" ng-click="userCTRL.cleanSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-refresh">
+                        </span> Limpiar
         </button>
     </div>
 </div>
