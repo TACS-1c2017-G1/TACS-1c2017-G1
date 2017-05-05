@@ -26,8 +26,13 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
         self.usersSelec = self.users.filter(function (user) {
             return user.selected
         })
-        if (self.usersSelec.length > 2){
+        if (self.usersSelec.length != 2){
             self.errorMessage = "Seleccione sólo dos usuarios"
+        }
+        else if(self.usersSelec.some(function (e) {
+                return e.lists.length === 0
+            })) {
+            self.errorMessage = "Uno de los usuarios no posee listas"
         }
         else {
             self.visibleData = false;

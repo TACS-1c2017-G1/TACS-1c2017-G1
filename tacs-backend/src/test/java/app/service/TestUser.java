@@ -1,6 +1,7 @@
 package app.service;
 
 import app.model.odb.*;
+import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
 import org.junit.After;
 import org.junit.Assert;
@@ -45,8 +46,12 @@ public class TestUser {
 		pelis1.add(Movie.create(100,"Star Wars"));
 		pelis2.add(Movie.create(50,"Toy Story"));
 		pelis2.add(Movie.create(100,"Star Wars"));
-		listas1.add(MovieList.create("Lista 1", pelis1));
-		listas2.add(MovieList.create("Lista 2", pelis2));
+		MovieList lista1 = MovieList.create("Lista 1", pelis1);
+		listas1.add(lista1);
+		RepositorioDeListas.getInstance().insert(lista1);
+		MovieList lista2 = MovieList.create("Lista 2", pelis1);
+		listas2.add(lista2);
+		RepositorioDeListas.getInstance().insert(lista2);
 
 		User usuario1 = User.create(Credencial.create("Carlos","124"));
 		usuario1.setId(100);
@@ -55,7 +60,8 @@ public class TestUser {
 		User usuario2 = User.create(Credencial.create("Carlos2","123"));
 		usuario2.setId(50);
 		usuario2.setLists(listas2);
-
+		
+		
 		RepositorioDeUsuarios.getInstance().insert(usuario1);
 		RepositorioDeUsuarios.getInstance().insert(usuario2);
 		List<Movie> interseccion = new ArrayList<Movie>();

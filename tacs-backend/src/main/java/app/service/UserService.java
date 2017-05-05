@@ -2,7 +2,10 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
+import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
+
+import org.apache.commons.collections.ListUtils;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,22 +35,13 @@ public class UserService {
         this.getRepositorio().insert(usuarioNuevo);
     }
 
-    public List<Movie> obtenerInterseccionListas(String id1, String id2) {
-        User user1 = this.obtenerUsuario(id1);
-        User user2 = this.obtenerUsuario(id2);
-        List<MovieList> user1Lists = user1.getLists();
-        List<MovieList> user2Lists = user2.getLists();
-        List<Movie> interseccion = new ArrayList<Movie>();
-        for (MovieList ml1 : user1Lists) {
-            List<Movie> movies1 = ml1.getMovies();
-            for (MovieList ml2 : user2Lists) {
-                List<Movie> movies2 = ml2.getMovies();
-                interseccion.addAll(movies2.stream().filter(movies1::contains).collect(Collectors.toList()));
-            }
-        }
-        return interseccion;
-    }
-
+	public List<Movie> obtenerInterseccionListas(String id1, String id2) {
+		RepositorioDeListas repo = RepositorioDeListas.getInstance();
+		MovieList lista1 = RepositorioDeListas.getInstance().search(Integer.parseInt(id1));
+		MovieList lista2 = RepositorioDeListas.getInstance().search(Integer.parseInt(id2));
+		List<Movie> interseccion = lista1.intersectionWith(lista2);
+		return interseccion;
+	}
 
     public User obtenerUsuario(String id) {
 		User user = this.getRepositorio().search(Integer.parseInt(id));

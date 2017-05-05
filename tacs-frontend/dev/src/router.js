@@ -87,7 +87,7 @@ myApp.config(function($stateProvider) {
 
     {
       name: 'users.lists',
-      url: '/users/lists',
+      url: '/lists',
       params: {
         usersSel: null
       },

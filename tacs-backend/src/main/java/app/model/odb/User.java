@@ -87,6 +87,10 @@ public class User {
 		}
 		return favoriteActors;
 	}
+	
+	public void setFavoriteActors(List<Actor> actores) {
+		this.favoriteActors = actores;
+	}
 
 
 	public void createList(String name) {
