@@ -4,8 +4,6 @@ import app.model.dto.RespuestaDto;
 import app.model.odb.*;
 import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
-
-import org.apache.commons.collections.ListUtils;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,7 @@ public class UserService {
     }
 
     public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
-        User usuarioNuevo = User.create(userAndPassword);
+        User usuarioNuevo = User.create(userAndPassword, false);
         this.getRepositorio().insert(usuarioNuevo);
     }
 

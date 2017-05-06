@@ -55,7 +55,7 @@ public class SesionesControllerTest extends RestTestBase {
     @Test
     public void logoutCorrecto() throws Exception {
         Credencial credencial =Credencial.create("Carlos", "123456");
-        repositorioDeUsuarios.insert(User.create(credencial));
+        repositorioDeUsuarios.insert(User.create(credencial,false));
         Sesion sesion = Sesion.create(credencial.getUsername());
         repositorioDeSesiones.insert(sesion);
 
