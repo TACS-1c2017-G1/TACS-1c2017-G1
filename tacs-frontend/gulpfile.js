@@ -26,7 +26,7 @@ gulp.task('devSync', function() {
     });
     gulp.watch('dev/src/**/*.js',['concat']).on('change', browserSync.reload);
     gulp.watch('dev/styles/**/*.less',['less']).on('change', browserSync.reload);
-    gulp.watch("dev/*.html").on('change', browserSync.reload);
+    gulp.watch("dev/**/*.html").on('change', browserSync.reload);
 });
 
 // Static server
