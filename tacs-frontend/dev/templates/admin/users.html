@@ -1,4 +1,4 @@
-<div class="text-center" ng-controller="userController as userCTRL">
+<div class="text-center" ng-controller="adminController as userCTRL" ng-show="userCTRL.esAdmin()">
     <h4>Lista de usuarios:</h4>
     <div class="alert alert-danger" ng-show="userCTRL.errorMessage" class="ng-hide">
         {{userCTRL.errorMessage}}

@@ -15,6 +15,7 @@ import java.util.List;
 public class TestUser {
 
 	UserService servicioUsuario = new UserService();
+	AdministrativoService adminService = new AdministrativoService();
 
 	@Before
 	public void setUp(){}
@@ -33,7 +34,7 @@ public class TestUser {
 	
 	@Test(expected=RuntimeException.class)
 	public void testBusquedaUsuarioInexistente() {
-		servicioUsuario.obtenerUsuario("0");
+		adminService.obtenerUsuario("0");
 	}
 
 	@Test
@@ -66,7 +67,7 @@ public class TestUser {
 		RepositorioDeUsuarios.getInstance().insert(usuario2);
 		List<Movie> interseccion = new ArrayList<Movie>();
 		interseccion.add(Movie.create(100,"Star Wars"));
-		Assert.assertEquals(servicioUsuario.obtenerInterseccionListas("100", "50"),interseccion);
+		Assert.assertEquals(adminService.obtenerInterseccionListas("100", "50"),interseccion);
 	}
 	
 	@Test

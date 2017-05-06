@@ -56,7 +56,7 @@ public class SesionesControllerTest extends RestTestBase {
     public void logoutCorrecto() throws Exception {
         Credencial credencial =Credencial.create("Carlos", "123456");
         repositorioDeUsuarios.insert(User.create(credencial,false));
-        Sesion sesion = Sesion.create(credencial.getUsername());
+        Sesion sesion = Sesion.create(credencial.getUsername(), false);
         repositorioDeSesiones.insert(sesion);
 
         this.mockClient.perform(put("/authentication/logout/")

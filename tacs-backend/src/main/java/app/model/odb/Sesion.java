@@ -1,5 +1,7 @@
 package app.model.odb;
 
+import javax.swing.text.StyledEditorKit;
+
 /**
  * Created by Rodrigo on 08/04/2017.
  */
@@ -7,6 +9,7 @@ public class Sesion {
     private String idSesion;
     private String username;
     private Boolean estaActiva;
+    private Boolean esAdmin;
 
     private static TokenGenerator generadorDeTokens = new TokenGenerator();
 
@@ -37,14 +40,23 @@ public class Sesion {
     public Sesion() {
     }
 
-    public static Sesion create(String username){
+    public static Sesion create(String username, Boolean esAdmin){
 
         Sesion sesion = new Sesion();
-        sesion.setIdSesion(generadorDeTokens.generateToken(username));
+        sesion.setIdSesion(generadorDeTokens.generateToken(username, esAdmin));
         sesion.setUsername(username);
         sesion.setEstaActiva(Boolean.TRUE);
+        sesion.setEsAdmin(esAdmin);
 
         return sesion;
+    }
+
+    public Boolean getEsAdmin() {
+        return esAdmin;
+    }
+
+    public void setEsAdmin(Boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
 
     public void desactivarSesion() {

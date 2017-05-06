@@ -1,4 +1,4 @@
-myApp.controller('userController', function ($rootScope, $scope, $state, Usuario) {
+myApp.controller('adminController', function ($rootScope, $scope, $state, Admin) {
     var self = this;
     self.users = [];
     self.usersSelec = [];
@@ -7,7 +7,7 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
 
 
     self.importUsers = function () {
-        Usuario.getUsers(sesionActual,
+        Admin.getUsers(sesionActual,
             function (response) {
                 self.users = response.data
             })
@@ -49,10 +49,14 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
         var day = date.getDate().toString();
         day = day.length > 1 ? day : '0' + day;
         return day + '/' + month + '/' + year;
-    }
+    };
 
     self.showUsers = function () {
         return self.users;
+    };
+
+    self.esAdmin = function () {
+      return $rootScope.esAdmin();
     };
 
     self.getUsername = function () {
@@ -69,7 +73,7 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
         }
 
 
-    }
+    };
 
     self.getLastAccess = function () {
         try {
@@ -85,7 +89,7 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
 
         }
 
-    }
+    };
 
     self.numList = function () {
         try {
@@ -136,7 +140,7 @@ myApp.controller('userController', function ($rootScope, $scope, $state, Usuario
     }
 
     self.getInfo = function (id) {
-        Usuario.getData(sesionActual, id,
+        Admin.getData(sesionActual, id,
             function (response) {
                 self.selectedUser = response.data;
                 self.visibleData = true;
