@@ -31,6 +31,12 @@ public class UserController {
 	public User datosUsuario(@RequestHeader String token, @PathVariable String id) throws JSONException, IOException {
 		return servicioDeUsuario.obtenerUsuario(id);
 	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<User> listaUsuarios(@RequestHeader String token) throws JSONException, IOException {
+		return servicioDeUsuario.obtenerUsuarios();
+	}
 
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody

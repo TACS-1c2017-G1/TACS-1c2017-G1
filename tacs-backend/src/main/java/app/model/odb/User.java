@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  */
 public class User {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+	private Integer id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 	private Credencial credencial;
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;
@@ -40,7 +40,7 @@ public class User {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -48,7 +48,7 @@ public class User {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

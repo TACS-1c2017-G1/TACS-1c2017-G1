@@ -5,6 +5,9 @@ import app.model.odb.Sesion;
 import app.model.odb.User;
 import app.repositories.RepositorioDeSesiones;
 import app.repositories.RepositorioDeUsuarios;
+
+import java.util.Calendar;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +24,7 @@ public class SesionesService {
         }
         Sesion nuevaSesion =Sesion.create(user.getCredencial().getUsername());
         this.getRepositorio().insert(nuevaSesion);
+        user.setLastAccess(Calendar.getInstance().getTime());
         return nuevaSesion;
     }
 
