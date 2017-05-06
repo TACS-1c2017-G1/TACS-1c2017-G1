@@ -19,7 +19,6 @@ myApp.service('Usuario', function ($http) {
 
     self.getData = function (sesionActual, id, callback) {
         return $http.get('http://localhost:8080/user/' + id, {
-            params: id,
             headers: {'token': sesionActual.idSesion}
         }).then(callback);
     }

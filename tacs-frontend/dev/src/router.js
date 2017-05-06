@@ -83,6 +83,19 @@ myApp.config(function($stateProvider) {
           templateUrl: 'templates/admin/users.html'
         }
       }
+    },
+
+    {
+      name: 'users.lists',
+      url: '/lists',
+      params: {
+        usersSel: null
+      },
+      views: {
+        'container@': {
+          templateUrl: 'templates/admin/listComparison.html'
+        }
+      }
     }
 
   ]
