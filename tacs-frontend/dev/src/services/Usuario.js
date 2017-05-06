@@ -10,6 +10,6 @@ myApp.service('Usuario', function ($http) {
     self.register = function (credentials) {
         return $http.post('http://localhost:8080/user/', credentials);
     };
-  
+
 
 });
