@@ -82,6 +82,12 @@ myApp.config(function ($stateProvider) {
                     templateUrl: 'templates/admin/listComparison.html'
                 }
             }
+        },
+
+        {
+            name: 'fichaPelicula',
+            url: '/movie/:movieId',
+            templateUrl: 'templates/fichas/pelicula.html'
         }
 
     ]
