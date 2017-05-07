@@ -1,20 +1,6 @@
 myApp.config(function ($stateProvider) {
     // An array of state definitions
-    var states = [{
-
-        name: 'layouts',
-        url: '',
-        abstract: true,
-        views: {
-            'header': {
-                templateUrl: 'templates/header.html'
-            },
-            'footer': {
-                templateUrl: 'templates/footer.html'
-            }
-        }
-    },
-
+    var states = [
         {
             name: 'home',
             url: '/',
