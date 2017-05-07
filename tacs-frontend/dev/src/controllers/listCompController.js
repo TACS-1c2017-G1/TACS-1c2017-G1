@@ -5,15 +5,16 @@ myApp.controller('listCompController', function ($rootScope, $scope,$state, $sta
     self.user2 = $stateParams.usersSel[1]
     self.user2List = ""
     self.intersection = null
+    self.sesion = $rootScope.sesionActual;
 
     self.compare = function () {
-        ListService.intersectionOf(self.user1List, self.user2List, sesionActual,
+        ListService.intersectionOf(self.user1List, self.user2List, self.sesion,
             function (response) {
                 self.intersection = response.data;
             })
     }
 
   self.esAdmin = function () {
-    return $rootScope.esAdmin();
+    return $rootScope.esAdmin;
   };
 });
