@@ -80,3 +80,5 @@ gulp.task('minify-css',['less'], function() {
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('docs'));
 });
+
+gulp.task('compilar', ['concat', 'minify', 'less']);

@@ -8,7 +8,7 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
 
 
     self.importUsers = function () {
-        Admin.getUsers(self.sesion,
+        Admin.getUsers($rootScope.sesionActual,
             function (response) {
                 self.users = response.data
             })
@@ -27,17 +27,17 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
         self.usersSelec = self.users.filter(function (user) {
             return user.selected
         })
-        if (self.usersSelec.length != 2){
+        if (self.usersSelec.length != 2) {
             self.errorMessage = "Seleccione sólo dos usuarios"
         }
-        else if(self.usersSelec.some(function (e) {
+        else if (self.usersSelec.some(function (e) {
                 return e.lists.length === 0
             })) {
             self.errorMessage = "Uno de los usuarios no posee listas"
         }
         else {
             self.visibleData = false;
-            $state.go('users.lists', {usersSel:self.usersSelec})
+            $state.go('users.lists', {usersSel: self.usersSelec})
         }
 
     }
@@ -57,7 +57,7 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
     };
 
     self.esAdmin = function () {
-      return $rootScope.esAdmin;
+        return $rootScope.esAdmin;
     };
 
     self.getUsername = function () {
@@ -141,7 +141,7 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
     }
 
     self.getInfo = function (id) {
-        Admin.getData(self.sesion, id,
+        Admin.getData($rootScope.sesionActual, id,
             function (response) {
                 self.selectedUser = response.data;
                 self.visibleData = true;

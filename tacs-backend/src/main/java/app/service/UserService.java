@@ -67,19 +67,19 @@ public class UserService {
 
 		Map<Actor, Integer> rankingActores = new HashMap<Actor, Integer>();
 		List<User> usuarios = obtenerUsuarios();
-		usuarios.stream().forEach(u -> {
-			u.getFavoriteActors().stream().forEach(a -> {
-				if (rankingActores.containsKey(a)) {
-					int valor = rankingActores.get(a);
-					rankingActores.put(a, ++valor);
-				} else {
-					rankingActores.put(a, 1);
-				}
-			});
-		});
+		usuarios.forEach(usuario-> usuario.getFavoriteActors().forEach(a ->{
+            if (rankingActores.containsKey(a)){
+                int valor = rankingActores.get(a);
+                rankingActores.put(a, ++valor);
+            }
+            else
+            {
+                rankingActores.put(a, 1);
+            }
+        }));
 		Stream<Map.Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
-		List<Actor> actoresOrdenados = sorted.map(e -> e.getKey()).collect(Collectors.toList());
+		List<Actor> actoresOrdenados = sorted.map(Map.Entry::getKey).collect(Collectors.toList());
 		return actoresOrdenados;
 	}
 

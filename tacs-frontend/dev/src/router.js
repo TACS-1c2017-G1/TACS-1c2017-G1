@@ -1,20 +1,6 @@
 myApp.config(function ($stateProvider) {
     // An array of state definitions
-    var states = [{
-
-        name: 'layouts',
-        url: '',
-        abstract: true,
-        views: {
-            'header': {
-                templateUrl: 'templates/header.html'
-            },
-            'footer': {
-                templateUrl: 'templates/footer.html'
-            }
-        }
-    },
-
+    var states = [
         {
             name: 'home',
             url: '/',
@@ -96,6 +82,12 @@ myApp.config(function ($stateProvider) {
                     templateUrl: 'templates/admin/listComparison.html'
                 }
             }
+        },
+
+        {
+            name: 'fichaPelicula',
+            url: '/movie/:movieId',
+            templateUrl: 'templates/fichas/pelicula.html'
         }
 
     ]

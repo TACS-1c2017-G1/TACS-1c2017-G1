@@ -17,14 +17,12 @@
             <th>#</th>
             <th>Tipo</th>
             <th>Titulo</th>
-            <th>Nombre</th>
         </tr>
         </thead>
         <tr ng-repeat="item in resultados">
-            <td> {{item.id}}</td>
-            <td> {{item.media_type}}</td>
-            <td>{{item.title}}</td>
-            <td>{{item.name}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.media_type}}</td>
+            <td><a ui-sref="fichaPelicula({movieId:item.id})">{{item.title}}{{item.name}}</a></td>
         </tr>
     </table>
 
