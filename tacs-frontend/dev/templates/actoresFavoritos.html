@@ -1,3 +1,19 @@
-<div class="text-center">
-    <h4>Todavía no has seleccionado ningun actor como favorito.</h4>
+<div class="text-center container" ng-controller="favoritosController" ng-hide="actoresFavoritos.length = 0">
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Biografía</th>
+    </tr>
+    <tr ng-repeat="actor in actoresFavoritos">
+      <td>{{actor.id}}</td>
+      <td>{{actor.name}}</td>
+      <td>{{actor.bio}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-center" ng-show="actoresFavoritos.length = 0" >
+  <h4>Todavía no has seleccionado ningun actor como favorito.</h4>
 </div>
