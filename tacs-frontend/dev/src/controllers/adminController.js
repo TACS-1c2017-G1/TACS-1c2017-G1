@@ -4,10 +4,11 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
     self.usersSelec = [];
     self.selectedUser = "";
     self.visibleData = false;
+    self.sesion = $rootScope.sesionActual;
 
 
     self.importUsers = function () {
-        Admin.getUsers(sesionActual,
+        Admin.getUsers(self.sesion,
             function (response) {
                 self.users = response.data
             })
@@ -56,7 +57,7 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
     };
 
     self.esAdmin = function () {
-      return $rootScope.esAdmin();
+      return $rootScope.esAdmin;
     };
 
     self.getUsername = function () {
@@ -140,7 +141,7 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
     }
 
     self.getInfo = function (id) {
-        Admin.getData(sesionActual, id,
+        Admin.getData(self.sesion, id,
             function (response) {
                 self.selectedUser = response.data;
                 self.visibleData = true;

@@ -49,7 +49,7 @@ myApp.config(function ($stateProvider) {
             url: '/actoresFavoritos',
             views: {
                 'container@': {
-                    templateUrl: 'templates/actoresFavoritos.html'
+                    templateUrl: 'templates/actFav/actoresFavoritos.html'
                 }
             }
         },

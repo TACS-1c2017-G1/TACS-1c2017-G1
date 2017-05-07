@@ -11,5 +11,11 @@ myApp.service('Usuario', function ($http) {
         return $http.post('http://localhost:8080/user/', credentials);
     };
 
+    self.getRecMovies = function (sesion,callback) {
+        return $http.get('http://localhost:8080/user/favoriteactor/movies',{
+            headers: {'token': sesion.idSesion}
+        }).then(callback);
+    }
+
 
 });
