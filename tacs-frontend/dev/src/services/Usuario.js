@@ -3,13 +3,26 @@
  */
 'use strict';
 
-myApp.service('Usuario', function ($http) {
+myApp.service('Usuario', function ($http, $rootScope) {
 
-    var self = this;
+  var self = this;
 
-    self.register = function (credentials) {
-        return $http.post('http://localhost:8080/user/', credentials);
-    };
+  self.register = function (credentials) {
+    return $http.post('http://localhost:8080/user/', credentials);
+  };
+
+  self.actoresFavoritos = function (credentials, callback) {
+            return $http.get('http://localhost:8080/user/favoriteactor/',
+    {
+      headers: {
+        'token'
+      :
+        $rootScope.sesionActual.idSesion
+      }
+    }
+    );
+}
 
 
-});
+})
+;
