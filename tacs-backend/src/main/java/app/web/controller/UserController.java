@@ -26,17 +26,7 @@ public class UserController {
 		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public User datosUsuario(@RequestHeader String token, @PathVariable String id) throws JSONException, IOException {
-		return servicioDeUsuario.obtenerUsuario(id);
-	}
-	
-	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<User> listadoUsuarios(@RequestHeader String token) throws JSONException, IOException {
-		return servicioDeUsuario.obtenerUsuarios();
-	}
+
 
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -45,14 +35,7 @@ public class UserController {
 		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token, idlistaDePeliculas);
 	}
 
-	@RequestMapping(value = "/{idLista1}/{idLista2}/", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<Movie> listaUsuarios(@RequestHeader String token, @PathVariable String idLista1,
-			@PathVariable String idLista2)
-			throws JSONException, IOException {
-		List<Movie> interseccion = servicioDeUsuario.obtenerInterseccionListas(idLista1, idLista2);
-		return interseccion;
-	}
+
 
 	@RequestMapping(value = "/favoriteactor/{idactor}/", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody

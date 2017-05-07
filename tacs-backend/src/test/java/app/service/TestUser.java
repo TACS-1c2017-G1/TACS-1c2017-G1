@@ -15,6 +15,7 @@ import java.util.List;
 public class TestUser {
 
 	UserService servicioUsuario = new UserService();
+	AdministrativoService adminService = new AdministrativoService();
 
 	@Before
 	public void setUp(){}
@@ -26,14 +27,14 @@ public class TestUser {
 		pelis.add(Movie.create(150,"Matrix"));
 		listas.add(MovieList.create("Lista 1", pelis));
 		listas.add(MovieList.create("Lista 2", pelis));
-		User usuario = User.create(Credencial.create("Carlos","123"));
+		User usuario = User.create(Credencial.create("Carlos","123"), false);
 		RepositorioDeUsuarios.getInstance().insert(usuario);
 		Assert.assertTrue(servicioUsuario.obtenerUsuarios().get(0).getId()==usuario.getId());
 	}
 	
 	@Test(expected=RuntimeException.class)
 	public void testBusquedaUsuarioInexistente() {
-		servicioUsuario.obtenerUsuario("0");
+		adminService.obtenerUsuario("0");
 	}
 
 	@Test
@@ -53,11 +54,11 @@ public class TestUser {
 		listas2.add(lista2);
 		RepositorioDeListas.getInstance().insert(lista2);
 
-		User usuario1 = User.create(Credencial.create("Carlos","124"));
+		User usuario1 = User.create(Credencial.create("Carlos","124"),false);
 		usuario1.setId(100);
 		usuario1.setLists(listas1);
 
-		User usuario2 = User.create(Credencial.create("Carlos2","123"));
+		User usuario2 = User.create(Credencial.create("Carlos2","123"),false);
 		usuario2.setId(50);
 		usuario2.setLists(listas2);
 		
@@ -66,18 +67,18 @@ public class TestUser {
 		RepositorioDeUsuarios.getInstance().insert(usuario2);
 		List<Movie> interseccion = new ArrayList<Movie>();
 		interseccion.add(Movie.create(100,"Star Wars"));
-		Assert.assertEquals(servicioUsuario.obtenerInterseccionListas("100", "50"),interseccion);
+		Assert.assertEquals(adminService.obtenerInterseccionListas("100", "50"),interseccion);
 	}
 	
 	@Test
 	public void testRankingFavoritos() throws IOException{
-		User usuario1 = User.create(Credencial.create("Carlos","124"));
+		User usuario1 = User.create(Credencial.create("Carlos","124"),false);
 		usuario1.setId(100);
 		RepositorioDeUsuarios.getInstance().insert(usuario1);
-		User usuario2 = User.create(Credencial.create("Carlos2","123"));
+		User usuario2 = User.create(Credencial.create("Carlos2","123"),false);
 		usuario2.setId(50);
 		RepositorioDeUsuarios.getInstance().insert(usuario2);
-		User usuario3 = User.create(Credencial.create("Carlos3","123"));
+		User usuario3 = User.create(Credencial.create("Carlos3","123"),false);
 		usuario3.setId(5);
 		RepositorioDeUsuarios.getInstance().insert(usuario3);
 		Actor actor1 = new Actor();

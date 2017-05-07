@@ -4,8 +4,6 @@ import app.model.dto.RespuestaDto;
 import app.model.odb.*;
 import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
-
-import org.apache.commons.collections.ListUtils;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,25 +29,10 @@ public class UserService {
     }
 
     public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
-        User usuarioNuevo = User.create(userAndPassword);
+        User usuarioNuevo = User.create(userAndPassword, false);
         this.getRepositorio().insert(usuarioNuevo);
     }
 
-	public List<Movie> obtenerInterseccionListas(String id1, String id2) {
-		RepositorioDeListas repo = RepositorioDeListas.getInstance();
-		MovieList lista1 = RepositorioDeListas.getInstance().search(Integer.parseInt(id1));
-		MovieList lista2 = RepositorioDeListas.getInstance().search(Integer.parseInt(id2));
-		List<Movie> interseccion = lista1.intersectionWith(lista2);
-		return interseccion;
-	}
-
-    public User obtenerUsuario(String id) {
-		User user = this.getRepositorio().search(Integer.parseInt(id));
-		if(user == null){
-			throw new RuntimeException("No existe el usuario con id " + id.toString());
-		}
-		return user;
-	}
 
 
     public ArrayList<User> obtenerUsuarios() {

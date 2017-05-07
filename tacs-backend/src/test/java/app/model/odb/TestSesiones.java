@@ -11,15 +11,15 @@ public class TestSesiones {
 
     @Test
     public void TokensUnicos(){
-            Sesion sesionAyita = Sesion.create("Ayita");
-            Sesion sesionRodri = Sesion.create("Rodri");
+            Sesion sesionAyita = Sesion.create("Ayita",Boolean.FALSE);
+            Sesion sesionRodri = Sesion.create("Rodri", Boolean.FALSE);
 
         assertNotEquals(sesionAyita.getIdSesion(),sesionRodri.getIdSesion());
     }
 
     @Test
     public void siDesactivoSesionQuedaInactiva(){
-        Sesion sesionRodri = Sesion.create("Rodri");
+        Sesion sesionRodri = Sesion.create("Rodri", Boolean.FALSE);
         assertTrue(sesionRodri.getEstaActiva());
         sesionRodri.desactivarSesion();
         assertFalse(sesionRodri.getEstaActiva());

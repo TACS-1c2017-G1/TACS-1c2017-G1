@@ -22,7 +22,7 @@ public class SesionesService {
         if(!user.getCredencial().getPassword().equals(credencial.getPassword())){
             throw new RuntimeException("Usuario y/o contraseña inválida");
         }
-        Sesion nuevaSesion =Sesion.create(user.getCredencial().getUsername());
+        Sesion nuevaSesion =Sesion.create(user.getCredencial().getUsername(), user.getAdmin());
         this.getRepositorio().insert(nuevaSesion);
         user.setLastAccess(Calendar.getInstance().getTime());
         return nuevaSesion;

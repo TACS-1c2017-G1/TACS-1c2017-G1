@@ -12,4 +12,8 @@ myApp.controller('listCompController', function ($rootScope, $scope,$state, $sta
                 self.intersection = response.data;
             })
     }
+
+  self.esAdmin = function () {
+    return $rootScope.esAdmin();
+  };
 });

@@ -143,7 +143,7 @@ public class TestUser {
 
 
 	/**
-	 * Test method for {@link app.model.odb.User#listFavorites()}.
+//	 * Test method for {@link app.model.odb.User#listFavorites()}.
 	 */
 	@Test
 	public final void testListFavorites() {
@@ -184,7 +184,7 @@ public class TestUser {
 	@Test
 	public void testUsernameVoid() throws ExceptionInInitializerError{
 		try {
-			User.create(Credencial.create("", "12345"));
+			User.create(Credencial.create("", "12345"), false);
 			fail();
 		} catch (ExceptionInInitializerError e) {
 			assertEquals(e.getMessage(),User.usuarioOContraseniaVacio());
@@ -193,7 +193,7 @@ public class TestUser {
 	@Test
 	public void testPasswordVoid() throws ExceptionInInitializerError{
 		try {
-			User.create(Credencial.create("Hola", ""));
+			User.create(Credencial.create("Hola", ""), false);
 			fail();
 		} catch (ExceptionInInitializerError e) {
 			assertEquals(e.getMessage(),User.usuarioOContraseniaVacio());

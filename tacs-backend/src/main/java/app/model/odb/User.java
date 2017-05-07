@@ -19,12 +19,10 @@ public class User {
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;
 	private Date lastAccess;
-
-
-
+	private Boolean isAdmin;
 
 	
-	public static User create(Credencial credencial) throws ExceptionInInitializerError {
+	public static User create(Credencial credencial, Boolean esAdmin) throws ExceptionInInitializerError {
 
 		User user = new User();
 		System.out.println("user id: " + user.getId());
@@ -33,6 +31,7 @@ public class User {
 		}
 		user.setCredencial(credencial);
 		user.setLists(new ArrayList<MovieList>());
+		user.setAdmin(esAdmin);
 		return user;
 	}
 
@@ -172,5 +171,12 @@ public class User {
 	public MovieList getList(int id_list){
 		return lists.stream().filter(movieList -> movieList.getId() == id_list).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
 	}
-	
+
+	public Boolean getAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		isAdmin = admin;
+	}
 }
