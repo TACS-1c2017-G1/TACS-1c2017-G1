@@ -37,6 +37,14 @@ myApp.service('Usuario', function ($http, $rootScope) {
         );
     }
 
+    self.getListas = function (credentials) {
+        return $http.get('http://localhost:8080/user/movieLists', {
+                headers: {
+                    'token': $rootScope.sesionActual.idSesion
+                }
+            }
+        );
+    };
 
 })
 ;

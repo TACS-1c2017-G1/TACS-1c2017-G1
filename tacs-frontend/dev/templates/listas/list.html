@@ -1,3 +1,38 @@
-<div class="text-center">
-    <h4>Todavía no has creado ninguna lista.</h4>
+<div class="container" ng-controller="listController">
+    <!--<div class="text-center" ng-show="listas.length = 0">-->
+        <!--<h4>Todavía no has creado ninguna lista.</h4>-->
+    <!--</div>-->
+
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Ingrese el nombre de la nueva lista." ng-model="nombre">
+            <span class="input-group-btn">
+        <button class="btn btn-success" type="button" ng-click="create(nombre)">Crear</button>
+      </span>
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-striped" ng-show="listas.length > 0">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>nombre</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="list in listas">
+                <td> {{list.id}}</td>
+                <td> {{list.name}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!--<div class="container" ng-controller="listController"> Crear una lista-->
+        <!--Nombre: <input ng-model="nombre">-->
+    <!--</div>-->
+
+    <!--<button type="button" >-->
+        <!--Crear-->
+    <!--</button>-->
 </div>
+

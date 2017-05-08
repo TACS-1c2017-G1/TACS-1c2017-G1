@@ -26,16 +26,12 @@ public class UserController {
 		servicioDeUsuario.crearNuevoUsuario(userAndPassword);
 	}
 
-
-
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<ActorEnPelicula> rankingDeActores(@RequestHeader String token, @PathVariable Long idlistaDePeliculas)
 			throws JSONException, IOException {
 		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token, idlistaDePeliculas);
 	}
-
-
 
 	@RequestMapping(value = "/favoriteactor/{idactor}/", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
@@ -60,6 +56,12 @@ public class UserController {
 	@ResponseBody
 	public List<Movie> verPeliculasConActoresFavoritos(@RequestHeader String token, Model model) throws Exception {
 		return servicioDeUsuario.verPeliculasConMasDeUnActorFavorito(token);
+	}
+	
+	@RequestMapping(value = "/movieLists", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<MovieList> verListas(@RequestHeader String token, Model model) throws Exception {
+		return servicioDeUsuario.verListas(token);
 	}
 
 }
