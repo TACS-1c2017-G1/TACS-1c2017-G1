@@ -105,6 +105,11 @@ public class UserService {
 		}
 		return listPelConMasDeUnActorFav;
 	}
+	
+	public List<MovieList> verListas(String token) {
+		User usuario = sesionesService.obtenerUsuarioPorToken(token);
+		return usuario.getLists();
+	}
 
 
 	public List<ActorEnPelicula> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {

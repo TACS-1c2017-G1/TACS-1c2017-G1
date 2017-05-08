@@ -1,3 +1,25 @@
-<div class="text-center">
+<div class="text-center" ng-controller="listController" ng-show="listas.length = 0">
     <h4>Todavía no has creado ninguna lista.</h4>
 </div>
+
+<div>
+<table class="table" ng-controller="listController" ng-show="listas.length > 0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>nombre</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="list in listas">
+            <td> {{list.id}}</td>
+            <td> {{list.nombre}}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="container" ng-controller="listController"> Crear una lista
+	Nombre: <input ng-model="nombre">
+</div>
+
+<button type="button" ng-click="listController.create(nombre)">
+Crear</button>

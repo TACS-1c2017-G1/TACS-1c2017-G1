@@ -6,6 +6,12 @@ myApp.service('ListService', function ($http) {
         return $http.get('http://localhost:8080/admin/user/' + lista1.id + '/' + lista2.id+'/', {
             headers: {'token': sesionActual.idSesion}
         }).then(callback);
-    }
+    };
+
+    self.createList = function (nombre, sesionActual) {
+    	return $http.post('http://.localhost:8080/list/', {
+    		headers: {'token' : sesionActual.idSesion}
+    	})
+    };
 
 });

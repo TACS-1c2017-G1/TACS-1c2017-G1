@@ -3,7 +3,7 @@
  */
 'use strict';
 
-myApp.service('Usuario', function ($http, $rootScope) {
+myApp.service('Usuario', function ($http) {
 
     var self = this;
 
@@ -37,6 +37,9 @@ myApp.service('Usuario', function ($http, $rootScope) {
         );
     }
 
+    self.getListas = function (credentials) {
+        return $http.get('http://localhost:8080/user/movieLists', credentials);
+    };
 
 })
 ;
