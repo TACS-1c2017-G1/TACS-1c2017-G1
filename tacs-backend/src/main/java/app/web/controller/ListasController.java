@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/list")
 public class ListasController {

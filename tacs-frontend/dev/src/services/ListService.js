@@ -1,4 +1,4 @@
-myApp.service('ListService', function ($http) {
+myApp.service('ListService', function ($http, $rootScope) {
 
     var self = this;
 
@@ -8,9 +8,9 @@ myApp.service('ListService', function ($http) {
         }).then(callback);
     };
 
-    self.createList = function (nombre, sesionActual) {
-    	return $http.post('http://.localhost:8080/list/', {
-    		headers: {'token' : sesionActual.idSesion}
+    self.createList = function (nombre) {
+    	return $http.post('http://localhost:8080/list/', nombre, {
+    		headers: {'token' : $rootScope.sesionActual.idSesion}
     	})
     };
 
