@@ -1,7 +1,18 @@
 myApp.controller('favoritosController', function ($rootScope, $scope, Usuario) {
 
+    var self = this;
+
     $scope.actoresFavoritos = [];
     self.recMovies = undefined;
+    self.visible = false;
+
+    $scope.searchRecMovies = function () {
+        Usuario.getRecMovies($rootScope.sesionActual,
+            function (response) {
+                self.recMovies = response.data;
+                self.visible = true;
+            })
+    };
 
     this.actoresFavoritos = function () {
         Usuario.actoresFavoritos()
@@ -14,14 +25,6 @@ myApp.controller('favoritosController', function ($rootScope, $scope, Usuario) {
         $scope.actoresFavoritos.splice($scope.actoresFavoritos.indexOf(actor), 1)
         Usuario.marcarActorFavorito(actor.id)
     }
-
-    $scope.searchRecMovies = function () {
-        Usuario.getRecMovies($rootScope.sesionActual)
-            .then(function (response) {
-                self.recMovies = response.data;
-            })
-    }
-
 
     this.actoresFavoritos();
 
