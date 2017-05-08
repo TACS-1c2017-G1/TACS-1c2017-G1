@@ -22,4 +22,32 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
 
     self.getListas();
 
+    self.cleanSelected = function () {
+        self.intersection = [];
+        $scope.listas.map(function (l) {
+            l.selected = false;
+        })
+    }
+
+    self.compareSelected = function () {
+        self.listasSelec = $scope.listas.filter(function (list) {
+            return list.selected
+        })
+        if (self.listasSelec.length != 2) {
+            self.errorMessage = "Seleccione sólo dos listas"
+        }
+        else if (self.listasSelec.some(function (e) {
+                return e.movies.length === 0
+            })) {
+            self.errorMessage = "Una de las listas no posee películas"
+        }
+        else {
+            ListService.intersectionOf(self.listasSelec[0], self.listasSelec[1], $rootScope.sesionActual,
+                function (response) {
+                    self.intersection = response.data;
+                })
+        }
+
+    }
+
 });
