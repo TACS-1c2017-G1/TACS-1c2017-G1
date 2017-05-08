@@ -1,19 +1,21 @@
 <div class="container" ng-controller="HomeController">
-  <div class="input-group">
-    <div class="input-group-btn" uib-dropdown is-open="status.isopen">
-      <button id="single-button" type="button" class="btn" uib-dropdown-toggle>{{search.by.name}}<span class="caret"></span>
+  <form ng-submit="buscar(search.by,search.query)">
+    <div class="input-group">
+      <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+        <button id="single-button" type="button" class="btn" uib-dropdown-toggle>{{search.by.name}}<span class="caret"></span>
             </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li ng-repeat="option in search.options">
-          <a href="" ng-click="search.by=option">{{option.name}}</a>
-        </li>
-      </ul>
-    </div>
-    <input ng-model="search.query" type="text" class="form-control" placeholder="Search..." />
-    <span class="input-group-btn">
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li ng-repeat="option in search.options">
+            <a href="" ng-click="search.by=option">{{option.name}}</a>
+          </li>
+        </ul>
+      </div>
+      <input ng-model="search.query" type="text" class="form-control" placeholder="Search..." />
+      <span class="input-group-btn">
               <button ng-click="buscar(search.by,search.query)" ng-disabled="search.query.length == 0" class="btn glyphicon glyphicon-search" type="button"></button>
             </span>
-  </div>
+    </div>
+  </form>
 
   <table class="table table-striped" ng-show="resultados.length > 0">
     <thead>
@@ -28,13 +30,13 @@
     <tr ng-repeat="item in resultados">
       <td>{{item.id}}</td>
       <td>
-        <img ng-show="item.poster_path!=null" ng-src="http://image.tmdb.org/t/p/w92/{{item.poster_path}}" />
-        <img ng-show="item.profile_path!=null" ng-src="http://image.tmdb.org/t/p/w92/{{item.profile_path}}" />
+        <img ng-if="item.poster_path" ng-src="http://image.tmdb.org/t/p/w92/{{item.poster_path}}" />
+        <img ng-if="item.profile_path" ng-src="http://image.tmdb.org/t/p/w92/{{item.profile_path}}" />
       </td>
       <td ng-show="ultimaBusquedaPor.mostrarTipo">{{item.media_type}}</td>
       <td>
-        <a ng-show="item.title!=null" ui-sref="fichaPelicula({fichaId:item.id})">{{item.title}}</a>
-        <a ng-show="item.name!=null" ui-sref="fichaPersona({fichaId:item.id})">{{item.name}}</a>
+        <a ng-show="item.title" ui-sref="fichaPelicula({fichaId:item.id})">{{item.title}}</a>
+        <a ng-show="item.name" ui-sref="fichaPersona({fichaId:item.id})">{{item.name}}</a>
       </td>
       <td ng-show="ultimaBusquedaPor.agregarFavorito">
         <button type="button" title="Agregar como favorito" class="btn btn-success" ng-click="agregarComoFavorito(item)">

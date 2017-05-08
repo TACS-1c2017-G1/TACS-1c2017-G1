@@ -1,5 +1,7 @@
 package app.web.controller;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,21 @@ public class BusquedasController {
 	@RequestMapping(value = "/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody String busqueda(@RequestHeader String Token, @PathVariable String query) throws Exception {
-		return BusquedasService.buscarPorNombre(query).toString();
+		JSONObject respuesta = BusquedasService.buscarPorNombre(query);
+		JSONArray list = new JSONArray();
+		JSONArray jsonArray = respuesta.getJSONArray("results");
+		int len = jsonArray.length();
+		if (jsonArray != null) {
+			for (int i = 0; i < len; i++) {
+				String mediaType = jsonArray.getJSONObject(i).getString("media_type");
+				if (!mediaType.equalsIgnoreCase("tv")) {
+					list.put(jsonArray.get(i));
+				}
+			}
+		}
+		respuesta.remove("results");
+		respuesta.put("results", list);
+		return respuesta.toString();
 	}
 
 }
