@@ -85,10 +85,20 @@ myApp.config(function($stateProvider) {
 
     {
       name: 'fichaPelicula',
-      url: '/movie/:movieId',
+      url: '/movie/:fichaId',
       views: {
         'container@': {
           templateUrl: 'templates/fichas/pelicula.html'
+        }
+      }
+    },
+
+    {
+      name: 'fichaPersona',
+      url: '/person/:fichaId',
+      views: {
+        'container@': {
+          templateUrl: 'templates/fichas/persona.html'
         }
       }
     }

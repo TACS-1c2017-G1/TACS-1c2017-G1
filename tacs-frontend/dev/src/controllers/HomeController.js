@@ -6,8 +6,7 @@ myApp.controller('HomeController', function($scope, BusquedasService, Usuario) {
   var movies = {
     name: "Movies",
     titleLabel: "Titulo",
-    url: "movie/",
-    mostrarPoster: true
+    url: "movie/"
   };
   var people = {
     name: "People",

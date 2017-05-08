@@ -19,7 +19,7 @@
     <thead>
       <tr>
         <th>#</th>
-        <th ng-show="ultimaBusquedaPor.mostrarPoster">Poster</th>
+        <th>Poster</th>
         <th ng-show="ultimaBusquedaPor.mostrarTipo">Tipo</th>
         <th>{{ultimaBusquedaPor.titleLabel}}</th>
         <th ng-show="ultimaBusquedaPor.agregarFavorito">Accion</th>
@@ -28,10 +28,14 @@
     <tr ng-repeat="item in resultados">
       <td>{{item.id}}</td>
       <td>
-        <img src="http://image.tmdb.org/t/p/w92{{item.poster_path}}" />
+        <img ng-show="item.poster_path!=null" ng-src="http://image.tmdb.org/t/p/w92/{{item.poster_path}}" />
+        <img ng-show="item.profile_path!=null" ng-src="http://image.tmdb.org/t/p/w92/{{item.profile_path}}" />
       </td>
       <td ng-show="ultimaBusquedaPor.mostrarTipo">{{item.media_type}}</td>
-      <td><a ui-sref="fichaPelicula({movieId:item.id})">{{item.title}}{{item.name}}</a></td>
+      <td>
+        <a ng-show="item.title!=null" ui-sref="fichaPelicula({fichaId:item.id})">{{item.title}}</a>
+        <a ng-show="item.name!=null" ui-sref="fichaPersona({fichaId:item.id})">{{item.name}}</a>
+      </td>
       <td ng-show="ultimaBusquedaPor.agregarFavorito">
         <button type="button" title="Agregar como favorito" class="btn btn-success" ng-click="agregarComoFavorito(item)">
                     <span class="glyphicon glyphicon-heart"></span>
