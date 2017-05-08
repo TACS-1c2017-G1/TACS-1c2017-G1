@@ -19,5 +19,4 @@
 */.idea
 *.iml
 */node_modules
-tacs-frontend/dev/bundle.js
-tacs-frontend/docs/
+*/bundle.js

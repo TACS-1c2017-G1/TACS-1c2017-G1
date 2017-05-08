@@ -1,0 +1,50 @@
+<div ng-controller="fichaPeliculaController">
+  <h1>{{movie.title}}</h1>
+
+  <h2>Overview</h2>
+  <p>{{movie.overview}}</p>
+  <h2>Reviews</h2>
+  <table>
+    <tr>
+      <th>Author</th>
+      <th>Content</th>
+    </tr>
+    <tr ng-repeat="review in movie.review">
+      <td>{{review.author}}</td>
+      <td>
+        <a style="color:black; text-decoration: none;">
+          <p style="color:black; text-decoration: none;">{{review.content}}</p>
+        </a>
+      </td>
+    </tr>
+  </table>
+  <h2>Cast</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>Actor name</th>
+        <th>Character</th>
+      </tr>
+      <tr ng-repeat="actorEnPelicula in movie.cast">
+        <td>
+          <a style="color:black; text-decoration: none;" href="#">
+            <p style="color:black; text-decoration: none;">{{actorEnPelicula.name}}</p>
+          </a>
+        </td>
+        <td>{{actorEnPelicula.character}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <h2>Backdrops</h2>
+    <a ng-repeat="backdrop in movie.backdrops" target="_blank" href="{{backdrop.baseUrl}}original{{backdrop.filePath}}">
+      <img src="{{backdrop.baseUrl}}w300{{backdrop.filePath}}" />
+    </a>
+  </div>
+  <div>
+    <h2>Posters</h2>
+    <a ng-repeat="poster in movie.posters" target="_blank" href="{{poster.baseUrl}}original{{poster.filePath}}">
+      <img src="{{poster.baseUrl}}w92{{poster.filePath}}" />
+    </a>
+  </div>
+</div>

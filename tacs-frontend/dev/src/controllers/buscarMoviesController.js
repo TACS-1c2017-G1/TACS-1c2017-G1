@@ -1,32 +1,10 @@
-myApp.controller('buscarMoviesController', function ($scope, $http) {
+myApp.controller('fichaPeliculaController', function($scope, $http, $stateParams) {
 
-    $scope.movies = [
-        {
-            title: 'bla',
-            id: '1',
-            overview: 'buena'
-        },
-        {
-            title: 'ble',
-            id: '2',
-            overview: 'mala'
-        }
-    ]
-
-
-    var req = {
-        method: 'GET',
-        url: 'localhost:8080/search/movie/house',
-        headers: {
-            'Token': 1
-        }
-
+  $http.get('http://localhost:8080/movie/' + $stateParams.movieId, {
+    headers: {
+      "Token": '12345'
     }
-
-    $http(req).then(function successCallback(response) {
-        $scope.movies = response
-    }, function errorCallback(response) {
-        $scope.movies = response
-    });
-
+  }).then(function(response) {
+    $scope.movie = response.data;
+  })
 });
