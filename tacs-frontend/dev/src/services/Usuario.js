@@ -45,6 +45,17 @@ myApp.service('Usuario', function ($http, $rootScope) {
             }
         );
     };
+    self.getRankingActoresFavoritos = function () {
+        return $http.get('http://localhost:8080/user/favoriteactor/ranking',
+            {
+                headers: {
+                    'token': $rootScope.sesionActual.idSesion
+                }
+            }
+        );
+    }
+
+
 
 })
 ;

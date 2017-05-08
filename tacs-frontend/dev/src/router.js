@@ -101,7 +101,16 @@ myApp.config(function($stateProvider) {
           templateUrl: 'templates/fichas/persona.html'
         }
       }
-    }
+    },
+{
+  name: 'rankingActoresFavoritos',
+    url: '/ranking',
+  views: {
+  'container@': {
+    templateUrl: 'templates/admin/rankingActoresFavoritos.html'
+  }
+}
+}
 
   ]
 
