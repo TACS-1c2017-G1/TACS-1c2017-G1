@@ -23,7 +23,7 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
     self.getListas();
 
     self.cleanSelected = function () {
-        self.intersection = [];
+        self.intersection = undefined;
         $scope.listas.map(function (l) {
             l.selected = false;
         })
