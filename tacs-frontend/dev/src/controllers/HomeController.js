@@ -1,7 +1,7 @@
 /**
  * Created by Rodrigo on 01/05/2017.
  */
-myApp.controller('HomeController', function ($scope, BusquedasService) {
+myApp.controller('HomeController', function ($scope, BusquedasService, Usuario) {
 
     $scope.buscar = function (textoABuscar) {
         if (!textoABuscar)
@@ -16,6 +16,20 @@ myApp.controller('HomeController', function ($scope, BusquedasService) {
                 else
                     $scope.resultados = response.data.results;
             })
+    }
+
+    $scope.agregarComoFavorito = function (actor) {
+
+        if (actor.media_type !== 'person') {
+            alert('Lo que selecciono no es un actor');
+            return;
+        }
+
+        Usuario.marcarActorFavorito(actor.id)
+            .then(function() {
+                alert('Actor agregado.')
+            });
+
     }
 
 });

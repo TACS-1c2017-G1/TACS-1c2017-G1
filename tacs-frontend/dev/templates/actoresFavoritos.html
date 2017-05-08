@@ -1,19 +1,24 @@
-<div class="text-center container" ng-controller="favoritosController" ng-hide="actoresFavoritos.length = 0">
+<div class="text-center container" ng-controller="favoritosController" ng-show="actoresFavoritos.length > 0">
   <table class="table table-striped">
     <tbody>
     <tr>
       <th>#</th>
       <th>Nombre</th>
-      <th>Biografía</th>
+      <th>Accion</th>
     </tr>
     <tr ng-repeat="actor in actoresFavoritos">
       <td>{{actor.id}}</td>
       <td>{{actor.name}}</td>
-      <td>{{actor.bio}}</td>
+      <td>
+        <button type="button" title="Quitar de favoritos" class="btn btn-danger" ng-click="sacarDeFavorito(actor)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
 </div>
-<div class="text-center" ng-show="actoresFavoritos.length = 0" >
-  <h4>Todavía no has seleccionado ningun actor como favorito.</h4>
-</div>
+
+<!--<div class="text-center" ng-show="actoresFavoritos">-->
+  <!--<h4>Todavía no has seleccionado ningun actor como favorito.</h4>-->
+<!--</div>-->
