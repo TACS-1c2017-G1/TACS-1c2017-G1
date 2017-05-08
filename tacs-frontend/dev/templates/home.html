@@ -17,12 +17,18 @@
             <th>#</th>
             <th>Tipo</th>
             <th>Titulo</th>
+            <th>Accion</th>
         </tr>
         </thead>
         <tr ng-repeat="item in resultados">
             <td>{{item.id}}</td>
             <td>{{item.media_type}}</td>
             <td><a ui-sref="fichaPelicula({movieId:item.id})">{{item.title}}{{item.name}}</a></td>
+            <td>
+                <button type="button" title="Agregar como favorito" class="btn btn-success" ng-click="agregarComoFavorito(item)">
+                    <span class="glyphicon glyphicon-heart"></span>
+                </button>
+            </td>
         </tr>
     </table>
 
