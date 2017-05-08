@@ -1,35 +1,43 @@
 <div class="container" ng-controller="HomeController">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <div class="input-group search-panel">
-                <input type="text" class="form-control" autofocus ng-model="textoDeBusqueda">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="buscar(textoDeBusqueda)"><span
-                            class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
+  <div class="input-group">
+    <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn" uib-dropdown-toggle>{{search.by.name}}<span class="caret"></span>
+            </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li ng-repeat="option in search.options">
+          <a href="" ng-click="search.by=option">{{option.name}}</a>
+        </li>
+      </ul>
     </div>
+    <input ng-model="search.query" type="text" class="form-control" placeholder="Search..." />
+    <span class="input-group-btn">
+              <button ng-click="buscar(search.by,search.query)" ng-disabled="search.query.length == 0" class="btn glyphicon glyphicon-search" type="button"></button>
+            </span>
+  </div>
 
-    <table class="table table-striped" ng-show="resultados.length > 0">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Tipo</th>
-            <th>Titulo</th>
-            <th>Accion</th>
-        </tr>
-        </thead>
-        <tr ng-repeat="item in resultados">
-            <td>{{item.id}}</td>
-            <td>{{item.media_type}}</td>
-            <td><a ui-sref="fichaPelicula({movieId:item.id})">{{item.title}}{{item.name}}</a></td>
-            <td>
-                <button type="button" title="Agregar como favorito" class="btn btn-success" ng-click="agregarComoFavorito(item)">
+  <table class="table table-striped" ng-show="resultados.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th ng-show="ultimaBusquedaPor.mostrarPoster">Poster</th>
+        <th ng-show="ultimaBusquedaPor.mostrarTipo">Tipo</th>
+        <th>{{ultimaBusquedaPor.titleLabel}}</th>
+        <th ng-show="ultimaBusquedaPor.agregarFavorito">Accion</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="item in resultados">
+      <td>{{item.id}}</td>
+      <td>
+        <img src="http://image.tmdb.org/t/p/w92{{item.poster_path}}" />
+      </td>
+      <td ng-show="ultimaBusquedaPor.mostrarTipo">{{item.media_type}}</td>
+      <td><a ui-sref="fichaPelicula({movieId:item.id})">{{item.title}}{{item.name}}</a></td>
+      <td ng-show="ultimaBusquedaPor.agregarFavorito">
+        <button type="button" title="Agregar como favorito" class="btn btn-success" ng-click="agregarComoFavorito(item)">
                     <span class="glyphicon glyphicon-heart"></span>
                 </button>
-            </td>
-        </tr>
-    </table>
+      </td>
+    </tr>
+  </table>
 
 </div>
