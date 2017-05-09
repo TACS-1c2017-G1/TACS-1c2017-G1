@@ -2,7 +2,9 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
+import app.repositories.RepositorioDeActores;
 import app.repositories.RepositorioDeListas;
+import app.repositories.RepositorioDePeliculas;
 import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,19 +114,21 @@ public class UserService {
 	}
 
 
-	public List<ActorEnPelicula> rankingDeActoresPorMayorRepeticion(String token, Long idlistaDePeliculas) {
+	public List<Actor> rankingDeActoresPorMayorRepeticion(String token, String idlistaDePeliculas) {
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
+		Integer id = Integer.parseInt(idlistaDePeliculas);
 
 		MovieList listaDePeliculas = usuario.getLists().stream()
-				.filter(movieList -> movieList.getId() == idlistaDePeliculas).findFirst()
+				.filter(movieList -> movieList.getId() == id).findFirst()
 				.orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
-
+		
+	
 		List<ActorEnPelicula> actoresEnPeliculas = obtenerTodosLosActoresEnPeliculas(listaDePeliculas.getMovies());
 
-		Map<ActorEnPelicula, Integer> aparicionDeActores = mapearPorRepeticionesLosActoresEnPeliculas(
+		Map<Actor, Integer> aparicionDeActores = mapearPorRepeticionesLosActoresEnPeliculas(
 				actoresEnPeliculas);
 
-		List<ActorEnPelicula> actoresOrdenados = aparicionDeActores.entrySet().stream()
+		List<Actor> actoresOrdenados = aparicionDeActores.entrySet().stream()
 				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).map(Map.Entry::getKey)
 				.collect(Collectors.toList());
 		// TODO en el futuro podemos ver la posibilidad de devolver actor en vez
@@ -132,10 +136,10 @@ public class UserService {
 		return actoresOrdenados;
 	}
 
-	private Map<ActorEnPelicula, Integer> mapearPorRepeticionesLosActoresEnPeliculas(
+	private Map<Actor, Integer> mapearPorRepeticionesLosActoresEnPeliculas(
 			List<ActorEnPelicula> actoresEnPeliculas) {
-		Map<ActorEnPelicula, Integer> aparicionDeActores = new HashMap<>();
-		actoresEnPeliculas.forEach(actorEnPelicula -> evaluarApariciones(actorEnPelicula, aparicionDeActores));
+		Map<Actor, Integer> aparicionDeActores = new HashMap<>();
+		actoresEnPeliculas.forEach(actorEnPelicula -> evaluarApariciones(actorEnPelicula.getActorId(), aparicionDeActores));
 		return aparicionDeActores;
 	}
 
@@ -145,11 +149,12 @@ public class UserService {
 		return actoresEnPeliculas;
 	}
 
-	private void evaluarApariciones(ActorEnPelicula actor, Map<ActorEnPelicula, Integer> aparicionDeActores) {
+	private void evaluarApariciones(Integer idActor, Map<Actor, Integer> aparicionDeActores) {
 
+		Actor actor = RepositorioDeActores.getInstance().search(idActor);
 		if (aparicionDeActores.containsKey(actor)) {
 			Integer valor = aparicionDeActores.get(actor);
-			aparicionDeActores.replace(actor, valor++);
+			aparicionDeActores.replace(actor, ++valor);
 		} else
 			aparicionDeActores.put(actor, 1);
 	}

@@ -38,6 +38,12 @@ public class ActorEnPelicula {
 		this.setMovieTitle(jsonCredit.getString("title"));
 	}
 
+	public ActorEnPelicula(int actorId,int movieId) {
+		super();
+		this.movieId = movieId;
+		this.actorId = actorId;
+	}
+
 	/**
 	 * @return the actorId
 	 */

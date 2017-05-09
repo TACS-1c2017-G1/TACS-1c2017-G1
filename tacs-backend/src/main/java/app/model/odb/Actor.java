@@ -4,6 +4,9 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
+import app.repositories.RepositorioDeActores;
+import app.repositories.RepositorioDePeliculas;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,9 +50,17 @@ public class Actor {
 		this.setActorEnPeliculas(id);
 		return this.getJsonResponse();
 	}
+	
+	public Actor(){
+		super();
+	}
 
-	public Actor() {
-		// TODO Auto-generated constructor stub
+	public static Actor create(int id, String nombre) {
+		Actor actor = new Actor();
+		actor.setId(id);
+		actor.setName(nombre);
+		RepositorioDeActores.getInstance().insert(actor);
+		return actor;
 	}
 
 	private void setImages(String id) throws JSONException, IOException {

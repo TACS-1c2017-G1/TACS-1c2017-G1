@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -28,7 +29,7 @@ public class UserController {
 
 	@RequestMapping(value = "/ranking/{idlistaDePeliculas}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<ActorEnPelicula> rankingDeActores(@RequestHeader String token, @PathVariable Long idlistaDePeliculas)
+	public List<Actor> rankingDeActores(@RequestHeader String token, @PathVariable String idlistaDePeliculas)
 			throws JSONException, IOException {
 		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token, idlistaDePeliculas);
 	}

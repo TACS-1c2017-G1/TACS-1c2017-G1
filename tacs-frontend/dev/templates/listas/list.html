@@ -22,21 +22,27 @@
                 <th></th>
                 <th>#</th>
                 <th>Nombre</th>
+                <th></th>
             </tr>
             </thead>
             <tr ng-repeat="list in listas">
                 <td>
-                    <label> Seleccione para comparar:
-                        <input type="checkbox" ng-model="list.selected">
-                    </label>
+                    <input type="checkbox" ng-model="list.selected">
                 </td>
                 <td> {{list.id}}</td>
                 <td> {{list.name}}</td>
                 <td>
                     <select ng-model="peliculaAQuitar" ng-options="movie.title for movie in list.movies">
                     </select>
-                    <button type="button" title="Quitar de lista" class="btn btn-danger" ng-click="quitarDeLista(peliculaAQuitar,list)">
+                    <button type="button" title="Quitar de lista" class="btn btn-danger"
+                            ng-click="quitarDeLista(peliculaAQuitar,list)">
                         <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info" ng-click="listCtrl.getActores(list.id)">
+                    <span class="glyphicon glyphicon-list-alt">
+                        </span> Ver actores
                     </button>
                 </td>
             </tr>
@@ -44,6 +50,15 @@
     </div>
     <br>
     <div class="text-center">
+        <div ng-show="listCtrl.actores" class="ng-cloak">
+            <div class="panel panel-default panel-info panel-modest">
+                <div class="panel-heading">Ranking actores</div>
+                <div class="panel-body" ng-repeat="actor in listCtrl.actores">
+                    <p>{{listCtrl.actores.indexOf(actor)+1}}.{{actor.name}}</p>
+                </div>
+            </div>
+        </div>
+        <br>
         <div ng-show="listCtrl.intersection" class="ng-cloak">
             <div class="panel panel-default panel-info panel-modest">
                 <div class="panel-heading">Películas encontradas</div>
