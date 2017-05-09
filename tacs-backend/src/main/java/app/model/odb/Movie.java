@@ -4,7 +4,6 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
-import app.repositories.RepositorioDePeliculas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -220,7 +219,6 @@ public class Movie {
 		Movie movie = new Movie();
 		movie.setId(movieId);
 		movie.setTitle(movieName);
-		RepositorioDePeliculas.getInstance().insert(movie);
 		return movie;
 	}
 

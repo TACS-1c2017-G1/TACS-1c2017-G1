@@ -2,9 +2,7 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
-import app.repositories.RepositorioDeActores;
 import app.repositories.RepositorioDeListas;
-import app.repositories.RepositorioDePeliculas;
 import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,12 +149,16 @@ public class UserService {
 
 	private void evaluarApariciones(Integer idActor, Map<Actor, Integer> aparicionDeActores) {
 
-		Actor actor = RepositorioDeActores.getInstance().search(idActor);
-		if (aparicionDeActores.containsKey(actor)) {
-			Integer valor = aparicionDeActores.get(actor);
-			aparicionDeActores.replace(actor, ++valor);
-		} else
-			aparicionDeActores.put(actor, 1);
+		try {
+			Actor actor = new Actor(idActor.toString());
+			if (aparicionDeActores.containsKey(actor)) {
+				Integer valor = aparicionDeActores.get(actor);
+				aparicionDeActores.replace(actor, ++valor);
+			} else
+				aparicionDeActores.put(actor, 1);
+		} catch (JSONException | IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

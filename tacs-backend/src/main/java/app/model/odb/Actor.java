@@ -4,8 +4,6 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
-import app.repositories.RepositorioDeActores;
-import app.repositories.RepositorioDePeliculas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +57,6 @@ public class Actor {
 		Actor actor = new Actor();
 		actor.setId(id);
 		actor.setName(nombre);
-		RepositorioDeActores.getInstance().insert(actor);
 		return actor;
 	}
 
