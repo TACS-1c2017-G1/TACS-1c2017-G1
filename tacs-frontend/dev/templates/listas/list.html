@@ -32,21 +32,27 @@
                 </td>
                 <td> {{list.id}}</td>
                 <td> {{list.name}}</td>
-
+                <td>
+                    <select ng-model="peliculaAQuitar" ng-options="movie.title for movie in list.movies">
+                    </select>
+                    <button type="button" title="Quitar de lista" class="btn btn-danger" ng-click="quitarDeLista(peliculaAQuitar,list)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
             </tr>
         </table>
     </div>
     <br>
     <div class="text-center">
-    <div ng-show="listCtrl.intersection" class="ng-cloak">
-        <div class="panel panel-default panel-info panel-modest">
-            <div class="panel-heading">Películas encontradas</div>
-            <div class="panel-body" ng-repeat="movie in listCtrl.intersection">
-                <p>{{movie.title}}<br></p>
+        <div ng-show="listCtrl.intersection" class="ng-cloak">
+            <div class="panel panel-default panel-info panel-modest">
+                <div class="panel-heading">Películas encontradas</div>
+                <div class="panel-body" ng-repeat="movie in listCtrl.intersection">
+                    <p>{{movie.title}}<br></p>
+                </div>
             </div>
         </div>
-    </div>
-    <br>
+        <br>
         <div class="btn-group">
             <button type="button" ng-click="listCtrl.compareSelected()" class="btn btn-primary">
                         <span class="glyphicon glyphicon-list">
