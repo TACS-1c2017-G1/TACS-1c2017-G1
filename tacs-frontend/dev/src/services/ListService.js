@@ -20,4 +20,29 @@ myApp.service('ListService', function ($http, $rootScope) {
         })
     };
 
+    self.agregarALista = function (pelicula, lista) {
+        return $http.post('http://localhost:8080/list/' + lista.id + '/', pelicula, {
+            headers: {'token': $rootScope.sesionActual.idSesion}
+        });
+    };
+
+    self.quitarDeLista = function (pelicula, lista) {
+        // return $http({
+        //     method: 'DELETE',
+        //     url: 'http://localhost:8080/list/' + lista.id + '/',
+        //     data: {
+        //         movie: pelicula
+        //     },
+        //     headers: {
+        //         'token': $rootScope.sesionActual.idSesion
+        //     }
+        // });
+        return $http.delete('http://localhost:8080/list/' + lista.id + '/',{
+            data: {movie: pelicula},
+            headers: {'token': $rootScope.sesionActual.idSesion}
+        });
+
+
+    };
+
 });

@@ -40,7 +40,7 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 
 	@Override
 	public void delete(MovieList lista) {
-		listas.remove(lista.getId());
+		listas.remove(lista);
 
 	}
 

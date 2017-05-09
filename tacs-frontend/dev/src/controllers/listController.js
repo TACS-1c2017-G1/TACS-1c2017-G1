@@ -20,8 +20,6 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
             });
     }
 
-    self.getListas();
-
     self.cleanSelected = function () {
         self.intersection = undefined;
         $scope.listas.map(function (l) {
@@ -47,7 +45,14 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
                     self.intersection = response.data;
                 })
         }
-
     }
+
+    $scope.quitarDeLista = function (peliculaAQuitar,list) {
+        //list.remove(list.indexOf(peliculaAQuitar));
+        ListService.quitarDeLista(peliculaAQuitar,list);
+    };
+
+
+    self.getListas();
 
 });

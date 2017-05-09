@@ -35,7 +35,7 @@ public class ListasService {
 
 	public void agregarItem(Movie movie, int id_list, String token) {
 		this.getRepositorioPelicuas().insert(movie);
-		this.consultarLista(id_list, token).addMovie(movie);
+		this.consultarLista(id_list, token);
 		MovieList lista = this.getRepositorioListas().search(id_list);
 		lista.addMovie(movie);
 		this.getRepositorioListas().update(lista);
