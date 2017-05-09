@@ -4,6 +4,7 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,6 +78,10 @@ public class Movie {
 	 */
 	public List<ActorEnPelicula> getCast() {
 		return cast;
+	}
+	
+	public void setCast(List<ActorEnPelicula> cast) {
+		this.cast = cast;
 	}
 
 	/**

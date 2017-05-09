@@ -8,6 +8,14 @@ myApp.service('ListService', function ($http, $rootScope) {
         }).then(callback);
     };
 
+    self.getAct = function (sesionActual, lista, callback) {
+        return $http.get('http://localhost:8080/user/ranking/' + lista, {
+            headers: {'token': sesionActual.idSesion}
+        }).then(callback);
+    };
+
+
+
     self.intersection = function (lista1, lista2, sesionActual, callback) {
         return $http.get('http://localhost:8080/list/' + lista1.id + '/' + lista2.id, {
             headers: {'token': sesionActual.idSesion}
