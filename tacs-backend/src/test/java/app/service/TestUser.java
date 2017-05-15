@@ -50,7 +50,7 @@ public class TestUser {
 		MovieList lista1 = MovieList.create("Lista 1", pelis1);
 		listas1.add(lista1);
 		RepositorioDeListas.getInstance().insert(lista1);
-		MovieList lista2 = MovieList.create("Lista 2", pelis1);
+		MovieList lista2 = MovieList.create("Lista 2", pelis2);
 		listas2.add(lista2);
 		RepositorioDeListas.getInstance().insert(lista2);
 
@@ -62,12 +62,14 @@ public class TestUser {
 		usuario2.setId(50);
 		usuario2.setLists(listas2);
 		
-		
+		Integer lista1Id = usuario1.getLists().get(0).getId();
+		Integer lista2Id = usuario2.getLists().get(0).getId();
+
 		RepositorioDeUsuarios.getInstance().insert(usuario1);
 		RepositorioDeUsuarios.getInstance().insert(usuario2);
 		List<Movie> interseccion = new ArrayList<Movie>();
 		interseccion.add(Movie.create(100,"Star Wars"));
-		Assert.assertEquals(adminService.obtenerInterseccionListas("100", "50"),interseccion);
+		Assert.assertEquals(adminService.obtenerInterseccionListas(lista1Id.toString(), lista2Id.toString()),interseccion);
 	}
 	
 	@Test

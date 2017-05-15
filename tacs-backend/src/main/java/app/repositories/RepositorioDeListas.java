@@ -13,7 +13,7 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 		return ourInstance;
 	}
 
-	private ArrayList<MovieList> listas;
+	private static ArrayList<MovieList> listas;
 
 	private RepositorioDeListas() {
 		this.listas = new ArrayList<MovieList>();
