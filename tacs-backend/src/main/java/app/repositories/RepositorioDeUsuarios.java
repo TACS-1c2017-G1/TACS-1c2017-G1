@@ -19,7 +19,7 @@ public class RepositorioDeUsuarios implements IRepositorio<User> {
 
     private ArrayList<User> usuarios;
 
-    private RepositorioDeUsuarios() {
+    public RepositorioDeUsuarios() {
         this.usuarios = new ArrayList<>();
     }
 

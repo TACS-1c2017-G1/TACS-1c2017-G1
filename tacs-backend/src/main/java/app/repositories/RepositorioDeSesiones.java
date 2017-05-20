@@ -18,7 +18,7 @@ public class RepositorioDeSesiones implements IRepositorio<Sesion> {
 
 	private static ArrayList<Sesion> sesiones;
 
-	private RepositorioDeSesiones() {
+	public RepositorioDeSesiones() {
 		sesiones = new ArrayList<Sesion>();
 	}
 
