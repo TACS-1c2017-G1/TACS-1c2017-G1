@@ -13,7 +13,7 @@ public class MongoConfig {
     public
     @Bean
     MongoDbFactory mongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(new MongoClient(), "storeApp");
+        return new SimpleMongoDbFactory(new MongoClient(), "theMovieDB-g1");
     }
 
     public
