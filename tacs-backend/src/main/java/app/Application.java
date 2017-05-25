@@ -1,9 +1,7 @@
 package app;
 
-import app.repositories.RepositorioDeUsuarios;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -23,8 +21,6 @@ public class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    @Autowired
-    private static RepositorioDeUsuarios repositorioDeUsuarios;
 
     public static void main(String[] args) {
 
