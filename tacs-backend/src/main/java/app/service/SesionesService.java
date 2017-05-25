@@ -5,33 +5,40 @@ import app.model.odb.Sesion;
 import app.model.odb.User;
 import app.repositories.RepositorioDeSesiones;
 import app.repositories.RepositorioDeUsuarios;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class SesionesService {
 
-    private RepositorioDeSesiones getRepositorio(){
-        return RepositorioDeSesiones.getInstance();
-    }
+    @Autowired
+    RepositorioDeUsuarios repositorioDeUsuarios;
 
     public Sesion loguearUsuario(Credencial credencial) {
-        User user = RepositorioDeUsuarios.getInstance().searchByUsername(credencial.getUsername());
-        if(!user.getCredencial().getPassword().equals(credencial.getPassword())){
+        this.crearAdminSiNoExiste();
+        User user = repositorioDeUsuarios.findByUsername(credencial.getUsername());
+        if(user == null || !user.getPassword().equals(credencial.getPassword())){
             throw new RuntimeException("Usuario y/o contraseña inválida");
         }
-        Sesion nuevaSesion =Sesion.create(user.getCredencial().getUsername(), user.getAdmin());
-        this.getRepositorio().insert(nuevaSesion);
+        Sesion nuevaSesion =Sesion.create(user.getUsername(), user.getAdmin());
+        RepositorioDeSesiones.getInstance().insert(nuevaSesion);
         user.setLastAccess(Calendar.getInstance().getTime());
         return nuevaSesion;
     }
 
+    private void crearAdminSiNoExiste() {
+        User userAdmin = User.create(Credencial.create("admin","admin"),true);
+        if(repositorioDeUsuarios.findByUsername("admin") == null){
+            repositorioDeUsuarios.insert(userAdmin);
+        }
+    }
+
     public void desloguearUsuario(String token) {
-        Sesion sesionADesactivar = this.getRepositorio().searchById(token);
+        Sesion sesionADesactivar = RepositorioDeSesiones.getInstance().searchById(token);
         sesionADesactivar.desactivarSesion();
-        this.getRepositorio().update(sesionADesactivar);
+        RepositorioDeSesiones.getInstance().update(sesionADesactivar);
 
     }
     
@@ -39,9 +46,9 @@ public class SesionesService {
     public User obtenerUsuarioPorToken( String token ) {
         if (token == null)
             throw new RuntimeException("Token nulo, no se puede realizar la operación.");
-        Sesion sesion = this.getRepositorio().searchById(token);
+        Sesion sesion = RepositorioDeSesiones.getInstance().searchById(token);
         validarSesionActiva(sesion);
-        return RepositorioDeUsuarios.getInstance().searchByUsername(sesion.getUsername());
+        return repositorioDeUsuarios.findByUsername(sesion.getUsername());
     }
 
 
