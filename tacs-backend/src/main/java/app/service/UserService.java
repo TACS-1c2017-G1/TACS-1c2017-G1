@@ -2,7 +2,6 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
-import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +21,17 @@ public class UserService {
 	@Autowired
 	SesionesService sesionesService;
 
-	private RepositorioDeUsuarios getRepositorio() {
-		return RepositorioDeUsuarios.getInstance();
-	}
+	@Autowired
+	RepositorioDeUsuarios repositorioDeUsuarios;
+
 
 	public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
 		User usuarioNuevo = User.create(userAndPassword, false);
-		this.getRepositorio().insert(usuarioNuevo);
+		repositorioDeUsuarios.insert(usuarioNuevo);
 	}
 
-	public ArrayList<User> obtenerUsuarios() {
-		return this.getRepositorio().getUsers();
+	public List<User> obtenerUsuarios() {
+		return repositorioDeUsuarios.findAll();
 	}
 
 	public RespuestaDto maracarActorFavorito(String token, String idActor) throws JSONException, IOException {
@@ -161,4 +160,7 @@ public class UserService {
 		}
 	}
 
+	public void borrarTodo() {
+		repositorioDeUsuarios.deleteAll();
+	}
 }
