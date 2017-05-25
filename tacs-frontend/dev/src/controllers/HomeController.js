@@ -37,19 +37,20 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
         if (!textoABuscar)
             return;
 
-        if(buscarPor.agregarLista)
+        if (buscarPor.agregarLista)
             Usuario.getListas()
                 .then(function (response) {
                     $scope.listas = response.data;
                 });
 
-        BusquedasService.buscar(buscarPor.url, textoABuscar)
+        BusquedasService.buscar(buscarPor.url, textoABuscar, $scope.numeroDePagina)
             .then(function (response) {
                 if (response.data.results <= 0) {
                     alert("Lo sentimos, no se encontraron resultados para \"" + textoABuscar + "\"");
                     $scope.resultados = [];
                 } else
                     $scope.resultados = response.data.results;
+                $scope.cantidadDeResultados = response.data.total_results;
                 $scope.ultimaBusquedaPor = buscarPor;
             })
     };
@@ -66,10 +67,20 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
             return;
         }
     };
-    
+
     $scope.agregarALista = function (pelicula, lista) {
-        ListService.agregarALista(pelicula,lista);
+        if (lista)
+            ListService.agregarALista(pelicula, lista)
+                .then(function () {
+                    alert('Pelicula agregada correctamente.');
+                });
     }
+
+    $scope.obtenerPagina = function () {
+        $scope.buscar($scope.search.by, $scope.search.query);
+    }
+
+    $scope.numeroDePagina = 1;
 
 
 });
