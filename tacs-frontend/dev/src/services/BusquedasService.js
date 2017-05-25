@@ -5,7 +5,7 @@ myApp.service('BusquedasService', function($http) {
 
   var self = this;
 
-  self.buscar = function(url, textoDeBusqueda) {
+  self.buscar = function(url, textoDeBusqueda, numeroDePagina) {
     return $http.get('http://localhost:8080/search/' + url + textoDeBusqueda.split(' ').join('-'), {
       headers: {
         "Token": '12345'
