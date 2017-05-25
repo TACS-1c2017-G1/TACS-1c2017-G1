@@ -3,18 +3,27 @@
  */
 package app.model.odb;
 
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
+
+@Entity
 public class User {
-	private Integer id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+
+	@Id
+	private Integer id;
+
+	@Embedded
 	private Credencial credencial;
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;

@@ -11,7 +11,7 @@ public class Initializer {
 
     public static Initializer create() {
         Initializer initializer = new Initializer();
-        User admin = User.create(Credencial.create("admin", "admin"), true);
+        User admin = User.create(Credencial.create("admin", "admin"     ), true);
         RepositorioDeUsuarios.getInstance().insert(admin);
         return initializer;
     }
