@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.model.odb.Actor;
@@ -13,8 +14,11 @@ import app.model.odb.MovieList;
 import app.model.tmdb.TMDbStatic;
 
 @Service
-public abstract class BusquedasService {
-
+public class BusquedasService {
+	
+	@Autowired
+	SesionesService sesionesService;
+/*
 	public static MovieList buscarPeliculaPorNombre(String query) throws Exception {
 		JSONArray resultJsonArray = buscarPeliculaPorNombreJson(query).getJSONArray("results");
 		MovieList resultList = new MovieList();
@@ -24,12 +28,14 @@ public abstract class BusquedasService {
 		}
 		return resultList;
 	}
-
-	public static JSONObject buscarPeliculaPorNombreJson(String query) throws Exception {
-		return TMDbStatic.getResource("search/movie", query);
+*/
+	public JSONObject buscarPeliculaPorNombreJson(String query, String token, String page) throws Exception {
+		sesionesService.obtenerUsuarioPorToken(token);
+		page = validarFormatoPagina(page);
+		return TMDbStatic.getResource("search/movie", query, page);
 	}
-
-	public static List<Actor> buscarActorPorNombre(String query) throws Exception {
+/*
+	public List<Actor> buscarActorPorNombre(String query) throws Exception {
 		JSONArray resultJsonArray = buscarActorPorNombreJson(query).getJSONArray("results");
 		List<Actor> resultList = new ArrayList<Actor>();
 		for (int i = 0; i < resultJsonArray.length(); i++) {
@@ -39,13 +45,30 @@ public abstract class BusquedasService {
 		}
 		return resultList;
 	}
-
-	public static JSONObject buscarActorPorNombreJson(String query) throws Exception {
-		return TMDbStatic.getResource("search/person", query);
+*/
+	public JSONObject buscarActorPorNombreJson(String query, String token, String page) throws Exception {
+		sesionesService.obtenerUsuarioPorToken(token);
+		return TMDbStatic.getResource("search/person", query, page);
 	}
 
-	public static JSONObject buscarPorNombre(String query) throws Exception {
-		return TMDbStatic.getResource("search/multi", query);
+	public JSONObject buscarPorNombre(String query, String token, String page) throws Exception {
+		sesionesService.obtenerUsuarioPorToken(token);
+		return TMDbStatic.getResource("search/multi", query, page);
+	}
+	
+	
+	private String validarFormatoPagina(String page) {
+		
+		if (page == null || page.length()==0)
+			return null;
+		
+		try {
+			Short.parseShort(page);
+		}
+		catch ( NumberFormatException e) {
+			throw new RuntimeException("El número de página solicitada tiene formato inválido.");
+		}
+		return page;
 	}
 
 }
