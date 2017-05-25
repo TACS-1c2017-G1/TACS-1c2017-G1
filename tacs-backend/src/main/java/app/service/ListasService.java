@@ -23,9 +23,12 @@ public class ListasService {
 	}
 
 	public MovieList crearLista(String name, String token) {
-		MovieList list = MovieList.create(name);
-		sesionesService.obtenerUsuarioPorToken(token).addList(list);
-		this.getRepositorioListas().insert(list);
+		MovieList list = getRepositorioListas().find(name);
+		if (null==list){
+			list = MovieList.create(name);
+			sesionesService.obtenerUsuarioPorToken(token).addList(list);
+			this.getRepositorioListas().insert(list);
+		}
 		return list;
 	}
 
