@@ -164,23 +164,27 @@ Después de importar la llave satisfactoriamente, verá algo como esto:
 
 Output
 ```gpg: Total number processed: 1
-gpg:               imported: 1  (RSA: 1)```
+gpg:               imported: 1  (RSA: 1)
+```
 
 A continuación, debemos agregar los detalles del repositorio de Mongo de tal manera que apt pueda saber de donde descargar los paquetes.
 
 Corriendo el siguiente comando crearemos la lista para MongoDB.
 
-```echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list```
+```echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+```
 
 Después de agregar los detalles del repositorio, debemos actualizar la lista de paquetes.
 
-```sudo apt-get update```
+```sudo apt-get update 
+```
 
 * Paso 2 — Instalando y Verificando MongoDB
 
 Ahora podemos instalar el propio paquete de MongoDB.
 
-```sudo apt-get install -y mongodb-org```
+```sudo apt-get install -y mongodb-org
+```
 
 Este comando instalará diversos paquetes incluyendo la versión estable más reciente de MongoDB seguido de herramientas administrativas para el servidor MongoDB.
 
@@ -213,7 +217,8 @@ La sección Service indica como deberá iniciar el servicio. La directiva User e
 La última sección, Install, le dice a systemd cuando el servicio debe iniciar automáticamente. multi-user.target es un sistema de secuencias de arranque estándar , que significa que el servicio correrá automáticamente al arrancar.
 Lo siguiente, será iniciar el servicio recién creado con systemctl.
 
-```sudo systemctl start mongodb```
+```sudo systemctl start mongodb
+```
 
 Aún cuando este comando no responde con un mensaje, puede utilizar systemctl para revisar que el servicio ha arrancado apropiadamente.
 ```
@@ -231,7 +236,8 @@ Output
 ```
 El último paso es habilitar automáticamente el arranque de MongoDB cuando el sistema inicie.
 
-```sudo systemctl enable mongodb```
+```sudo systemctl enable mongodb
+```
 
 El servidor MongoDB ahora está configurado y corriendo, y usted puede administrar el servicio MongoDB utilizando el comando systemctl (por ejemplo: sudo systemctl mongodb stop, sudo systemctl mongodb start).
 
