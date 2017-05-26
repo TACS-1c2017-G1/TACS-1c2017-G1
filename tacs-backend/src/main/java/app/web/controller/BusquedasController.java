@@ -2,6 +2,7 @@ package app.web.controller;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +13,30 @@ import app.service.BusquedasService;
 @CrossOrigin
 @RequestMapping(value = "/search")
 public class BusquedasController {
+	
+	@Autowired
+	BusquedasService servicioBusquedas;
 
 	@RequestMapping(value = "/movie/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busquedaPeliculaJson(@RequestHeader String Token, @PathVariable String query)
+	public @ResponseBody String busquedaPeliculaJson(@RequestHeader String Token, @PathVariable String query, @RequestParam String page)
 			throws Exception {
-		return BusquedasService.buscarPeliculaPorNombreJson(query).toString();
+		
+		return servicioBusquedas.buscarPeliculaPorNombreJson(query, Token, page).toString();
 	}
 
 	@RequestMapping(value = "/person/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busquedaActorJson(@RequestHeader String Token, @PathVariable String query)
+	public @ResponseBody String busquedaActorJson(@RequestHeader String Token, @PathVariable String query, @RequestParam String page)
 			throws Exception {
-		return BusquedasService.buscarActorPorNombreJson(query).toString();
+		
+		return servicioBusquedas.buscarActorPorNombreJson(query, Token, page).toString();
 	}
 
 	@RequestMapping(value = "/{query}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String busqueda(@RequestHeader String Token, @PathVariable String query) throws Exception {
-		JSONObject respuesta = BusquedasService.buscarPorNombre(query);
+	public @ResponseBody String busqueda(@RequestHeader String Token, @PathVariable String query, @RequestParam String page) throws Exception {
+		JSONObject respuesta = servicioBusquedas.buscarPorNombre(query, Token, page);
 		JSONArray list = new JSONArray();
 		JSONArray jsonArray = respuesta.getJSONArray("results");
 		int len = jsonArray.length();

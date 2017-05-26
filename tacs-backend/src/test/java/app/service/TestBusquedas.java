@@ -32,7 +32,8 @@ public class TestBusquedas {
 
 	@Test(expected = JSONException.class)
 	public void testBuscarPorNombre() throws Exception {
-		BusquedasService.buscarPorNombre("Chaplin").get("statusCode");
+		BusquedasService bs = new BusquedasService();
+		bs.buscarPorNombre("Chaplin", "1234", null).get("statusCode");
 	}
 
 }
