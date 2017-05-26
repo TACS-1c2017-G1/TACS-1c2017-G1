@@ -3,25 +3,33 @@
  */
 package app.model.odb;
 
+import com.querydsl.core.annotations.QueryEntity;
 import org.apache.commons.collections.ListUtils;
+import org.mongodb.morphia.annotations.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
+
+@QueryEntity
+@Document
 public class MovieList {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-	private String name = "";
-	private List<Movie> movies = new ArrayList<Movie>();
+
+	@Id
+	private String id;
+	private String name;
+	private List<Movie> movies;
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -29,7 +37,7 @@ public class MovieList {
 	 * @param id
 	 *            the id to set
 	 */
-	private void setId(int id) {
+	private void setId(String id) {
 		this.id = id;
 	}
 
@@ -60,9 +68,13 @@ public class MovieList {
 	 *            the movies to set
 	 */
 	private void setMovies(List<Movie> movies) {
+		if(movies == null){
+			movies = new ArrayList<>();
+		}
 		this.movies = movies;
 	}
 
+	@PersistenceConstructor
 	public MovieList() {
 	}
 
@@ -70,18 +82,6 @@ public class MovieList {
 		MovieList movieList = new MovieList();
 		movieList.setName(name);
 		movieList.setMovies(movies);
-		return movieList;
-	}
-
-	public static MovieList create(String name) {
-		MovieList movieList = new MovieList();
-		movieList.setName(name);
-		return movieList;
-	}
-
-	public static Object create(int id_list) {
-		MovieList movieList = new MovieList();
-		movieList.setId(id_list);
 		return movieList;
 	}
 

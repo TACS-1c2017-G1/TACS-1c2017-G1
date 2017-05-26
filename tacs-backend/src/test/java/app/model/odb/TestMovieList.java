@@ -1,19 +1,19 @@
 package app.model.odb;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 public class TestMovieList {
 
 	@Test
 	public void interseccionListas() {
-		MovieList lista = MovieList.create("Primer lista");
-		MovieList otraLista = MovieList.create("Segunda lista");
+		MovieList lista = MovieList.create("Primer lista", new ArrayList<>());
+		MovieList otraLista = MovieList.create("Segunda lista", new ArrayList<>());
 		Movie peli = Movie.create(1, "Primer Peli");
 		Movie otraPeli = Movie.create(2, "Segunda peli");
 		lista.addMovie(peli);

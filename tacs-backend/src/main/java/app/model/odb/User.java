@@ -53,7 +53,6 @@ public class User {
 
 	public static User create(Credencial credencial, Boolean esAdmin) throws ExceptionInInitializerError {
 		User user = new User();
-		System.out.println("user id: " + user.getId());
 		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
@@ -190,7 +189,7 @@ public class User {
 		this.lastAccess = lastAccess;
 	}
 
-	public MovieList getList(int id_list){
+	public MovieList getList(String id_list){
 		return lists.stream().filter(movieList -> movieList.getId() == id_list).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
 	}
 

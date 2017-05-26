@@ -2,6 +2,7 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
+import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class UserService {
 
 	@Autowired
 	RepositorioDeUsuarios repositorioDeUsuarios;
+
+	@Autowired
+	RepositorioDeListas repositorioDeListas;
 
 
 	public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
@@ -113,10 +117,9 @@ public class UserService {
 
 	public List<Actor> rankingDeActoresPorMayorRepeticion(String token, String idlistaDePeliculas) {
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
-		Integer id = Integer.parseInt(idlistaDePeliculas);
 
 		MovieList listaDePeliculas = usuario.getLists().stream()
-				.filter(movieList -> movieList.getId() == id).findFirst()
+				.filter(movieList -> movieList.getId() == idlistaDePeliculas).findFirst()
 				.orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
 		
 	

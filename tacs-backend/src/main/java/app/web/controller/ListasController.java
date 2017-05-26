@@ -20,7 +20,7 @@ public class ListasController {
 
 	@RequestMapping(value = "/{id_lista}", method = RequestMethod.GET)
 	@ResponseBody
-	public MovieList consultarLista(@RequestHeader String token, @PathVariable int id_lista) throws Exception {
+	public MovieList consultarLista(@RequestHeader String token, @PathVariable String id_lista) throws Exception {
 		return listasService.consultarLista(id_lista, token);
 	}
 
@@ -32,22 +32,22 @@ public class ListasController {
 
 	@RequestMapping(value = "/{id_lista}/", method = RequestMethod.POST)
 	@ResponseBody
-	public void agregarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable int id_lista)
+	public void agregarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable String id_lista)
 			throws IOException {
     	listasService.agregarItem(movie, id_lista, token);
     }
 
 	@RequestMapping(value = "/{id_lista}/", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void eliminarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable int id_lista)
+	public void eliminarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable String id_lista)
 			throws IOException {
         listasService.eliminarItem(movie, id_lista, token);
     }
 	
 	@RequestMapping(value = "/intersection/{idLista1}/{idLista2}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Movie> calcularInterseccionDe(@RequestHeader String token, @PathVariable Integer idLista1,
-			Integer idLista2) throws IOException {
+	public List<Movie> calcularInterseccionDe(@RequestHeader String token, @PathVariable String idLista1,
+			String idLista2) throws IOException {
 		return listasService.interseccionEntre(idLista1, idLista2, token);
 	}
 
