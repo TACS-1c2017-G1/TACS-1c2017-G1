@@ -33,6 +33,20 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
         by: movies
     };
 
+    function llenarGrillaDeResultados(buscarPor, textoABuscar) {
+        BusquedasService.buscar(buscarPor.url, textoABuscar, $scope.numeroDePagina)
+            .then(function (response) {
+                if (response.data.results <= 0) {
+                    alert("Lo sentimos, no se encontraron resultados para \"" + textoABuscar + "\"");
+                    $scope.resultados = [];
+                } else {
+                    $scope.resultados = response.data.results;
+                    $scope.cantidadDeResultados = response.data.total_results;
+                }
+                $scope.ultimaBusquedaPor = buscarPor;
+            })
+    }
+
     $scope.buscar = function (buscarPor, textoABuscar) {
         if (!textoABuscar)
             return;
@@ -43,16 +57,9 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
                     $scope.listas = response.data;
                 });
 
-        BusquedasService.buscar(buscarPor.url, textoABuscar, $scope.numeroDePagina)
-            .then(function (response) {
-                if (response.data.results <= 0) {
-                    alert("Lo sentimos, no se encontraron resultados para \"" + textoABuscar + "\"");
-                    $scope.resultados = [];
-                } else
-                    $scope.resultados = response.data.results;
-                $scope.cantidadDeResultados = response.data.total_results;
-                $scope.ultimaBusquedaPor = buscarPor;
-            })
+        $scope.numeroDePagina = 1;
+
+        llenarGrillaDeResultados(buscarPor, textoABuscar);
     };
 
     $scope.agregarComoFavorito = function (actor) {
@@ -77,10 +84,9 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
     }
 
     $scope.obtenerPagina = function () {
-        $scope.buscar($scope.search.by, $scope.search.query);
+        llenarGrillaDeResultados($scope.search.by, $scope.search.query);
     }
 
     $scope.numeroDePagina = 1;
-
 
 });

@@ -11,7 +11,7 @@
                     </li>
                 </ul>
             </div>
-            <input ng-model="search.query" type="text" class="form-control" placeholder="Search..."/>
+            <input ng-model="search.query" type="text" class="form-control" placeholder="Que desea buscar?" ng-change="setearPaginaInicial()" />
             <span class="input-group-btn">
               <button ng-click="buscar(search.by,search.query)" ng-disabled="search.query.length == 0"
                       class="btn glyphicon glyphicon-search" type="button"></button>
