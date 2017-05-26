@@ -31,7 +31,6 @@ public class BusquedasService {
 */
 	public JSONObject buscarPeliculaPorNombreJson(String query, String token, String page) throws Exception {
 		sesionesService.obtenerUsuarioPorToken(token);
-		page = validarFormatoPagina(page);
 		return TMDbStatic.getResource("search/movie", query, page);
 	}
 /*
@@ -54,21 +53,6 @@ public class BusquedasService {
 	public JSONObject buscarPorNombre(String query, String token, String page) throws Exception {
 		sesionesService.obtenerUsuarioPorToken(token);
 		return TMDbStatic.getResource("search/multi", query, page);
-	}
-	
-	
-	private String validarFormatoPagina(String page) {
-		
-		if (page == null || page.length()==0)
-			return null;
-		
-		try {
-			Short.parseShort(page);
-		}
-		catch ( NumberFormatException e) {
-			throw new RuntimeException("El número de página solicitada tiene formato inválido.");
-		}
-		return page;
 	}
 
 }
