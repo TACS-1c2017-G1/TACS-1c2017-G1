@@ -40,6 +40,21 @@ public class MovieList {
 		return name;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof MovieList)) return false;
+
+		MovieList movieList = (MovieList) o;
+
+		return getName().equals(movieList.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return getName().hashCode();
+	}
+
 	/**
 	 * @param name
 	 *            the name to set

@@ -1,9 +1,13 @@
 package app.repositories;
 
+import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 public class RepositorioDeListas implements IRepositorio<MovieList> {
@@ -44,4 +48,7 @@ public class RepositorioDeListas implements IRepositorio<MovieList> {
 
 	}
 
+    public MovieList find(String name) {
+		return listas.stream().filter(movieList -> Objects.equals(movieList.getName(), name)).findFirst().orElse(null);
+    }
 }

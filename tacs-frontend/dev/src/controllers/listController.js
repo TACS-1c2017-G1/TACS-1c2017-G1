@@ -7,8 +7,12 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
         ListService.createList(nombre)
             .then(function (response) {
                 $scope.movieList = response.data;
-                $scope.listas.push(response.data);
-                alert('Lista creada con exito.')
+                if($scope.listas.contains(response.data)){
+                    alert('La lista ya existe.')
+                }else{
+                    $scope.listas.push(response.data);
+                    alert('Lista creada con exito.')
+                }
                 $scope.nombre = undefined;
             })
     }
