@@ -9,7 +9,6 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -116,7 +115,7 @@ public class User {
 
 
 	public void createList(String name) {
-		this.getLists().add(MovieList.create(name, Arrays.asList()));
+		this.getLists().add(MovieList.create(name, new ArrayList<Movie>()));
 	}
 
 	public void addList(MovieList movieList) {

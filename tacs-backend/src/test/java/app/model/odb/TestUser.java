@@ -6,6 +6,7 @@ package app.model.odb;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -20,8 +21,8 @@ public class TestUser {
 	Movie movie1 = new Movie();
 	Movie movie2 = new Movie();
 	Movie movie3 = new Movie();
-	MovieList movieList1 = MovieList.create("movieList1", Arrays.asList());
-	MovieList movieList2 = MovieList.create("movieList2", Arrays.asList());
+	MovieList movieList1 = MovieList.create("movieList1", new ArrayList<Movie>());
+	MovieList movieList2 = MovieList.create("movieList2", new ArrayList<Movie>());
 	Actor actor = new Actor();
 
 	/**
@@ -61,22 +62,22 @@ public class TestUser {
 	 * Test method for
 	 * {@link app.model.odb.User#addToList(app.model.odb.MovieList, app.model.odb.Movie)}.
 	 */
-//	@Test
-//	public final void testAddToList() {
-//		user2.addToList(user2.getLists().get(0), movie1);
-//		assertEquals(1, user2.getLists().get(0).size());
-//	}
+	@Test
+	public final void testAddToList() {
+		user2.addToList(user2.getLists().get(0), movie1);
+		assertEquals(1, user2.getLists().get(0).size());
+	}
 
 	/**
 	 * Test method for
 	 * {@link app.model.odb.User#removeFromList(app.model.odb.MovieList, app.model.odb.Movie)}.
 	 */
-//	@Test
-//	public final void testRemoveFromList() {
-//		user2.addToList(user2.getLists().get(0), movie1);
-//		user2.removeFromList(user2.getLists().get(0), movie1);
-//		assertTrue(user2.getLists().get(0).isEmpty());
-//	}
+	@Test
+	public final void testRemoveFromList() {
+		user2.addToList(user2.getLists().get(0), movie1);
+		user2.removeFromList(user2.getLists().get(0), movie1);
+		assertTrue(user2.getLists().get(0).isEmpty());
+	}
 
 	/**
 	 * Test method for
@@ -92,17 +93,17 @@ public class TestUser {
 	 * Test method for
 	 * {@link app.model.odb.User#intersectionBetweenLists(app.model.odb.MovieList, app.model.odb.MovieList)}.
 	 */
-//	@Test
-//	public final void testIntersectionBetweenLists() {
-//		user1.addList(movieList1);
-//		user1.addList(movieList2);
-//		user1.addToList(movieList1, movie1);
-//		user1.addToList(movieList1, movie2);
-//		user1.addToList(movieList2, movie1);
-//		user1.addToList(movieList2, movie3);
-//		assertEquals(1, user1.intersectionBetweenLists(movieList1, movieList2).size());
-//		assertEquals(movie1, user1.intersectionBetweenLists(movieList1, movieList2).get(0));
-//	}
+	@Test
+	public final void testIntersectionBetweenLists() {
+		user1.addList(movieList1);
+		user1.addList(movieList2);
+		user1.addToList(movieList1, movie1);
+		user1.addToList(movieList1, movie2);
+		user1.addToList(movieList2, movie1);
+		user1.addToList(movieList2, movie3);
+		assertEquals(1, user1.intersectionBetweenLists(movieList1, movieList2).size());
+		assertEquals(movie1, user1.intersectionBetweenLists(movieList1, movieList2).get(0));
+	}
 
 	/**
 	 * Test method for
