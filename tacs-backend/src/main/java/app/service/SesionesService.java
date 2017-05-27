@@ -16,6 +16,7 @@ public class SesionesService {
     @Autowired
     RepositorioDeUsuarios repositorioDeUsuarios;
 
+
     public Sesion loguearUsuario(Credencial credencial) {
         this.crearAdminSiNoExiste();
         User user = repositorioDeUsuarios.findByUsername(credencial.getUsername());

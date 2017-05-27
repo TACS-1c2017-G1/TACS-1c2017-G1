@@ -1,16 +1,16 @@
 /**
- * 
+ *
  */
 package app.model.odb;
 
 import com.querydsl.core.annotations.QueryEntity;
-import org.apache.commons.collections.ListUtils;
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author facundo91
@@ -98,11 +98,9 @@ public class MovieList {
 	}
 
 	public List<Movie> intersectionWith(MovieList movieList2) {
-		List<Movie> intersection = new ArrayList<Movie>(
-				ListUtils.intersection(this.getMovies(), movieList2.getMovies()));
+		List<Movie> intersection = this.getMovies().stream().filter(movie -> movieList2.getMovies().stream().anyMatch(m -> m.getId().equals(movie.getId()))).collect(Collectors.toList());
 		return intersection;
 	}
-
 
 	public int size() {
 		return this.getMovies().size();

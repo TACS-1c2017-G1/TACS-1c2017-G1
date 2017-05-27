@@ -34,7 +34,6 @@ public class Actor {
 	private int statusCode;
 	private String statusMessage;
 
-	@PersistenceConstructor
 	public Actor(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
 		try {
@@ -55,7 +54,8 @@ public class Actor {
 		this.setActorEnPeliculas(id);
 		return this.getJsonResponse();
 	}
-	
+
+	@PersistenceConstructor
 	public Actor(){
 		super();
 	}

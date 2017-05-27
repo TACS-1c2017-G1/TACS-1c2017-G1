@@ -53,7 +53,6 @@ public class UserService {
 				usuario.getFavoriteActors().remove(optActor.get());
 				rta.setMessage("Actor favorito removido: " + actor.getName());
 			} else {
-				actor.setId(null);
 				repositorioDeActores.save(actor);
 				usuario.getFavoriteActors().add(actor);
 				repositorioDeUsuarios.save(usuario);
