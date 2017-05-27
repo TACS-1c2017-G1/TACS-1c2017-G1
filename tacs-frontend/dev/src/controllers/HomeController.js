@@ -65,12 +65,12 @@ myApp.controller('HomeController', function ($scope, BusquedasService, Usuario, 
     $scope.agregarComoFavorito = function (actor) {
 
         if ((actor.media_type == 'person') || ($scope.ultimaBusquedaPor == people)) {
-            Usuario.marcarActorFavorito(actor.id)
+            Usuario.marcarActorFavorito(actor)
                 .then(function () {
                     alert('Actor agregado.');
                 });
         } else {
-            alert('Lo que selecciono no es un actor');
+            alert('Lo que seleccionó no es un actor');
             return;
         }
     };

@@ -53,7 +53,6 @@ public class User {
 
 	public static User create(Credencial credencial, Boolean esAdmin) throws ExceptionInInitializerError {
 		User user = new User();
-		System.out.println("user id: " + user.getId());
 		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
@@ -146,22 +145,6 @@ public class User {
 		return movieList1.intersectionWith(movieList2);
 	}
 
-	public void rankActorsInAList(MovieList list) {
-		list.rankActors();
-	}
-
-	public void search(String query) {
-		// TODO
-	}
-
-	public void searchMovie(String query) {
-		// TODO
-	}
-
-	public void searchActor(String query) {
-		// TODO
-	}
-
 
 	public void showMovieDetails(Movie movie) {
 		movie.showDetails();
@@ -190,8 +173,9 @@ public class User {
 		this.lastAccess = lastAccess;
 	}
 
-	public MovieList getList(int id_list){
-		return lists.stream().filter(movieList -> movieList.getId() == id_list).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
+	public MovieList getList(MovieList list){
+
+		return lists.stream().filter(movieList -> movieList.getId().equals(list.getId())).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
 	}
 
 	public Boolean getAdmin() {

@@ -4,22 +4,27 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
-
+import com.querydsl.core.annotations.QueryEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mongodb.morphia.annotations.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
+@QueryEntity
+@Document
 public class Movie {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+
+	@Id
+	private String id;
 	private String title;
 	private String overview;
 	private List<ActorEnPelicula> cast = new ArrayList<ActorEnPelicula>();
@@ -28,18 +33,11 @@ public class Movie {
 	private List<Review> reviews = new ArrayList<Review>();
 	private JSONObject jsonResponse;
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	private void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -107,7 +105,7 @@ public class Movie {
 
 	public void setInfo() {
 		try {
-			this.setId(this.getJsonResponse().getInt("id"));
+			this.setId(this.getJsonResponse().getString("id"));
 			this.setTitle(this.getJsonResponse().getString("title"));
 			this.setOverview(this.getJsonResponse().getString("overview"));
 		} catch (JSONException e) {
@@ -135,7 +133,7 @@ public class Movie {
 	}
 
 	/**
-	 * @param id
+	 * @param
 	 * @throws JSONException
 	 * @throws IOException
 	 */
@@ -160,7 +158,6 @@ public class Movie {
 	}
 
 	/**
-	 * @param id
 	 * @throws JSONException
 	 * @throws IOException
 	 */
@@ -176,7 +173,6 @@ public class Movie {
 	}
 
 	/**
-	 * @param id
 	 * @throws JSONException
 	 * @throws IOException
 	 */
@@ -215,24 +211,10 @@ public class Movie {
 		this.jsonResponse = jsonResponse;
 	}
 
-	public static Movie create(int movieId, String movieName) {
+	public static Movie create(String movieName) {
 		Movie movie = new Movie();
-		movie.setId(movieId);
 		movie.setTitle(movieName);
 		return movie;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
 	}
 
 	/*

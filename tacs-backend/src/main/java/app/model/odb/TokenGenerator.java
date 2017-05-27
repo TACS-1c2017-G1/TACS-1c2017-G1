@@ -15,4 +15,11 @@ public class TokenGenerator {
         String random = Long.toString( longToken, 16 );
         return (esAdmin.toString().concat(random.substring(0,7)).concat(username).concat(random.substring(8,15)));
     }
+
+    public synchronized static String generarIdString(){
+        long longToken = Math.abs( random.nextLong() );
+        String random = Long.toString( longToken, 16 );
+        return random;
+    }
+
 }

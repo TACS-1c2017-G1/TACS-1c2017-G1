@@ -16,6 +16,9 @@ public class AdministrativoService {
     @Autowired
     RepositorioDeUsuarios repositorioDeUsuarios;
 
+    @Autowired
+    RepositorioDeListas repositorioDeListas;
+
     public User obtenerUsuario(String id) {
         User user = repositorioDeUsuarios.findOne(id);
         if(user == null){
@@ -37,8 +40,8 @@ public class AdministrativoService {
 
 
     public List<Movie> obtenerInterseccionListas(String id1, String id2) {
-        MovieList lista1 = RepositorioDeListas.getInstance().search(Integer.parseInt(id1));
-        MovieList lista2 = RepositorioDeListas.getInstance().search(Integer.parseInt(id2));
+        MovieList lista1 = repositorioDeListas.findOne(id1);
+        MovieList lista2 = repositorioDeListas.findOne(id2);
         List<Movie> interseccion = lista1.intersectionWith(lista2);
         return interseccion;
     }

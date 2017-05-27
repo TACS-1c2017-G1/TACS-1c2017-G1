@@ -2,6 +2,8 @@ package app.service;
 
 import app.model.dto.RespuestaDto;
 import app.model.odb.*;
+import app.repositories.RepositorioDeActores;
+import app.repositories.RepositorioDeListas;
 import app.repositories.RepositorioDeUsuarios;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,13 @@ public class UserService {
 	@Autowired
 	RepositorioDeUsuarios repositorioDeUsuarios;
 
+	@Autowired
+	RepositorioDeListas repositorioDeListas;
+
+	@Autowired
+	RepositorioDeActores repositorioDeActores;
+
+
 
 	public void crearNuevoUsuario(Credencial userAndPassword) throws ExceptionInInitializerError {
 		User usuarioNuevo = User.create(userAndPassword, false);
@@ -34,20 +43,20 @@ public class UserService {
 		return repositorioDeUsuarios.findAll();
 	}
 
-	public RespuestaDto maracarActorFavorito(String token, String idActor) throws JSONException, IOException {
+	public RespuestaDto marcarActorFavorito(String token, Actor actor) throws JSONException, IOException {
 		try {
 			User usuario = sesionesService.obtenerUsuarioPorToken(token);
 			Optional<Actor> optActor = usuario.getFavoriteActors().stream()
-					.filter(actor -> actor.getId() == Integer.parseInt(idActor)).findFirst();
+					.filter(actorFavorito -> actorFavorito.getId().equals(actor.getId())).findFirst();
 			RespuestaDto rta = new RespuestaDto();
 			if (optActor.isPresent()) {
 				usuario.getFavoriteActors().remove(optActor.get());
-				rta.setCode(1);
-				rta.setMessage("Actor favorito removido: " + idActor);
+				rta.setMessage("Actor favorito removido: " + actor.getName());
 			} else {
-				usuario.getFavoriteActors().add(new Actor(idActor));
-				rta.setCode(0);
-				rta.setMessage("Actor favorito agregado: " + idActor);
+				repositorioDeActores.save(actor);
+				usuario.getFavoriteActors().add(actor);
+				repositorioDeUsuarios.save(usuario);
+				rta.setMessage("Actor favorito agregado: " + actor.getName());
 			}
 
 			return rta;
@@ -107,16 +116,21 @@ public class UserService {
 	
 	public List<MovieList> verListas(String token) {
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
-		return usuario.getLists();
+		//esto lo hago para que me devuelva el contenido de cada lista .
+		List<MovieList> listasADevolver = getListasCompletasDelUsuario(usuario);
+		return listasADevolver;
+	}
+
+	private List<MovieList> getListasCompletasDelUsuario(User usuario) {
+		return usuario.getLists().stream().map(movieList -> repositorioDeListas.findOne(movieList.getId())).collect(Collectors.toList());
 	}
 
 
 	public List<Actor> rankingDeActoresPorMayorRepeticion(String token, String idlistaDePeliculas) {
 		User usuario = sesionesService.obtenerUsuarioPorToken(token);
-		Integer id = Integer.parseInt(idlistaDePeliculas);
 
-		MovieList listaDePeliculas = usuario.getLists().stream()
-				.filter(movieList -> movieList.getId() == id).findFirst()
+		MovieList listaDePeliculas = getListasCompletasDelUsuario(usuario).stream()
+				.filter(movieList -> movieList.getId().equals(idlistaDePeliculas)).findFirst()
 				.orElseThrow(() -> new RuntimeException("No existe la lista de peliculas que intenta rankear."));
 		
 	
@@ -146,7 +160,7 @@ public class UserService {
 		return actoresEnPeliculas;
 	}
 
-	private void evaluarApariciones(Integer idActor, Map<Actor, Integer> aparicionDeActores) {
+	private void evaluarApariciones(String idActor, Map<Actor, Integer> aparicionDeActores) {
 
 		try {
 			Actor actor = new Actor(idActor.toString());
