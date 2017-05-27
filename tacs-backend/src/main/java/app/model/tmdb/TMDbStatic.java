@@ -36,8 +36,10 @@ public abstract class TMDbStatic {
 		return getJsonObject(resource, query, response1);
 	}
 
-	public static JSONObject getResource(String resource, String query) throws JSONException, IOException {
+	public static JSONObject getResource(String resource, String query, String page) throws JSONException, IOException {
 		String pedir = getApiURL() + resource + getApiKey() + "&query=" + query;
+		if (page != null)
+			pedir += "&page="+ page;
 		return makeRequest(resource, query, pedir);
 	}
 

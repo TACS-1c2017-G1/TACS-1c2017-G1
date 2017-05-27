@@ -5,17 +5,15 @@ package app.model.odb;
 
 import org.json.JSONObject;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * @author facundo91
  *
  */
 // http://image.tmdb.org/t/p/w185/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
 public class Image {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-	private int movieId;
-	private int actorId;
+	private String id = TokenGenerator.generarIdString();
+	private String movieId;
+	private String actorId;
 	private String baseUrl = "http://image.tmdb.org/t/p/";
 	private int size;
 	private String filePath;
@@ -24,7 +22,7 @@ public class Image {
 	 * @param movieId
 	 *            the movieId to set
 	 */
-	private void setMovieId(int movieId) {
+	private void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 
@@ -46,7 +44,7 @@ public class Image {
 	 * @param actorId
 	 *            the actorId to set
 	 */
-	public void setActorId(int actorId) {
+	public void setActorId(String actorId) {
 		this.actorId = actorId;
 	}
 

@@ -3,33 +3,61 @@
  */
 package app.model.odb;
 
+import com.querydsl.core.annotations.QueryEntity;
+import org.mongodb.morphia.annotations.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
+
+@QueryEntity
+@Document
 public class User {
-	private Integer id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-	private Credencial credencial;
+
+	@Id
+	private String id;
+
 	private List<MovieList> lists;
 	private List<Actor> favoriteActors;
 	private Date lastAccess;
 	private Boolean isAdmin;
+	private String username;
+	private String password;
 
-	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@PersistenceConstructor
+	public User() {}
+
+
 	public static User create(Credencial credencial, Boolean esAdmin) throws ExceptionInInitializerError {
-
 		User user = new User();
-		System.out.println("user id: " + user.getId());
 		if (credencial.esInvalida()) {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
-		user.setCredencial(credencial);
+		user.setUsername(credencial.getUsername());
+		user.setPassword(credencial.getPassword());
 		user.setLists(new ArrayList<MovieList>());
 		user.setAdmin(esAdmin);
 		return user;
@@ -39,7 +67,7 @@ public class User {
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -47,17 +75,10 @@ public class User {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Credencial getCredencial() {
-		return credencial;
-	}
-
-	public void setCredencial(Credencial credencial) {
-		this.credencial = credencial;
-	}
 
 	/**
 	 * @return the lists
@@ -93,7 +114,7 @@ public class User {
 
 
 	public void createList(String name) {
-		this.getLists().add(MovieList.create(name, Arrays.asList()));
+		this.getLists().add(MovieList.create(name, new ArrayList<Movie>()));
 	}
 
 	public void addList(MovieList movieList) {
@@ -124,22 +145,6 @@ public class User {
 		return movieList1.intersectionWith(movieList2);
 	}
 
-	public void rankActorsInAList(MovieList list) {
-		list.rankActors();
-	}
-
-	public void search(String query) {
-		// TODO
-	}
-
-	public void searchMovie(String query) {
-		// TODO
-	}
-
-	public void searchActor(String query) {
-		// TODO
-	}
-
 
 	public void showMovieDetails(Movie movie) {
 		movie.showDetails();
@@ -168,8 +173,9 @@ public class User {
 		this.lastAccess = lastAccess;
 	}
 
-	public MovieList getList(int id_list){
-		return lists.stream().filter(movieList -> movieList.getId() == id_list).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
+	public MovieList getList(MovieList list){
+
+		return lists.stream().filter(movieList -> movieList.getId().equals(list.getId())).findFirst().orElseThrow(() -> new RuntimeException("No existe la lista solicitada"));
 	}
 
 	public Boolean getAdmin() {

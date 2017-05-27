@@ -34,11 +34,11 @@ public class UserController {
 		return servicioDeUsuario.rankingDeActoresPorMayorRepeticion(token, idlistaDePeliculas);
 	}
 
-	@RequestMapping(value = "/favoriteactor/{idactor}/", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public RespuestaDto marcarActorFavorito(@RequestHeader String token, @PathVariable String idactor, Model model)
+	public RespuestaDto marcarActorFavorito(@RequestHeader String token, @RequestBody Actor actor)
 			throws Exception {
-		return servicioDeUsuario.maracarActorFavorito(token, idactor);
+		return servicioDeUsuario.marcarActorFavorito(token, actor);
 	}
 
 	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.GET, produces = "application/json")

@@ -27,8 +27,8 @@ myApp.service('Usuario', function ($http, $rootScope) {
         );
     }
 
-    self.marcarActorFavorito = function (idActor) {
-        return $http.put('http://localhost:8080/user/favoriteactor/' + idActor + '/', undefined,
+    self.marcarActorFavorito = function (actor) {
+        return $http.put('http://localhost:8080/user/favoriteactor/', actor,
             {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion
