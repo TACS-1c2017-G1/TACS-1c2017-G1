@@ -32,7 +32,7 @@ public class ListasService {
 		User usuario =sesionesService.obtenerUsuarioPorToken(token);
 		usuario.addList(list);
 		repositorioDeListas.insert(list);
-		repositorioDeUsuarios.insert(usuario);
+		repositorioDeUsuarios.save(usuario);
 		return list;
 	}
 
