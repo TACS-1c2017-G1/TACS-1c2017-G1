@@ -98,15 +98,11 @@ public class MovieList {
 	}
 
 	public List<Movie> intersectionWith(MovieList movieList2) {
-		// TODO Test
 		List<Movie> intersection = new ArrayList<Movie>(
 				ListUtils.intersection(this.getMovies(), movieList2.getMovies()));
 		return intersection;
 	}
 
-	public void rankActors() {
-		// TODO Auto-generated method stub
-	}
 
 	public int size() {
 		return this.getMovies().size();

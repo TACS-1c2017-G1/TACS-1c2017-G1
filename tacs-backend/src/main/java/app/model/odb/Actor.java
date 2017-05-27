@@ -4,22 +4,28 @@
 package app.model.odb;
 
 import app.model.tmdb.TMDbStatic;
-
+import com.querydsl.core.annotations.QueryEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mongodb.morphia.annotations.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author facundo91
  *
  */
+@QueryEntity
+@Document
 public class Actor {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+
+	@Id
+	private String id;
 	private String name;
 	private List<Image> profiles = new ArrayList<Image>();
 	private List<ActorEnPelicula> actorEnPeliculas = new ArrayList<ActorEnPelicula>();
@@ -28,10 +34,11 @@ public class Actor {
 	private int statusCode;
 	private String statusMessage;
 
+	@PersistenceConstructor
 	public Actor(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
 		try {
-			this.setId(this.getJsonResponse().getInt("id"));
+			this.setId(this.getJsonResponse().getString("id"));
 			this.setName(this.getJsonResponse().getString("name"));
 			this.setBio(this.getJsonResponse().getString("biography"));
 			this.setImages(id);
@@ -53,9 +60,8 @@ public class Actor {
 		super();
 	}
 
-	public static Actor create(int id, String nombre) {
+	public static Actor create(String nombre) {
 		Actor actor = new Actor();
-		actor.setId(id);
 		actor.setName(nombre);
 		return actor;
 	}
@@ -92,7 +98,7 @@ public class Actor {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -100,7 +106,7 @@ public class Actor {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -140,7 +146,7 @@ public class Actor {
 
 	public void setInfo(JSONObject jsonActor) {
 		try {
-			this.setId(jsonActor.getInt("id"));
+			this.setId(jsonActor.getString("id"));
 			this.setName(jsonActor.getString("name"));
 			this.addProfile(jsonActor.getString("profile_path"));
 		} catch (JSONException e) {
@@ -192,19 +198,6 @@ public class Actor {
 
 	private void setStatusMessage(String statusMessage) {
 		this.statusMessage = statusMessage;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
 	}
 
 	/*

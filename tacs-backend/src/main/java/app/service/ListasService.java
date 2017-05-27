@@ -4,6 +4,7 @@ import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.model.odb.User;
 import app.repositories.RepositorioDeListas;
+import app.repositories.RepositorioDePeliculasEnListas;
 import app.repositories.RepositorioDeUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class ListasService {
 	@Autowired
 	RepositorioDeUsuarios repositorioDeUsuarios;
 
+	@Autowired
+	RepositorioDePeliculasEnListas repositorioDePeliculasEnListas;
+
 	public List<Movie> interseccionEntre(String idLista1, String idLista2, String token) {
 		return this.consultarLista(idLista1, token).intersectionWith(this.consultarLista(idLista2, token));
 	}
@@ -39,6 +43,7 @@ public class ListasService {
 	public void agregarItem(Movie movie, String id_list, String token) {
 		this.consultarLista(id_list, token);
 		MovieList lista = repositorioDeListas.findOne(id_list);
+		repositorioDePeliculasEnListas.save(movie);
 		lista.addMovie(movie);
 		repositorioDeListas.save(lista);
 	}
@@ -51,6 +56,7 @@ public class ListasService {
 	}
 	
 	public MovieList consultarLista(String id_list, String token){
-		return sesionesService.obtenerUsuarioPorToken(token).getList(id_list);
+		MovieList list = repositorioDeListas.findOne(id_list);
+		return sesionesService.obtenerUsuarioPorToken(token).getList(list);
 	}
 }

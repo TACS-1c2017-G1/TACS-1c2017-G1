@@ -5,16 +5,14 @@ package app.model.odb;
 
 import org.json.JSONObject;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * @author facundo91
  *
  */
 public class Review {
-	private int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+	private String id = TokenGenerator.generarIdString();
 	private String reviewId; // just colled results.id by the TMDb API
-	private int movieId; // just colled id by the TMDb API
+	private String movieId; // just colled id by the TMDb API
 	private String author;
 	private String content;
 	private String url;
@@ -27,7 +25,6 @@ public class Review {
 	}
 
 	/**
-	 * @param review_id
 	 *            the reviewId to set
 	 */
 	private void setReviewId(String reviewId) {
@@ -38,7 +35,7 @@ public class Review {
 	 * @param movieId
 	 *            the movieId to set
 	 */
-	private void setMovieId(int movieId) {
+	private void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 
