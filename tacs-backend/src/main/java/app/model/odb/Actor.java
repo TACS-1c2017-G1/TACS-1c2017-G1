@@ -33,6 +33,7 @@ public class Actor {
 	private JSONObject jsonResponse;
 	private int statusCode;
 	private String statusMessage;
+	private int scoreRank = 0;
 
 	public Actor(String id) throws JSONException, IOException {
 		this.setJsonResponse(TMDbStatic.getResource2("person", id));
@@ -217,6 +218,18 @@ public class Actor {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public int getScoreRank() {
+		return scoreRank;
+	}
+
+	public void resetScoreRak() {
+		this.scoreRank = 0;
+	}
+	
+	public void incScoreRank() {
+		this.scoreRank++;
 	}
 
 }
