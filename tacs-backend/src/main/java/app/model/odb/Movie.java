@@ -105,7 +105,7 @@ public class Movie {
 
 	public void setInfo() {
 		try {
-			this.setId(this.getJsonResponse().getString("id"));
+			this.setId(String.valueOf(this.getJsonResponse().getInt("id")));
 			this.setTitle(this.getJsonResponse().getString("title"));
 			this.setOverview(this.getJsonResponse().getString("overview"));
 		} catch (JSONException e) {

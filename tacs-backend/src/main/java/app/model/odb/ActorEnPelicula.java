@@ -28,7 +28,7 @@ public class ActorEnPelicula {
 
 	public ActorEnPelicula(JSONObject jsonCredit, Movie movie) {
 		this.setMovieId(movie.getId());
-		this.setActorId(jsonCredit.getString("id"));
+		this.setActorId(String.valueOf(jsonCredit.getInt("id")));
 		this.setCreditId(jsonCredit.getString("credit_id"));
 		this.setCharacter(jsonCredit.getString("character"));
 		this.setName(jsonCredit.getString("name"));
