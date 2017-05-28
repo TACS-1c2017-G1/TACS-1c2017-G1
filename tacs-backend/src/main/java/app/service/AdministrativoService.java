@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdministrativoService {
@@ -21,6 +22,7 @@ public class AdministrativoService {
 
     public User obtenerUsuario(String id) {
         User user = repositorioDeUsuarios.findOne(id);
+        user.setLists(user.getLists().stream().map(movieList -> repositorioDeListas.findOne(movieList.getId())).collect(Collectors.toList()));
         if(user == null){
             throw new RuntimeException("No existe el usuario con id " + id.toString());
         }
