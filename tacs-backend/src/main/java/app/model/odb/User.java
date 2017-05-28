@@ -8,6 +8,8 @@ import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,7 @@ public class User {
 	private Boolean isAdmin;
 	private String username;
 	private String password;
+	public static final String SALT = "TMDB-G1";
 
 	public String getUsername() {
 		return username;
@@ -57,10 +60,32 @@ public class User {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
 		user.setUsername(credencial.getUsername());
-		user.setPassword(credencial.getPassword());
+		String saltedPassword = SALT + credencial.getPassword();
+		String hashedPassword = generarHash(saltedPassword);
+		user.setPassword(hashedPassword);
 		user.setLists(new ArrayList<MovieList>());
 		user.setAdmin(esAdmin);
 		return user;
+	}
+	
+	private static String generarHash(String input) {
+		StringBuilder hash = new StringBuilder();
+
+		try {
+			MessageDigest sha = MessageDigest.getInstance("SHA-1");
+			byte[] hashedBytes = sha.digest(input.getBytes());
+			char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'a', 'b', 'c', 'd', 'e', 'f' };
+			for (int idx = 0; idx < hashedBytes.length; ++idx) {
+				byte b = hashedBytes[idx];
+				hash.append(digits[(b & 0xf0) >> 4]);
+				hash.append(digits[b & 0x0f]);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("Error en la encriptación de la password.");
+		}
+
+		return hash.toString();
 	}
 
 

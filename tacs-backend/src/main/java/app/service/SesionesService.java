@@ -8,6 +8,8 @@ import app.repositories.RepositorioDeUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
 @Service
@@ -15,12 +17,15 @@ public class SesionesService {
 
     @Autowired
     RepositorioDeUsuarios repositorioDeUsuarios;
+	public static final String SALT = "TMDB-G1";
 
 
     public Sesion loguearUsuario(Credencial credencial) {
         this.crearAdminSiNoExiste();
         User user = repositorioDeUsuarios.findByUsername(credencial.getUsername());
-        if(user == null || !user.getPassword().equals(credencial.getPassword())){
+        String saltedPassword = SALT + credencial.getPassword();
+		String hashedPassword = generarHash(saltedPassword);
+        if(user == null || !user.getPassword().equals(hashedPassword)){
             throw new RuntimeException("Usuario y/o contraseña inválida");
         }
         Sesion nuevaSesion =Sesion.create(user.getUsername(), user.getAdmin());
@@ -28,6 +33,26 @@ public class SesionesService {
         user.setLastAccess(Calendar.getInstance().getTime());
         return nuevaSesion;
     }
+    
+    private static String generarHash(String input) {
+		StringBuilder hash = new StringBuilder();
+
+		try {
+			MessageDigest sha = MessageDigest.getInstance("SHA-1");
+			byte[] hashedBytes = sha.digest(input.getBytes());
+			char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'a', 'b', 'c', 'd', 'e', 'f' };
+			for (int idx = 0; idx < hashedBytes.length; ++idx) {
+				byte b = hashedBytes[idx];
+				hash.append(digits[(b & 0xf0) >> 4]);
+				hash.append(digits[b & 0x0f]);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("Error en la encriptación de la password.");
+		}
+
+		return hash.toString();
+	}
 
     private void crearAdminSiNoExiste() {
         User userAdmin = User.create(Credencial.create("admin","admin"),true);
