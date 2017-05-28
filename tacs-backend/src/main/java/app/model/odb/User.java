@@ -3,14 +3,15 @@
  */
 package app.model.odb;
 
-import com.querydsl.core.annotations.QueryEntity;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.querydsl.core.annotations.QueryEntity;
 
 /**
  * @author facundo91
@@ -30,6 +31,7 @@ public class User {
 	private Boolean isAdmin;
 	private String username;
 	private String password;
+	public static final String SALT = "TMDB-G1";
 
 	public String getUsername() {
 		return username;
@@ -57,7 +59,9 @@ public class User {
 			throw new ExceptionInInitializerError(User.usuarioOContraseniaVacio());
 		}
 		user.setUsername(credencial.getUsername());
-		user.setPassword(credencial.getPassword());
+		String saltedPassword = SALT + credencial.getPassword();
+		String hashedPassword = TokenGenerator.generarHash(saltedPassword);
+		user.setPassword(hashedPassword);
 		user.setLists(new ArrayList<MovieList>());
 		user.setAdmin(esAdmin);
 		return user;

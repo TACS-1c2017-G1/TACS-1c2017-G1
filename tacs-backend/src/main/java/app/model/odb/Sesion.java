@@ -1,7 +1,5 @@
 package app.model.odb;
 
-import javax.swing.text.StyledEditorKit;
-
 /**
  * Created by Rodrigo on 08/04/2017.
  */
