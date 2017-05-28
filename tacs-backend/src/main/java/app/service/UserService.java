@@ -1,18 +1,28 @@
 package app.service;
 
-import app.model.dto.RespuestaDto;
-import app.model.odb.*;
-import app.repositories.RepositorioDeActores;
-import app.repositories.RepositorioDeListas;
-import app.repositories.RepositorioDeUsuarios;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import app.model.dto.RespuestaDto;
+import app.model.odb.Actor;
+import app.model.odb.ActorEnPelicula;
+import app.model.odb.Credencial;
+import app.model.odb.Movie;
+import app.model.odb.MovieList;
+import app.model.odb.User;
+import app.repositories.RepositorioDeActores;
+import app.repositories.RepositorioDeListas;
+import app.repositories.RepositorioDeUsuarios;
 
 /**
  * Created by Rodrigo on 08/04/2017.
@@ -80,22 +90,24 @@ public class UserService {
 
 	public List<Actor> verRankingActoresFavoritos(String token) throws JSONException, IOException {
 
-		Map<Actor, Integer> rankingActores = new HashMap<Actor, Integer>();
+		ArrayList<Actor> rankingActores = new ArrayList<Actor>(0);
 		List<User> usuarios = obtenerUsuarios();
-		usuarios.forEach(usuario-> usuario.getFavoriteActors().forEach(a ->{
-            if (rankingActores.containsKey(a)){
-                int valor = rankingActores.get(a);
-                rankingActores.put(a, ++valor);
-            }
-            else
-            {
-                rankingActores.put(a, 1);
-            }
-        }));
-		Stream<Map.Entry<Actor, Integer>> sorted = rankingActores.entrySet().stream()
-				.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
-		List<Actor> actoresOrdenados = sorted.map(Map.Entry::getKey).collect(Collectors.toList());
-		return actoresOrdenados;
+		usuarios
+		.forEach( usuario -> usuario.getFavoriteActors()
+				.forEach( actor -> {
+		            Optional<Actor> optActRank = rankingActores.stream()
+		            							.filter( actorRank -> actorRank.getId().equals(actor.getId())).findFirst();
+		            if (optActRank.isPresent())
+		            	optActRank.get().incScoreRank();
+		            else {
+		            	actor.resetScoreRak();
+		            	rankingActores.add(actor);
+		            }
+				})
+		);
+		
+		return rankingActores.stream().sorted((actor1, actor2) -> Integer.compare(actor2.getScoreRank(), actor1.getScoreRank()))
+				.collect(Collectors.toList());
 	}
 
 	public List<Movie> verPeliculasConMasDeUnActorFavorito(String token) throws JSONException, IOException {
