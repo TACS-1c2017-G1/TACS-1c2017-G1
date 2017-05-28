@@ -50,8 +50,8 @@ public class UserService {
 					.filter(actorFavorito -> actorFavorito.getId().equals(actor.getId())).findFirst();
 			RespuestaDto rta = new RespuestaDto();
 			if (optActor.isPresent()) {
-				usuario.getFavoriteActors().remove(optActor.get());
-				rta.setMessage("Actor favorito removido: " + actor.getName());
+				rta.setMessage("Ya lo tiene como favorito al actor  " + actor.getName());
+
 			} else {
 				repositorioDeActores.save(actor);
 				usuario.getFavoriteActors().add(actor);
@@ -64,6 +64,13 @@ public class UserService {
 			e.printStackTrace();
 			throw new RuntimeException("El id de actor posee un formato inválido.");
 		}
+	}
+
+	public void desmarcarActorFavorito(String token, String id_actor){
+		User usuario = sesionesService.obtenerUsuarioPorToken(token);
+		usuario.getFavoriteActors().stream()
+				.filter(actorFavorito -> actorFavorito.getId().equals(id_actor)).findFirst().ifPresent(actor -> usuario.getFavoriteActors().remove(actor));
+		repositorioDeUsuarios.save(usuario);
 	}
 
 	public List<Actor> verActoresFavoritos(String token) throws JSONException, IOException {
