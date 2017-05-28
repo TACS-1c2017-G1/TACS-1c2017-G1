@@ -209,8 +209,9 @@
 				<finalName>tacs</finalName>
 				<plugins>
 					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>RELEASE</version>
+						<version>LATEST</version>
 						<configuration>
 							<outputDirectory>webapps</outputDirectory>
 							<warName>ROOT</warName>
