@@ -1,16 +1,15 @@
 package app.service;
 
-import java.util.Calendar;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import app.model.odb.Credencial;
 import app.model.odb.Sesion;
 import app.model.odb.TokenGenerator;
 import app.model.odb.User;
 import app.repositories.RepositorioDeSesiones;
 import app.repositories.RepositorioDeUsuarios;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
 
 @Service
 public class SesionesService {
@@ -36,7 +35,7 @@ public class SesionesService {
     }
 
     private void crearAdminSiNoExiste() {
-        User userAdmin = User.create(Credencial.create("admin","admin"),true);
+        User userAdmin = User.create(Credencial.create("admin", TokenGenerator.generarHash(SALT + "admin")),true);
         if(repositorioDeUsuarios.findByUsername("admin") == null){
             repositorioDeUsuarios.insert(userAdmin);
         }
@@ -48,7 +47,11 @@ public class SesionesService {
         RepositorioDeSesiones.getInstance().update(sesionADesactivar);
 
     }
-    
+
+    public void actualizarPass(User user){
+        user.setPassword(TokenGenerator.generarHash(SALT+user.getPassword()));
+        repositorioDeUsuarios.save(user);
+    }
     
     public User obtenerUsuarioPorToken( String token ) {
         if (token == null)
