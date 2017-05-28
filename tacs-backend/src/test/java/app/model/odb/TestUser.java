@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
 public class TestUser {
 	User user1 = new User();
 	User user2 = new User();
-	Movie movie1 = new Movie();
-	Movie movie2 = new Movie();
-	Movie movie3 = new Movie();
+	Movie movie1 = new Movie("550");
+	Movie movie2 = new Movie("550");
+	Movie movie3 = new Movie("550");
 	MovieList movieList1 = MovieList.create("movieList1", new ArrayList<Movie>());
 	MovieList movieList2 = MovieList.create("movieList2", new ArrayList<Movie>());
 	Actor actor = new Actor();
