@@ -1,13 +1,12 @@
 package app.web.controller;
 
+import app.service.BusquedasService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import app.service.BusquedasService;
 
 @Controller
 @CrossOrigin
@@ -29,7 +28,6 @@ public class BusquedasController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody String busquedaActorJson(@RequestHeader String Token, @PathVariable String query, @RequestParam String page)
 			throws Exception {
-		
 		return servicioBusquedas.buscarActorPorNombreJson(query, Token, page).toString();
 	}
 
