@@ -22,8 +22,8 @@ myApp.controller('favoritosController', function ($rootScope, $scope, Usuario) {
     };
 
     $scope.sacarDeFavorito = function (actor) {
-        $scope.actoresFavoritos.splice($scope.actoresFavoritos.indexOf(actor), 1)
-        Usuario.marcarActorFavorito(actor.id)
+        $scope.actoresFavoritos.splice($scope.actoresFavoritos.indexOf(actor), 1);
+        Usuario.desmarcarActorFavorito(actor)
     }
 
     this.actoresFavoritos();

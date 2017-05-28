@@ -1,7 +1,10 @@
 package app.web.controller;
 
 import app.model.dto.RespuestaDto;
-import app.model.odb.*;
+import app.model.odb.Actor;
+import app.model.odb.Credencial;
+import app.model.odb.Movie;
+import app.model.odb.MovieList;
 import app.service.UserService;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -39,6 +41,13 @@ public class UserController {
 	public RespuestaDto marcarActorFavorito(@RequestHeader String token, @RequestBody Actor actor)
 			throws Exception {
 		return servicioDeUsuario.marcarActorFavorito(token, actor);
+	}
+
+	@RequestMapping(value = "/favoriteactor/{id_actor}", method = RequestMethod.PUT, produces = "application/json")
+	@ResponseBody
+	public void desmarcarActorFavorito(@RequestHeader String token, @PathVariable String id_actor)
+			throws Exception {
+		servicioDeUsuario.desmarcarActorFavorito(token, id_actor);
 	}
 
 	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.GET, produces = "application/json")
