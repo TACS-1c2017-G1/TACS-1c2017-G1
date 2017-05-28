@@ -1,16 +1,16 @@
 package app.service;
 
-import app.model.odb.Credencial;
-import app.model.odb.Sesion;
-import app.model.odb.User;
-import app.repositories.RepositorioDeSesiones;
-import app.repositories.RepositorioDeUsuarios;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
+import app.model.odb.Credencial;
+import app.model.odb.Sesion;
+import app.model.odb.TokenGenerator;
+import app.model.odb.User;
+import app.repositories.RepositorioDeSesiones;
+import app.repositories.RepositorioDeUsuarios;
 
 @Service
 public class SesionesService {
@@ -24,7 +24,7 @@ public class SesionesService {
         this.crearAdminSiNoExiste();
         User user = repositorioDeUsuarios.findByUsername(credencial.getUsername());
         String saltedPassword = SALT + credencial.getPassword();
-		String hashedPassword = generarHash(saltedPassword);
+		String hashedPassword = TokenGenerator.generarHash(saltedPassword);
         if(user == null || !user.getPassword().equals(hashedPassword)){
             throw new RuntimeException("Usuario y/o contraseña inválida");
         }
@@ -33,26 +33,6 @@ public class SesionesService {
         user.setLastAccess(Calendar.getInstance().getTime());
         return nuevaSesion;
     }
-    
-    private static String generarHash(String input) {
-		StringBuilder hash = new StringBuilder();
-
-		try {
-			MessageDigest sha = MessageDigest.getInstance("SHA-1");
-			byte[] hashedBytes = sha.digest(input.getBytes());
-			char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-					'a', 'b', 'c', 'd', 'e', 'f' };
-			for (int idx = 0; idx < hashedBytes.length; ++idx) {
-				byte b = hashedBytes[idx];
-				hash.append(digits[(b & 0xf0) >> 4]);
-				hash.append(digits[b & 0x0f]);
-			}
-		} catch (NoSuchAlgorithmException e) {
-			System.out.println("Error en la encriptación de la password.");
-		}
-
-		return hash.toString();
-	}
 
     private void crearAdminSiNoExiste() {
         User userAdmin = User.create(Credencial.create("admin","admin"),true);
