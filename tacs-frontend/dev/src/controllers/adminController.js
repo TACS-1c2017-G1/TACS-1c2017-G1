@@ -62,11 +62,11 @@ myApp.controller('adminController', function ($rootScope, $scope, $state, Admin)
 
     self.getUsername = function () {
         try {
-            if (self.selectedUser.credencial === null) {
+            if (self.selectedUser.username === null) {
                 return "Sin Username"
             }
             else {
-                return self.selectedUser.credencial.username;
+                return self.selectedUser.username;
             }
         }
         catch (e) {

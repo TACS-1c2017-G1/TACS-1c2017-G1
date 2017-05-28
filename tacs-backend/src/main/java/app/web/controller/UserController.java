@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import app.model.dto.RespuestaDto;
 import app.model.odb.Actor;
 import app.model.odb.Credencial;
 import app.model.odb.Movie;
 import app.model.odb.MovieList;
 import app.service.UserService;
+
 
 @Controller
 @CrossOrigin
@@ -48,6 +50,13 @@ public class UserController {
 	public RespuestaDto marcarActorFavorito(@RequestHeader String token, @RequestBody Actor actor)
 			throws Exception {
 		return servicioDeUsuario.marcarActorFavorito(token, actor);
+	}
+
+	@RequestMapping(value = "/favoriteactor/{id_actor}", method = RequestMethod.PUT, produces = "application/json")
+	@ResponseBody
+	public void desmarcarActorFavorito(@RequestHeader String token, @PathVariable String id_actor)
+			throws Exception {
+		servicioDeUsuario.desmarcarActorFavorito(token, id_actor);
 	}
 
 	@RequestMapping(value = "/favoriteactor/", method = RequestMethod.GET, produces = "application/json")

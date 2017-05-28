@@ -31,6 +31,7 @@ public class SesionesService {
         Sesion nuevaSesion =Sesion.create(user.getUsername(), user.getAdmin());
         RepositorioDeSesiones.getInstance().insert(nuevaSesion);
         user.setLastAccess(Calendar.getInstance().getTime());
+        repositorioDeUsuarios.save(user);
         return nuevaSesion;
     }
 

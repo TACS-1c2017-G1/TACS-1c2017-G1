@@ -28,14 +28,23 @@ myApp.service('Usuario', function ($http, $rootScope) {
     }
 
     self.marcarActorFavorito = function (actor) {
-        return $http.put('http://localhost:8080/user/favoriteactor/', actor,
+      return $http.put('http://localhost:8080/user/favoriteactor/', actor,
             {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion
                 }
             }
         );
-    }
+    };
+  self.desmarcarActorFavorito = function (actor_id) {
+    return $http.put('http://localhost:8080/user/favoriteactor/' + actor_id,null,
+      {
+        headers: {
+          'token': $rootScope.sesionActual.idSesion
+        }
+      }
+    );
+  }
 
     self.getListas = function (credentials) {
         return $http.get('http://localhost:8080/user/movieLists', {

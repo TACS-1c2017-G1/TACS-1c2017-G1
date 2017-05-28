@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,6 +87,12 @@ public class MovieList {
 	}
 
 	public void addMovie(Movie movie) {
+		try {
+			movie.setInfoCreditsReviewsImages();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.getMovies().add(movie);
 	}
 
