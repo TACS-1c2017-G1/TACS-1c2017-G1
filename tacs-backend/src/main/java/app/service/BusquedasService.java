@@ -1,16 +1,9 @@
 package app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.model.odb.Actor;
-import app.model.odb.Movie;
-import app.model.odb.MovieList;
 import app.model.tmdb.TMDbStatic;
 
 @Service

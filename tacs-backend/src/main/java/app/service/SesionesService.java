@@ -1,26 +1,31 @@
 package app.service;
 
-import app.model.odb.Credencial;
-import app.model.odb.Sesion;
-import app.model.odb.User;
-import app.repositories.RepositorioDeSesiones;
-import app.repositories.RepositorioDeUsuarios;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
+import app.model.odb.Credencial;
+import app.model.odb.Sesion;
+import app.model.odb.TokenGenerator;
+import app.model.odb.User;
+import app.repositories.RepositorioDeSesiones;
+import app.repositories.RepositorioDeUsuarios;
 
 @Service
 public class SesionesService {
 
     @Autowired
     RepositorioDeUsuarios repositorioDeUsuarios;
+	public static final String SALT = "TMDB-G1";
 
 
     public Sesion loguearUsuario(Credencial credencial) {
         this.crearAdminSiNoExiste();
         User user = repositorioDeUsuarios.findByUsername(credencial.getUsername());
-        if(user == null || !user.getPassword().equals(credencial.getPassword())){
+        String saltedPassword = SALT + credencial.getPassword();
+		String hashedPassword = TokenGenerator.generarHash(saltedPassword);
+        if(user == null || !user.getPassword().equals(hashedPassword)){
             throw new RuntimeException("Usuario y/o contraseña inválida");
         }
         Sesion nuevaSesion =Sesion.create(user.getUsername(), user.getAdmin());
