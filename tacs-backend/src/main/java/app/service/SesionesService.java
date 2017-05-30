@@ -35,7 +35,7 @@ public class SesionesService {
     }
 
     private void crearAdminSiNoExiste() {
-        User userAdmin = User.create(Credencial.create("admin", TokenGenerator.generarHash(SALT + "admin")),true);
+        User userAdmin = User.create(Credencial.create("admin", "admin"),true);
         if(repositorioDeUsuarios.findByUsername("admin") == null){
             repositorioDeUsuarios.insert(userAdmin);
         }
