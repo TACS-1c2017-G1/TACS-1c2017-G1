@@ -48,9 +48,9 @@ public class ListasService {
 		repositorioDeListas.save(lista);
 	}
 
-	public void eliminarItem(Movie movie, String id_list, String token) {
-		this.consultarLista(id_list, token).removeMovie(movie);
-		MovieList lista = repositorioDeListas.findOne(id_list);
+	public void eliminarItem(String id_pelicula, String id_list, String token) {
+		MovieList lista =this.consultarLista(id_list, token);
+		Movie movie = repositorioDePeliculasEnListas.findOne(id_pelicula);
 		lista.removeMovie(movie);
 		repositorioDeListas.save(lista);
 	}
