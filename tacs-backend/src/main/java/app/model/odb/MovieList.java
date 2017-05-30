@@ -79,6 +79,19 @@ public class MovieList {
 	public MovieList() {
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof MovieList)) return false;
+		MovieList movieList = (MovieList) o;
+		return getName().equals(movieList.getName());
+		}
+
+	@Override
+	public int hashCode() {
+		return getName().hashCode();
+	}
+
 	public static MovieList create(String name, List<Movie> movies) {
 		MovieList movieList = new MovieList();
 		movieList.setName(name);
