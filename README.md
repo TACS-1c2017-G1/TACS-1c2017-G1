@@ -68,17 +68,16 @@ sudo npm install npm@latest -g
 sudo npm install
 ```
 
-### 4. Instalar Gulp y correr gulp watch
+### 4. Correr gulp compilar para generar bundle.js
 ```
-sudo npm install gulp --dev-save
-gulp devSync
+gulp compilar
 ```
 
 ### 5. Ver el front end, alternativas:
 
-- Con `gulp devSync` ya deberian poder abrir el browser en el puerto `localhost:3000` para poder verlo.
+- Con `gulp compilar` ya deberian poder abrir el browser en el puerto `localhost:3000` para poder verlo.
 
-- Abrir el archivo `index.html` en un browser (preferentemente Chrome que hace un liveReload por cada vez que se modifica el archivo).
+- Abrir el archivo `index.html` en un browser (preferentemente Chrome que hace un liveReload por cada vez que se modifica el archivo), es necesario tener el archivo bundle.js .
 
 - Via `http-server`
 
@@ -110,20 +109,6 @@ gulp devSync
 ```
 package.json - Archivo de proyecto para npm.
 gulpfile.js - Se definen las tareas a correr con gulp.
-
-docs/ - Podria llamarse bin, release u otros tantos nombres mejores, pero llamandolo docs, github lo puede poner como una pagina web con dominio propio.
-../index.html - Donde importamos nuestras vendor resources, bundle.js y style.css.
-../style.css - Se autogenera con Gulp Watch.
-../bundle.js - Se autogenera con Gulp Watch.
-/templates
-../header.html
-../footer.html
-../home.html
-../listas
-../../list.html, new.html, edit.html
-.../favoritos
-../../list.html, new.html, edit.html
-
 
 dev/
 ../index.html
