@@ -55,8 +55,13 @@ myApp.controller('listController', function ($rootScope, $scope, $state, $stateP
     }
 
     $scope.quitarDeLista = function (peliculaAQuitar,list) {
-        //list.remove(list.indexOf(peliculaAQuitar));
-        ListService.quitarDeLista(peliculaAQuitar,list);
+        ListService.quitarDeLista(peliculaAQuitar,list).then(function () {
+          alert('Pelicula quitada correctamente.');
+          var movies = $scope.listas.filter(lista => lista.id === list.id)[0].movies;
+
+          movies.splice(movies.indexOf(peliculaAQuitar),1);
+
+        });
     };
 
 

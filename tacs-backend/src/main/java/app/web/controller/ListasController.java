@@ -37,11 +37,11 @@ public class ListasController {
     	listasService.agregarItem(movie, id_lista, token);
     }
 
-	@RequestMapping(value = "/{id_lista}/", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id_lista}/{id_pelicula}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void eliminarItem(@RequestHeader String token, @RequestBody Movie movie, @PathVariable String id_lista)
+	public void eliminarItem(@RequestHeader String token, @PathVariable String id_lista, @PathVariable String id_pelicula)
 			throws IOException {
-        listasService.eliminarItem(movie, id_lista, token);
+        listasService.eliminarItem(id_pelicula, id_lista, token);
     }
 	
 	@RequestMapping(value = "/intersection/{idLista1}/{idLista2}", method = RequestMethod.GET)

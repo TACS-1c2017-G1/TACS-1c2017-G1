@@ -3,6 +3,7 @@
  */
 package app.model.odb;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +36,6 @@ public class TestUser {
 
 	@Test
 	public final void testUserSetUp() {
-		assertTrue(user1.getLists().isEmpty());
 		assertTrue(user1.getFavoriteActors().isEmpty());
 	}
 
@@ -44,7 +44,8 @@ public class TestUser {
 	 */
 	@Test
 	public final void testCreateList() {
-		assertEquals(1, user2.getLists().size());
+		user2.addList(movieList2);
+		assertEquals(2, user2.getLists().size());
 	}
 
 	/**

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mongodb.morphia.annotations.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.IOException;
@@ -99,9 +100,9 @@ public class Movie {
 	/**
 	 * @return the reviews
 	 */
-	public List<Review> getReviews() {
-		return reviews;
-	}
+//	public List<Review> getReviews() {
+//		return reviews;
+//	}
 
 	public void setInfo() {
 		try {
@@ -121,14 +122,7 @@ public class Movie {
 	public Movie(String id) {
 		try {
 			this.setJsonResponse(TMDbStatic.getResource2("movie", id));
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
+			this.id = id;
 			this.setInfoCreditsReviewsImages();
 		} catch (Exception e) {
 			throw new JSONException("not found");
@@ -138,11 +132,13 @@ public class Movie {
 	}
 
 	public void setInfoCreditsReviewsImages() throws IOException {
+		this.setJsonResponse(TMDbStatic.getResource2("movie", id));
 		this.setInfo();
 		this.setCredits();
-		this.setReviews();
+//		this.setReviews();
 		this.setImages();
 	}
+
 
 	/**
 	 * @param
@@ -173,16 +169,16 @@ public class Movie {
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	private void setReviews() throws JSONException, IOException {
-		JSONArray reviews = TMDbStatic.getResource2("movie", this.getId() + "/reviews").getJSONArray("results");
-		for (int i = 0; i < reviews.length(); i++) {
-			this.addReview(new Review(reviews.getJSONObject(i), this));
-		}
-	}
-
-	private void addReview(Review review) {
-		this.getReviews().add(review);
-	}
+//	private void setReviews() throws JSONException, IOException {
+//		JSONArray reviews = TMDbStatic.getResource2("movie", this.getId() + "/reviews").getJSONArray("results");
+//		for (int i = 0; i < reviews.length(); i++) {
+////			this.addReview(new Review(reviews.getJSONObject(i), this));
+//		}
+//	}
+//
+//	private void addReview(Review review) {
+//		this.getReviews().add(review);
+//	}
 
 	/**
 	 * @throws JSONException

@@ -45,8 +45,7 @@ myApp.service('ListService', function ($http, $rootScope) {
         //         'token': $rootScope.sesionActual.idSesion
         //     }
         // });
-        return $http.delete('http://localhost:8080/list/' + lista.id + '/',{
-            data: {movie: pelicula},
+        return $http.delete('http://localhost:8080/list/' + lista.id + '/'+ pelicula.id,{
             headers: {'token': $rootScope.sesionActual.idSesion}
         });
 
