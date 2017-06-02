@@ -8,17 +8,17 @@ myApp.service('Usuario', function ($http, $rootScope) {
     var self = this;
 
     self.register = function (credentials) {
-        return $http.post('http://localhost:8080/user/', credentials);
+        return $http.post(settings.apiUrl+'user/', credentials);
     };
 
     self.getRecMovies = function (sesion,callback) {
-        return $http.get('http://localhost:8080/user/favoriteactor/movies', {
+        return $http.get(settings.apiUrl+'user/favoriteactor/movies', {
             headers: {'token': sesion.idSesion}
         }).then(callback);
     }
 
     self.actoresFavoritos = function (credentials) {
-        return $http.get('http://localhost:8080/user/favoriteactor/',
+        return $http.get(settings.apiUrl+'user/favoriteactor/',
             {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion
@@ -28,7 +28,7 @@ myApp.service('Usuario', function ($http, $rootScope) {
     }
 
     self.marcarActorFavorito = function (actor) {
-      return $http.put('http://localhost:8080/user/favoriteactor/', actor,
+      return $http.put(settings.apiUrl+'user/favoriteactor/', actor,
             {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion
@@ -37,7 +37,7 @@ myApp.service('Usuario', function ($http, $rootScope) {
         );
     };
   self.desmarcarActorFavorito = function (actor_id) {
-    return $http.put('http://localhost:8080/user/favoriteactor/' + actor_id,null,
+    return $http.put(settings.apiUrl+'user/favoriteactor/' + actor_id,null,
       {
         headers: {
           'token': $rootScope.sesionActual.idSesion
@@ -47,7 +47,7 @@ myApp.service('Usuario', function ($http, $rootScope) {
   }
 
     self.getListas = function (credentials) {
-        return $http.get('http://localhost:8080/user/movieLists', {
+        return $http.get(settings.apiUrl+'user/movieLists', {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion
                 }
@@ -55,7 +55,7 @@ myApp.service('Usuario', function ($http, $rootScope) {
         );
     };
     self.getRankingActoresFavoritos = function () {
-        return $http.get('http://localhost:8080/user/favoriteactor/ranking',
+        return $http.get(settings.apiUrl+'user/favoriteactor/ranking',
             {
                 headers: {
                     'token': $rootScope.sesionActual.idSesion

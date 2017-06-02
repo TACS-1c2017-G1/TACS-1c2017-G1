@@ -1,7 +1,7 @@
 myApp.controller('fichaController', function($scope, $http, $stateParams) {
 
   $scope.traerFicha = function(tipo) {
-    $http.get('http://localhost:8080/' + tipo + '/' + $stateParams.fichaId, {
+    $http.get(settings.apiUrl + tipo + '/' + $stateParams.fichaId, {
       headers: {
         "Token": '12345'
       }

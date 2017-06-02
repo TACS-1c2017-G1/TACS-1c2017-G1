@@ -1,6 +1,6 @@
 myApp.controller('fichaPeliculaController', function($scope, $http, $stateParams) {
 
-  $http.get('http://localhost:8080/movie/' + $stateParams.movieId, {
+  $http.get(settings.apiUrl+'movie/' + $stateParams.movieId, {
     headers: {
       "Token": '12345'
     }
