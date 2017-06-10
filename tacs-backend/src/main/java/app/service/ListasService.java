@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ListasService {
@@ -31,8 +34,8 @@ public class ListasService {
 	}
 
 	public MovieList crearLista(String name, String token) {
-        MovieList list = find(name);
-        if (null==list) {
+		MovieList list = find(name);
+        if (list==null) {
             list = MovieList.create(name, new ArrayList<>());
             User usuario = sesionesService.obtenerUsuarioPorToken(token);
             usuario.addList(list);
@@ -44,8 +47,8 @@ public class ListasService {
 
     public MovieList find(String name) {
         List<MovieList> listas = repositorioDeListas.findAll();
-        return listas.stream().filter(movieList -> (movieList.getName()== name)).findFirst().orElse(null);
-        }
+		return listas.stream().filter(movieList -> Objects.equals(movieList.getName(), name)).findFirst().orElse(null);
+	}
 
 	public void agregarItem(Movie movie, String id_list, String token) {
 		this.consultarLista(id_list, token);
