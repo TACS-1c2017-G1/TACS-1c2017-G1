@@ -1,0 +1,28 @@
+<div ng-controller="fichaController" ng-init="traerFicha('person')">
+  <h1>{{item.name}}</h1>
+  <h2>Biography</h2>
+  <p>{{item.bio}}</p>
+  <h2>Credits</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>Character</th>
+        <th>Movie</th>
+      </tr>
+      <tr ng-repeat="actorEnPelicula in item.actorEnPeliculas">
+        <td>{{actorEnPelicula.character}}</td>
+        <td>
+          <a style="color:black; text-decoration: none;" ui-sref="fichaPelicula({fichaId:actorEnPelicula.movieId})">
+            <p style="color:black; text-decoration: none;">{{actorEnPelicula.movieTitle}}</p>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <h2>Images</h2>
+    <a ng-repeat="image in item.profiles" href="{{image.baseUrl}}original{{image.filePath}}">
+      <img ng-src="{{image.baseUrl}}w300{{image.filePath}}" />
+    </a>
+  </div>
+</div>

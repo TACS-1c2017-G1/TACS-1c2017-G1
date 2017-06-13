@@ -1,0 +1,31 @@
+<div class="text-center" ng-controller="listCompController as listCompCTRL" ng-show="listCompCTRL.esAdmin()">
+    <h4>Seleccione las listas a comparar:</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <label>Seleccione una lista para {{listCompCTRL.user1.credencial.username}}:</label>
+            <select ng-model="listCompCTRL.user1List" ng-options="list.name for list in listCompCTRL.user1.lists">
+            </select>
+        </div>
+        <div class="col-sm-6">
+            <label>Seleccione una lista para {{listCompCTRL.user2.credencial.username}}:</label>
+            <select ng-model="listCompCTRL.user2List" ng-options="list.name for list in listCompCTRL.user2.lists">
+            </select>
+        </div>
+    </div>
+    <div ng-show="listCompCTRL.intersection" class="ng-cloak">
+        <div class="panel panel-default panel-info panel-modest">
+            <div class="panel-heading">Películas encontradas</div>
+            <div class="panel-body" ng-repeat="movie in listCompCTRL.intersection">
+                <p>{{movie.title}}<br></p>
+            </div>
+        </div>
+    </div>
+    <button type="button" ng-click="listCompCTRL.compare()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search">
+                        </span> Comparar
+    </button>
+    <button type="button" ui-sref="users" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-menu-left">
+                        </span> Volver
+    </button>
+</div>

@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
-@RequestMapping(value = "/list")
+@RequestMapping(value = "api/list")
 public class ListasController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class ListasController {
 			throws IOException {
         listasService.eliminarItem(id_pelicula, id_lista, token);
     }
-	
+
 	@RequestMapping(value = "/intersection/{idLista1}/{idLista2}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Movie> calcularInterseccionDe(@RequestHeader String token, @PathVariable String idLista1,
@@ -52,4 +52,3 @@ public class ListasController {
 	}
 
 }
-

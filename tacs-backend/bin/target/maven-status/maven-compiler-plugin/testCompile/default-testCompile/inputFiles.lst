@@ -1,0 +1,12 @@
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/model/odb/TestUser.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/model/tmdb/TestTheMovieDBDao.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/service/TestAdministrativo.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/model/odb/TestSesiones.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/model/odb/TestMovieList.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/web/controller/UserControllerTest.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/web/controller/SesionesControllerTest.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/service/TestSesiones.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/service/TestUser.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/service/TestListas.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/service/TestBusquedas.java
+/home/facundo91/git/TACS-1c2017-G1/tacs-backend/src/test/java/app/web/RestTestBase.java

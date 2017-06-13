@@ -1,0 +1,66 @@
+<div class="container" ng-controller="HomeController">
+    <form>
+        <div class="input-group">
+            <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+                <button id="single-button" type="button" class="btn" uib-dropdown-toggle>{{search.by.name}}<span
+                        class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li ng-repeat="option in search.options">
+                        <a href="" ng-click="search.by=option">{{option.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <input ng-model="search.query" type="text" class="form-control" placeholder="Que desea buscar?" ng-change="setearPaginaInicial()" />
+            <span class="input-group-btn">
+              <button ng-click="buscar(search.by,search.query)" ng-disabled="search.query.length == 0"
+                      class="btn glyphicon glyphicon-search" type="button"></button>
+            </span>
+        </div>
+    </form>
+
+    <table class="table table-striped" ng-show="resultados.length > 0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Poster</th>
+            <th ng-show="ultimaBusquedaPor.mostrarTipo">Tipo</th>
+            <th>{{ultimaBusquedaPor.titleLabel}}</th>
+            <th ng-show="ultimaBusquedaPor.agregarFavorito || (ultimaBusquedaPor.agregarLista && listas.length)">Accion</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="item in resultados">
+            <td>{{item.id}}</td>
+            <td>
+                <img ng-if="item.poster_path" ng-src="http://image.tmdb.org/t/p/w92/{{item.poster_path}}"/>
+                <img ng-if="item.profile_path" ng-src="http://image.tmdb.org/t/p/w92/{{item.profile_path}}"/>
+            </td>
+            <td ng-show="ultimaBusquedaPor.mostrarTipo">{{item.media_type}}</td>
+            <td>
+                <a ng-show="item.title" ui-sref="fichaPelicula({fichaId:item.id})">{{item.title}}</a>
+                <a ng-show="item.name" ui-sref="fichaPersona({fichaId:item.id})">{{item.name}}</a>
+            </td>
+            <td ng-show="ultimaBusquedaPor.agregarFavorito">
+                <button type="button" title="Agregar como favorito" class="btn btn-success"
+                        ng-click="agregarComoFavorito(item)">
+                    <span class="glyphicon glyphicon-heart"></span>
+                </button>
+            </td>
+            <td ng-show="ultimaBusquedaPor.agregarLista && listas.length">
+                <select ng-model="listaParaAgregar" ng-options="list.name for list in listas">
+                </select>
+                <button type="button" title="Agregar a lista" class="btn btn-success"
+                        ng-click="agregarALista(item,listaParaAgregar)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+
+        </tr>
+    </table>
+
+    <div class="box-footer clearfix text-center" ng-show="resultados">
+        <ul uib-pagination total-items="cantidadDeResultados" ng-model="numeroDePagina" max-size="5" items-per-page="19"
+            previous-text="«" next-text="»" class="pagination-sm no-margin"
+            boundary-link-numbers="true" force-ellipses="true" ng-click="obtenerPagina()"></ul>
+    </div>
+</div>

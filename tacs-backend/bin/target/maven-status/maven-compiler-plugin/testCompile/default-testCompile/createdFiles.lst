@@ -1,0 +1,10 @@
+app/model/odb/TestMovieList.class
+app/web/RestTestBase.class
+app/service/TestUser.class
+app/service/TestBusquedas.class
+app/service/TestAdministrativo.class
+app/service/TestListas.class
+app/model/odb/TestSesiones.class
+app/model/tmdb/TestTheMovieDBDao.class
+app/model/odb/TestUser.class
+app/service/TestSesiones.class

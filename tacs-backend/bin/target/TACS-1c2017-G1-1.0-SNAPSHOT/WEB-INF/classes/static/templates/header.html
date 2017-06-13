@@ -1,0 +1,28 @@
+<div ng-controller="headerController">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">GRUPO 1</a>
+        </div>
+        <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+
+            <ul class="nav navbar-nav navbar-right" id="cabeceraUsuario">
+                <ld><span class="glyphicon glyphicon-user"></span></ld>
+                <ld><strong style="text-transform:uppercase">{{sesionActual.username}}</strong></ld>
+                <ld>
+                    <li>
+                        <button type="button" ng-click="logout()" class="btn btn-xs btn-danger btn-block">Salir</button>
+                    </li>
+                </ld>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home" ui-sref-active="active">BUSCAR</a></li>
+                <li><a ui-sref="actoresFavoritos" ui-sref-active="active">ACTORES FAVORITOS</a></li>
+                <li><a ui-sref="listas" ui-sref-active="active">LISTAS</a></li>
+                <!-- Sólo se mostrará si es admin-->
+                <li><a ng-show="esAdmin" ui-sref="users" ui-sref-active="active">USUARIOS</a></li>
+                <li><a ng-show="esAdmin" ui-sref="rankingActoresFavoritos" ui-sref-active="active">RANKING</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

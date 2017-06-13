@@ -1,0 +1,93 @@
+<div class="text-center" ng-controller="adminController as userCTRL" ng-show="userCTRL.esAdmin()">
+    <h4>Lista de usuarios:</h4>
+    <div class="alert alert-danger" ng-show="userCTRL.errorMessage" class="ng-hide">
+        {{userCTRL.errorMessage}}
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered  table-hover text-center">
+            <thead>
+            <tr class="center">
+                <th></th>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Username
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in userCTRL.showUsers()">
+                <td>
+                    <label> Seleccione para comparar:
+                        <input type="checkbox" ng-model="user.selected">
+                    </label>
+                </td>
+                <td>{{ user.id}}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    <button type="button" ng-click="userCTRL.getInfo(user.id)" class="btn btn-info">
+                        <span class="glyphicon glyphicon-list-alt">
+                        </span> Ver detalles
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div ng-show="userCTRL.visibleData" class="ng-cloak">
+        <div class="panel panel-default panel-info panel-modest">
+            <div class="panel-heading">Datos de usuario</div>
+            <div class="panel-body">Username: {{userCTRL.getUsername()}}</div>
+            <br>
+            <div class="panel-body">Cantidad de listas creadas: {{userCTRL.numList()}}</div>
+            <br>
+            <div class="panel-body">Cantidad de actores favoritos: {{userCTRL.numFavAct()}}</div>
+            <br>
+            <div class="panel-body">Último acceso: {{userCTRL.getLastAccess()}}</div>
+            <br>
+            <div class="panel-body">Listas creadas:
+                <table class="table table-bordered  table-hover text-center">
+                    <thead>
+                    <tr class="center">
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Peliculas
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="movieList in userCTRL.getMovies()">
+                        <td>{{ movieList.name}}</td>
+                        <td>
+                        <p ng-repeat="movie in movieList.movies">
+                            {{ movie.title}}
+                        </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <button type="button" ng-click="userCTRL.hide()" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove">
+                        </span> Cerrar
+        </button>
+    </div>
+    <br>
+    <div class="btn-group">
+        <button type="button" ng-click="userCTRL.compareSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-list">
+                        </span> Comparar seleccionados
+        </button>
+        <button type="button" ng-click="userCTRL.cleanSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-refresh">
+                        </span> Limpiar
+        </button>
+    </div>
+</div>

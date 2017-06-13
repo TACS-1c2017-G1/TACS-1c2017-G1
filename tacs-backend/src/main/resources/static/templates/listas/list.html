@@ -1,0 +1,91 @@
+<div class="container" ng-controller="listController as listCtrl">
+    <!--<div class="text-center" ng-show="listas.length = 0">-->
+    <!--<h4>Todavía no has creado ninguna lista.</h4>-->
+    <!--</div>-->
+    <div class="alert alert-danger text-center" ng-show="listCtrl.errorMessage" class="ng-hide">
+        {{listCtrl.errorMessage}}
+    </div>
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Ingrese el nombre de la nueva lista."
+                   ng-model="nombre">
+            <span class="input-group-btn">
+        <button class="btn btn-success" type="button" ng-click="create(nombre)">Crear</button>
+      </span>
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-striped" ng-show="listas.length > 0">
+            <thead>
+            <tr>
+                <th></th>
+                <th>#</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr ng-repeat="list in listas">
+                <td>
+                    <input type="checkbox" ng-model="list.selected">
+                </td>
+                <td> {{list.id}}</td>
+                <td> {{list.name}}</td>
+                <td>
+                    <select ng-model="peliculaAQuitar" ng-options="movie.title for movie in list.movies">
+                    </select>
+                    <button type="button" title="Quitar de lista" class="btn btn-danger"
+                            ng-click="quitarDeLista(peliculaAQuitar,list)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info" ng-click="listCtrl.getActores(list.id)">
+                    <span class="glyphicon glyphicon-list-alt">
+                        </span> Ver actores
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="text-center">
+        <div ng-show="listCtrl.actores" class="ng-cloak">
+            <div class="panel panel-default panel-info panel-modest">
+                <div class="panel-heading">Ranking actores</div>
+                <div class="panel-body" ng-repeat="actor in listCtrl.actores">
+                    <p>{{listCtrl.actores.indexOf(actor)+1}}.{{actor.name}}</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div ng-show="listCtrl.intersection" class="ng-cloak">
+            <div class="panel panel-default panel-info panel-modest">
+                <div class="panel-heading">Películas encontradas</div>
+                <div class="panel-body" ng-repeat="movie in listCtrl.intersection">
+                    <p>{{movie.title}}<br></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="btn-group">
+            <button type="button" ng-click="listCtrl.compareSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-list">
+                        </span> Comparar seleccionadas
+            </button>
+            <button type="button" ng-click="listCtrl.cleanSelected()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-refresh">
+                        </span> Limpiar
+            </button>
+        </div>
+    </div>
+
+    <!--<div class="container" ng-controller="listController"> Crear una lista-->
+    <!--Nombre: <input ng-model="nombre">-->
+    <!--</div>-->
+
+    <!--<button type="button" >-->
+    <!--Crear-->
+    <!--</button>-->
+</div>
+
