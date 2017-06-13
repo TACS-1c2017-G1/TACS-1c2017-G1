@@ -14,7 +14,7 @@ import app.model.odb.Actor;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value = "api/person")
+@RequestMapping(value = "/api/person")
 public class ActorController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

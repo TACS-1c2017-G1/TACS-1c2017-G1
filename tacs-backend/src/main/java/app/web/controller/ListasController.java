@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
-@RequestMapping(value = "api/list")
+@RequestMapping(value = "/api/list")
 public class ListasController {
 
 	@Autowired

@@ -26,7 +26,7 @@ import app.service.UserService;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value = "api/user")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
 	@Autowired
