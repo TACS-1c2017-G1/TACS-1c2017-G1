@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/authentication")
+@RequestMapping("/api/authentication")
 public class SesionesController {
 
     @Autowired

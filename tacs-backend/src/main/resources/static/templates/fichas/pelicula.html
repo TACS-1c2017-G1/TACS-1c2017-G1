@@ -1,0 +1,50 @@
+<div ng-controller="fichaController" ng-init="traerFicha('movie')">
+  <h1>{{item.title}}</h1>
+
+  <h2>Overview</h2>
+  <p>{{item.overview}}</p>
+  <h2>Reviews</h2>
+  <table>
+    <tr>
+      <th>Author</th>
+      <th>Content</th>
+    </tr>
+    <tr ng-repeat="review in item.review">
+      <td>{{review.author}}</td>
+      <td>
+        <a style="color:black; text-decoration: none;">
+          <p style="color:black; text-decoration: none;">{{review.content}}</p>
+        </a>
+      </td>
+    </tr>
+  </table>
+  <h2>Cast</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>Actor name</th>
+        <th>Character</th>
+      </tr>
+      <tr ng-repeat="actorEnPelicula in item.cast">
+        <td>
+          <a style="color:black; text-decoration: none;" ui-sref="fichaPersona({fichaId:actorEnPelicula.actorId})">
+            <p style="color:black; text-decoration: none;">{{actorEnPelicula.name}}</p>
+          </a>
+        </td>
+        <td>{{actorEnPelicula.character}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <h2>Backdrops</h2>
+    <a ng-repeat="backdrop in item.backdrops" target="_blank" href="{{backdrop.baseUrl}}original{{backdrop.filePath}}">
+      <img ng-src="{{backdrop.baseUrl}}w300{{backdrop.filePath}}" />
+    </a>
+  </div>
+  <div>
+    <h2>Posters</h2>
+    <a ng-repeat="poster in item.posters" target="_blank" href="{{poster.baseUrl}}original{{poster.filePath}}">
+      <img ng-src="{{poster.baseUrl}}w92{{poster.filePath}}" />
+    </a>
+  </div>
+</div>

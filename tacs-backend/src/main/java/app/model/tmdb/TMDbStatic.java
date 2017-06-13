@@ -33,6 +33,8 @@ public abstract class TMDbStatic {
 			throws IOException, ClientProtocolException {
 		HttpGet httpGet = new HttpGet(pedir);
 		CloseableHttpResponse response1 = HttpClients.createDefault().execute(httpGet);
+		System.out.println("PEDIDO: "+pedir);
+		System.out.println("RESPUESTA: "+response1);
 		return getJsonObject(resource, query, response1);
 	}
 

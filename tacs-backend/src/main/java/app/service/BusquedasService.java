@@ -8,7 +8,7 @@ import app.model.tmdb.TMDbStatic;
 
 @Service
 public class BusquedasService {
-	
+
 	@Autowired
 	SesionesService sesionesService;
 /*
@@ -42,6 +42,7 @@ public class BusquedasService {
 		sesionesService.obtenerUsuarioPorToken(token);
 		return TMDbStatic.getResource("search/person", query, page);
 	}
+
 
 	public JSONObject buscarPorNombre(String query, String token, String page) throws Exception {
 		sesionesService.obtenerUsuarioPorToken(token);

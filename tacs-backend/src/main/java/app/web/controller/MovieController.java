@@ -14,7 +14,7 @@ import app.model.odb.Movie;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value = "/movie")
+@RequestMapping(value = "/api/movie")
 public class MovieController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

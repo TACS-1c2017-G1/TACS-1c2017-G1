@@ -26,7 +26,7 @@ import app.service.UserService;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
 	@Autowired
@@ -76,7 +76,7 @@ public class UserController {
 	public List<Movie> verPeliculasConActoresFavoritos(@RequestHeader String token, Model model) throws Exception {
 		return servicioDeUsuario.verPeliculasConMasDeUnActorFavorito(token);
 	}
-	
+
 	@RequestMapping(value = "/movieLists", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<MovieList> verListas(@RequestHeader String token, Model model) throws Exception {
