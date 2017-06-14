@@ -14,7 +14,7 @@ public class Image {
 	private String id = TokenGenerator.generarIdString();
 	private String movieId;
 	private String actorId;
-	private String baseUrl = "http://image.tmdb.org/t/p/";
+	private String baseUrl = "https://image.tmdb.org/t/p/";
 	private int size;
 	private String filePath;
 

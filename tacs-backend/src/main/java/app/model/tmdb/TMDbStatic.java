@@ -55,8 +55,9 @@ public abstract class TMDbStatic {
 	 * @throws IOException
 	 */
 	private static String getApiKey() throws IOException {
-		String key = new String(Files.readAllBytes(Paths.get("resources")));
-		return "?&api_key=" + key.substring(0, key.length() - 1);
+//		String key = new String(Files.readAllBytes(Paths.get("resources")));
+//		return "?&api_key=" + key.substring(0, key.length() - 1);
+		return "?&api_key=" + "6d1dfc1d31cde5e582b40131826b32c9";
 	}
 
 	private static JSONObject getJsonObject(String resource, String query, CloseableHttpResponse response1)
